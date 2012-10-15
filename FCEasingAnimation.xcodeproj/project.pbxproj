@@ -16,6 +16,7 @@
 		5DF94C65162C333F00BE9BCD /* libFCEasingAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C4C162C333F00BE9BCD /* libFCEasingAnimation.a */; };
 		5DF94C6B162C333F00BE9BCD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5DF94C69162C333F00BE9BCD /* InfoPlist.strings */; };
 		5DF94C6E162C333F00BE9BCD /* FCEasingAnimationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C6D162C333F00BE9BCD /* FCEasingAnimationTests.m */; };
+		5DF94C77162C51D500BE9BCD /* FCEasingAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C56162C333F00BE9BCD /* FCEasingAnimation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -252,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DF94C6E162C333F00BE9BCD /* FCEasingAnimationTests.m in Sources */,
+				5DF94C77162C51D500BE9BCD /* FCEasingAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

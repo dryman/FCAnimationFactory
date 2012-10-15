@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+void fcSegment(float *out, float x1, float x2, float(^block)(float x));
+
 @interface FCEasingAnimation : NSObject
 
 @end
