@@ -162,7 +162,7 @@ FCFloatBlock genBezier (float p1, float p2)
 {
     float points[4];
     float(^f)(float) = ^float(float x) {
-        return cosf(x*M_PI_2);
+        return sinf(x*M_PI_2);
     };
     fcSegment(points, 0, 1, f);
     
@@ -175,7 +175,7 @@ FCFloatBlock genBezier (float p1, float p2)
         sum += fabsf(y - y_correct);
         num++;
     }
-    STAssertEqualsWithAccuracy(sum/num, 0.f, 0.0001, @"accuracy is acceptable in 0.01");
+    STAssertEqualsWithAccuracy(sum/num, 0.f, 0.001, @"accuracy is acceptable in 0.01");
     /*
      * Accuracy of quint is not as good as well
      * It is 0.017502
