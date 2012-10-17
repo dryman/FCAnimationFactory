@@ -188,7 +188,11 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
      */
 }
 
-- (void)testRawCosineAccuracy
+/*
+ * Start from here, we use scaled bezier generator
+ */
+
+- (void)testCosineAccuracy
 {
     float points[4];
     float(^f)(float) = ^float(float x) {
@@ -209,6 +213,36 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
     
     /*
      * Accuracy is 0.000450
+     */
+}
+
+- (void)testSegmentedQuintAccuracy
+{
+    float points[4];
+    float sum = 0, num = 0, seg = 0.5;
+    
+    float(^f)(float) = ^float(float x) {
+        return x*x*x*x*x;
+    };
+    
+    for (float step = 0; step<1; step+=seg) {
+        float roof = step+seg <= 1 ? step+seg : 1;
+        fcSegment(points, step, roof, f);
+        
+        FCFloatBlock x_block = genScaledBezier(points[0], points[2], step, roof);
+        FCFloatBlock y_block = genScaledBezier(points[1], points[3], f(step), f(roof));
+        
+        for (float t = 0; t < 1; t+=0.01){
+            float x = x_block(t), y = y_block(t);
+            sum += fabsf(y - f(x));
+            num++;
+        }
+    }
+    
+    STAssertEqualsWithAccuracy(sum/num, 0.f, 0.001, @"accuracy is acceptable in 0.001");
+    
+    /*
+     * Accuracy is 0.000746 with segment to half
      */
 }
 
