@@ -19,6 +19,13 @@ FCFloatBlock genBezier (float p1, float p2)
     };
 }
 
+FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
+{
+    return ^float(float t){
+        return s1 + (3*(1-t)*(1-t)*t*p1 + 3*(1-t)*t*t*p2 + t*t*t)*(s2-s1);
+    };
+}
+
 @implementation FCEasingAnimationTests
 
 - (void)setUp
@@ -150,7 +157,7 @@ FCFloatBlock genBezier (float p1, float p2)
         sum += fabsf(y - f(x));
         num++;
     }
-    STAssertEqualsWithAccuracy(sum/num, 0.f, 0.1, @"accuracy is acceptable in 0.01");
+    STAssertEqualsWithAccuracy(sum/num, 0.f, 0.1, @"accuracy is acceptable in 0.1");
     /*
      * Accuracy of quint is not as good as well
      * It is 0.017502
@@ -175,11 +182,33 @@ FCFloatBlock genBezier (float p1, float p2)
         sum += fabsf(y - y_correct);
         num++;
     }
-    STAssertEqualsWithAccuracy(sum/num, 0.f, 0.001, @"accuracy is acceptable in 0.01");
+    STAssertEqualsWithAccuracy(sum/num, 0.f, 0.001, @"accuracy is acceptable in 0.001");
     /*
-     * Accuracy of quint is not as good as well
-     * It is 0.017502
-     * Resonable since higher order is critical near boundaries
+     * Accuracy is 0.0044
+     */
+}
+
+- (void)testRawCosineAccuracy
+{
+    float points[4];
+    float(^f)(float) = ^float(float x) {
+        return cosf(x*M_PI_2);
+    };
+    fcSegment(points, 0, 1, f);
+    
+    FCFloatBlock x_block = genScaledBezier(points[0], points[2], 0, 1);
+    FCFloatBlock y_block = genScaledBezier(points[1], points[3], f(0), f(1));
+    
+    float sum = 0, num = 0;
+    for (float t = 0; t < 1; t+=0.01){
+        float x = x_block(t), y = y_block(t), y_correct = f(x);
+        sum += fabsf(y - y_correct);
+        num++;
+    }
+    STAssertEqualsWithAccuracy(sum/num, 0.f, 0.001, @"accuracy is acceptable in 0.001");
+    
+    /*
+     * Accuracy is 0.000450
      */
 }
 
