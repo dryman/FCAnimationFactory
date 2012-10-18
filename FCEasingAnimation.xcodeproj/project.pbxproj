@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D611FEC162F88E7004BB224 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D611FEB162F88E7004BB224 /* QuartzCore.framework */; };
 		5DF94C50162C333F00BE9BCD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C4F162C333F00BE9BCD /* Foundation.framework */; };
 		5DF94C55162C333F00BE9BCD /* FCAnimationFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5DF94C54162C333F00BE9BCD /* FCAnimationFactory.h */; };
 		5DF94C57162C333F00BE9BCD /* FCAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C56162C333F00BE9BCD /* FCAnimationFactory.m */; };
@@ -43,6 +44,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5D611FEB162F88E7004BB224 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5DF94C4C162C333F00BE9BCD /* libFCEasingAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFCEasingAnimation.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF94C4F162C333F00BE9BCD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5DF94C53162C333F00BE9BCD /* FCEasingAnimation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FCEasingAnimation-Prefix.pch"; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D611FEC162F88E7004BB224 /* QuartzCore.framework in Frameworks */,
 				5DF94C5F162C333F00BE9BCD /* SenTestingKit.framework in Frameworks */,
 				5DF94C61162C333F00BE9BCD /* UIKit.framework in Frameworks */,
 				5DF94C62162C333F00BE9BCD /* Foundation.framework in Frameworks */,
@@ -102,6 +105,7 @@
 		5DF94C4E162C333F00BE9BCD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5D611FEB162F88E7004BB224 /* QuartzCore.framework */,
 				5DF94C4F162C333F00BE9BCD /* Foundation.framework */,
 				5DF94C5E162C333F00BE9BCD /* SenTestingKit.framework */,
 				5DF94C60162C333F00BE9BCD /* UIKit.framework */,
@@ -301,7 +305,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -321,7 +325,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

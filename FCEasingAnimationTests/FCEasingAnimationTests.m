@@ -62,7 +62,7 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
 - (void)testBezierBasicParameter
 {
     float points[4];
-    fcSegment(points, 0, 1, ^float(float x) { return x*x; });
+    fc_bezier_interpolation(&points[0],&points[2], 0, 1, ^float(float x) { return x*x; });
     STAssertEqualsWithAccuracy(points[1], 0.f, 0.0001f, @"control point p1 sholdn't have y component");
     STAssertEqualsWithAccuracy((1.f-points[3])/(1.f-points[2]), 2.f, 0.0001, @"derivative on 1 should be 2.f");
 }
@@ -82,7 +82,7 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
     float(^f)(float) = ^float(float x) {
         return x*x;
     };
-    fcSegment(points, 0, 1, f);
+    fc_bezier_interpolation(&points[0],&points[2], 0, 1, f);
     
     FCFloatBlock x_block = genBezier(points[0],points[2]);
     FCFloatBlock y_block = genBezier(points[1],points[3]);
@@ -102,7 +102,7 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
     float(^f)(float) = ^float(float x) {
         return x*x*x;
     };
-    fcSegment(points, 0, 1, f);
+    fc_bezier_interpolation(&points[0],&points[2], 0, 1, f);
     
     FCFloatBlock x_block = genBezier(points[0],points[2]);
     FCFloatBlock y_block = genBezier(points[1],points[3]);
@@ -122,7 +122,7 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
     float(^f)(float) = ^float(float x) {
         return x*x*x*x;
     };
-    fcSegment(points, 0, 1, f);
+    fc_bezier_interpolation(&points[0],&points[2], 0, 1, f);
     
     FCFloatBlock x_block = genBezier(points[0],points[2]);
     FCFloatBlock y_block = genBezier(points[1],points[3]);
@@ -147,7 +147,7 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
     float(^f)(float) = ^float(float x) {
         return x*x*x*x*x;
     };
-    fcSegment(points, 0, 1, f);
+    fc_bezier_interpolation(&points[0],&points[2], 0, 1, f);
     
     FCFloatBlock x_block = genBezier(points[0],points[2]);
     FCFloatBlock y_block = genBezier(points[1],points[3]);
@@ -172,7 +172,7 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
     float(^f)(float) = ^float(float x) {
         return sinf(x*M_PI_2);
     };
-    fcSegment(points, 0, 1, f);
+    fc_bezier_interpolation(&points[0],&points[2], 0, 1, f);
     
     FCFloatBlock x_block = genBezier(points[0],points[2]);
     FCFloatBlock y_block = genBezier(points[1],points[3]);
@@ -199,7 +199,7 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
     float(^f)(float) = ^float(float x) {
         return cosf(x*M_PI_2);
     };
-    fcSegment(points, 0, 1, f);
+    fc_bezier_interpolation(&points[0],&points[2], 0, 1, f);
     
     FCFloatBlock x_block = genScaledBezier(points[0], points[2], 0, 1);
     FCFloatBlock y_block = genScaledBezier(points[1], points[3], f(0), f(1));
@@ -228,7 +228,7 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
     
     for (float step = 0; step<1; step+=seg) {
         float roof = step+seg <= 1 ? step+seg : 1;
-        fcSegment(points, step, roof, f);
+        fc_bezier_interpolation(&points[0],&points[2], step, roof, f);
         
         FCFloatBlock x_block = genScaledBezier(points[0], points[2], step, roof);
         FCFloatBlock y_block = genScaledBezier(points[1], points[3], f(step), f(roof));
@@ -258,7 +258,7 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
     float(^f)(float) = ^float(float x) {
         return 1;
     };
-    fcSegment(points, 0, 1, f);
+    fc_bezier_interpolation(&points[0],&points[2], 0, 1, f);
     
     FCFloatBlock x_block = genScaledBezier(points[0], points[2], 0, 1);
     FCFloatBlock y_block = genScaledBezier(points[1], points[3], f(0), f(1));

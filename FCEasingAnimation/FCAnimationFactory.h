@@ -7,9 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
 
-void fcSegment(float *out, float x1, float x2, float(^block)(float x));
+void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float(^block)(float x));
 
 @interface FCAnimationFactory : NSObject
+{
+    NSArray*  _normalizedTimings;
+    NSArray*  _timingBlocks;
+    NSNumber* _totalDuration;
+}
+
+@property (copy) NSArray* normalizedTimings;
+@property (copy) NSArray* segmentedDurations;
+@property (copy) NSArray* timingBlocks;
+@property (copy) NSNumber* totalDuration;
+
++ (FCAnimationFactory*) factory;
+- (CAKeyframeAnimation*) animation;
+
 
 @end
