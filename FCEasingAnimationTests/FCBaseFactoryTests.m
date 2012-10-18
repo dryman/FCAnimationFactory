@@ -22,6 +22,7 @@
     CAKeyframeAnimation *animation = [factory animation];
     NSArray *timingFunctions = animation.timingFunctions;
     STAssertEquals(timingFunctions.count, 1U, @"only one function here");
+    STAssertEquals(animation.values.count, 2U, @"two values");
 }
 
 - (void)testDefaultFactory_timingFunction
@@ -65,7 +66,6 @@
         STAssertEqualsWithAccuracy(c0[0], 0.f, 0.00001f, @"c0[0] should be 0");
         STAssertEqualsWithAccuracy(c0[1], 0.f, 0.00001f, @"c0[1] should be 0");
         
-        
         float c1[2], c2[2];
         [tFunc getControlPointAtIndex:1 values:c1];
         [tFunc getControlPointAtIndex:2 values:c2];
@@ -75,6 +75,16 @@
         STAssertEqualsWithAccuracy(c2[0], 1.f, 0.000001f, @"c2=(1,1)");
         STAssertEqualsWithAccuracy(c2[1], 1.f, 0.000001f, @"c2=(1,1)");
     }
+}
+
+- (void)testTwoSegment_values
+{
+    factory.totalDuration = [NSNumber numberWithFloat:1.f];
+    CAKeyframeAnimation *animation = [factory animation];
+    STAssertEquals(animation.values.count, 3U, @"three values");
+    STAssertEqualsWithAccuracy([[animation.values objectAtIndex:0] floatValue], 0.f, 0.0001, @"first value is 0");
+    STAssertEqualsWithAccuracy([[animation.values objectAtIndex:1] floatValue], 0.5f, 0.0001, @"first value is 0");
+    STAssertEqualsWithAccuracy([[animation.values objectAtIndex:2] floatValue], 1.f, 0.0001, @"first value is 0");
 }
 
 - (void)testQuintFunction
@@ -103,6 +113,20 @@
     STAssertEqualsWithAccuracy(c1[1], 0.05107f, 0.0001f, @"c1=(0,0)");
     STAssertEqualsWithAccuracy(c2[0], 0.68333f, 0.0001f, @"c2=(1,1)");
     STAssertEqualsWithAccuracy(c2[1], 0.18279f, 0.0001f, @"c2=(1,1)");
+}
+
+- (void)testQuintFunctionValues
+{
+    factory.totalDuration = [NSNumber numberWithFloat:1.f];
+    factory.timingBlocks = [NSArray arrayWithObject:^float(float x){
+        return x*x*x*x*x;
+    }];
+    CAKeyframeAnimation *animation = [factory animation];
+    STAssertEquals(animation.values.count, 3U, @"three values");
+    STAssertEqualsWithAccuracy([[animation.values objectAtIndex:0] floatValue],      0.f, 0.0001, @"first value is 0");
+    STAssertEqualsWithAccuracy([[animation.values objectAtIndex:1] floatValue], 0.03125f, 0.0001, @"first value is 0");
+    STAssertEqualsWithAccuracy([[animation.values objectAtIndex:2] floatValue],      1.f, 0.0001, @"first value is 0");
+    
 }
 
 - (void)testTwoTimingFunctions

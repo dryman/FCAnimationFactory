@@ -29,6 +29,7 @@
 - (CAKeyframeAnimation*) animation
 {
     // TODO: assert if count of normalizedTimes, normalizedValues and timingFunctions is correct
+    // TODO: need to implement different kinds of values...
         
     NSMutableArray *keyTimes = [NSMutableArray array];
     NSMutableArray *timingFunctions = [NSMutableArray array];
@@ -46,12 +47,11 @@
         int count = (int)ceilf(duration*SEGMENT_FACTOR);
         float n_value0 = [[weakSelf.normalizedValues objectAtIndex:idx] floatValue];
         float n_value1 = [[weakSelf.normalizedValues objectAtIndex:idx+1] floatValue];
+        float n_value_diff = n_value1 - n_value0;
         
         float time_step = duration/(float)count;
         float n_step = 1.f/(float)count; // normalized
         float n_iter = 0.f;
-        float value_step = value_diff*(n_value1 - n_value0)/(float)count;
-        float value_accumulator = from_value + value_diff*n_value0;
         
         float c1[2], c2[2];
         
@@ -60,9 +60,11 @@
             [timingFunctions addObject:[CAMediaTimingFunction functionWithControlPoints:c1[0] :c1[1] :c2[0] :c2[1]]];
             
             [keyTimes addObject:[NSNumber numberWithFloat:time_accumulator/total_duration]];
-            [values addObject:[NSNumber numberWithFloat:value_accumulator]];
             
-            value_accumulator += value_step;
+            float normalized_value = block(n_iter)*n_value_diff + n_value0;
+            float value = normalized_value * value_diff + from_value;
+            [values addObject:[NSNumber numberWithFloat:value]];
+            
             n_iter += n_step;
             time_accumulator += time_step;
         }
