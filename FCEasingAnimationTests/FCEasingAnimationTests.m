@@ -7,7 +7,7 @@
 //
 
 #import "FCEasingAnimationTests.h"
-#import "FCEasingAnimation.h"
+#import "FCAnimationFactory.h"
 #import <math.h>
 
 typedef float(^FCFloatBlock)(float);
@@ -74,6 +74,7 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
  * The raw accuracy of higher order function is low is reasonable and
  * acceptable.
  */
+
 
 - (void)testRawQuadAccuracy
 {
@@ -243,6 +244,35 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
     
     /*
      * Accuracy is 0.000746 with segment to half
+     */
+}
+
+
+/* should fail
+ * needed to add test nan functionality
+ */
+
+- (void)testOneFunction
+{
+    float points[4];
+    float(^f)(float) = ^float(float x) {
+        return 1;
+    };
+    fcSegment(points, 0, 1, f);
+    
+    FCFloatBlock x_block = genScaledBezier(points[0], points[2], 0, 1);
+    FCFloatBlock y_block = genScaledBezier(points[1], points[3], f(0), f(1));
+    
+    float sum = 0, num = 0;
+    for (float t = 0; t < 1; t+=0.01){
+        float x = x_block(t), y = y_block(t), y_correct = f(x);
+        sum += fabsf(y - y_correct);
+        num++;
+    }
+    STAssertEqualsWithAccuracy(sum/num, 0.f, 0.001, @"accuracy is acceptable in 0.001");
+    
+    /*
+     * Accuracy is 0.000450
      */
 }
 

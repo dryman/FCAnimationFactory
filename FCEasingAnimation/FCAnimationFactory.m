@@ -6,7 +6,7 @@
 //  Copyright (c) 2012年 dryman. All rights reserved.
 //
 
-#import "FCEasingAnimation.h"
+#import "FCAnimationFactory.h"
 
 void fcSegment(float *out, float x1, float x2, float(^block)(float x))
 {
@@ -50,6 +50,6 @@ void fcSegment(float *out, float x1, float x2, float(^block)(float x))
 }
 
 
-@implementation FCEasingAnimation
+@implementation FCAnimationFactory
 
 @end

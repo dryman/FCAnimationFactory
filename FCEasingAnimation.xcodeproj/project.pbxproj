@@ -8,15 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		5DF94C50162C333F00BE9BCD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C4F162C333F00BE9BCD /* Foundation.framework */; };
-		5DF94C55162C333F00BE9BCD /* FCEasingAnimation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5DF94C54162C333F00BE9BCD /* FCEasingAnimation.h */; };
-		5DF94C57162C333F00BE9BCD /* FCEasingAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C56162C333F00BE9BCD /* FCEasingAnimation.m */; };
+		5DF94C55162C333F00BE9BCD /* FCAnimationFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5DF94C54162C333F00BE9BCD /* FCAnimationFactory.h */; };
+		5DF94C57162C333F00BE9BCD /* FCAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C56162C333F00BE9BCD /* FCAnimationFactory.m */; };
 		5DF94C5F162C333F00BE9BCD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C5E162C333F00BE9BCD /* SenTestingKit.framework */; };
 		5DF94C61162C333F00BE9BCD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C60162C333F00BE9BCD /* UIKit.framework */; };
 		5DF94C62162C333F00BE9BCD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C4F162C333F00BE9BCD /* Foundation.framework */; };
 		5DF94C65162C333F00BE9BCD /* libFCEasingAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C4C162C333F00BE9BCD /* libFCEasingAnimation.a */; };
 		5DF94C6B162C333F00BE9BCD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5DF94C69162C333F00BE9BCD /* InfoPlist.strings */; };
 		5DF94C6E162C333F00BE9BCD /* FCEasingAnimationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C6D162C333F00BE9BCD /* FCEasingAnimationTests.m */; };
-		5DF94C77162C51D500BE9BCD /* FCEasingAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C56162C333F00BE9BCD /* FCEasingAnimation.m */; };
+		5DF94C77162C51D500BE9BCD /* FCAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C56162C333F00BE9BCD /* FCAnimationFactory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +36,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				5DF94C55162C333F00BE9BCD /* FCEasingAnimation.h in CopyFiles */,
+				5DF94C55162C333F00BE9BCD /* FCAnimationFactory.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,8 +46,8 @@
 		5DF94C4C162C333F00BE9BCD /* libFCEasingAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFCEasingAnimation.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF94C4F162C333F00BE9BCD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5DF94C53162C333F00BE9BCD /* FCEasingAnimation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FCEasingAnimation-Prefix.pch"; sourceTree = "<group>"; };
-		5DF94C54162C333F00BE9BCD /* FCEasingAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCEasingAnimation.h; sourceTree = "<group>"; };
-		5DF94C56162C333F00BE9BCD /* FCEasingAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCEasingAnimation.m; sourceTree = "<group>"; };
+		5DF94C54162C333F00BE9BCD /* FCAnimationFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCAnimationFactory.h; sourceTree = "<group>"; };
+		5DF94C56162C333F00BE9BCD /* FCAnimationFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCAnimationFactory.m; sourceTree = "<group>"; };
 		5DF94C5D162C333F00BE9BCD /* FCEasingAnimationTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FCEasingAnimationTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF94C5E162C333F00BE9BCD /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		5DF94C60162C333F00BE9BCD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -83,7 +83,7 @@
 		5DF94C41162C333F00BE9BCD = {
 			isa = PBXGroup;
 			children = (
-				5DF94C51162C333F00BE9BCD /* FCEasingAnimation */,
+				5DF94C51162C333F00BE9BCD /* FCAnimationFactory */,
 				5DF94C66162C333F00BE9BCD /* FCEasingAnimationTests */,
 				5DF94C4E162C333F00BE9BCD /* Frameworks */,
 				5DF94C4D162C333F00BE9BCD /* Products */,
@@ -109,13 +109,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5DF94C51162C333F00BE9BCD /* FCEasingAnimation */ = {
+		5DF94C51162C333F00BE9BCD /* FCAnimationFactory */ = {
 			isa = PBXGroup;
 			children = (
-				5DF94C54162C333F00BE9BCD /* FCEasingAnimation.h */,
-				5DF94C56162C333F00BE9BCD /* FCEasingAnimation.m */,
+				5DF94C54162C333F00BE9BCD /* FCAnimationFactory.h */,
+				5DF94C56162C333F00BE9BCD /* FCAnimationFactory.m */,
 				5DF94C52162C333F00BE9BCD /* Supporting Files */,
 			);
+			name = FCAnimationFactory;
 			path = FCEasingAnimation;
 			sourceTree = "<group>";
 		};
@@ -244,7 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DF94C57162C333F00BE9BCD /* FCEasingAnimation.m in Sources */,
+				5DF94C57162C333F00BE9BCD /* FCAnimationFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DF94C6E162C333F00BE9BCD /* FCEasingAnimationTests.m in Sources */,
-				5DF94C77162C51D500BE9BCD /* FCEasingAnimation.m in Sources */,
+				5DF94C77162C51D500BE9BCD /* FCAnimationFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +400,7 @@
 				5DF94C73162C333F00BE9BCD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5DF94C74162C333F00BE9BCD /* Build configuration list for PBXNativeTarget "FCEasingAnimationTests" */ = {
 			isa = XCConfigurationList;
@@ -407,6 +409,7 @@
 				5DF94C76162C333F00BE9BCD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

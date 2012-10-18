@@ -10,6 +10,6 @@
 
 void fcSegment(float *out, float x1, float x2, float(^block)(float x));
 
-@interface FCEasingAnimation : NSObject
+@interface FCAnimationFactory : NSObject
 
 @end
