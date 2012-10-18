@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "FCAnimationFactory.h"
 
-@interface FCValueAnimationFactory : FCAnimationFactory
+@interface FCValueAnimationFactory : FCAnimationFactory <NSCopying>
 {
     NSArray* _normalizedValues;
     NSNumber* _fromValue;
@@ -18,5 +18,7 @@
 @property (copy) NSArray* normalizedValues;
 @property (copy) NSNumber* fromValue;
 @property (copy) NSNumber* toValue;
+
++ (CAKeyframeAnimation*) animationWithName:(NSString*)name fromValue:(NSNumber*)fv toValue: (NSNumber*)tv duration:(NSNumber*)duration;
 
 @end

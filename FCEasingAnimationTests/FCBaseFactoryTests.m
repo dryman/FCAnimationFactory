@@ -174,4 +174,41 @@
     STAssertEqualsWithAccuracy(c2[1],      1.f, 0.0001f, @"c2=(1,1)");
 }
 
+- (void)testQuintAnimation
+{
+    factory.totalDuration = [NSNumber numberWithFloat:1.f];
+    factory.timingBlocks = [NSArray arrayWithObject:^float(float x){
+        return x*x*x*x*x;
+    }];
+    CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"quinticEaseIn"
+                                                                      fromValue:@0.f
+                                                                        toValue:@1.f
+                                                                       duration:@1.f];
+    CAMediaTimingFunction *tFunc0 = [animation.timingFunctions objectAtIndex:0];
+    CAMediaTimingFunction *tFunc1 = [animation.timingFunctions objectAtIndex:1];
+    
+    float c1[2], c2[2];
+    [tFunc0 getControlPointAtIndex:1 values:c1];
+    [tFunc0 getControlPointAtIndex:2 values:c2];
+    
+    STAssertEqualsWithAccuracy(c1[0], 0.249994f, 0.0001f, @"c1=(0.25,0)");
+    STAssertEqualsWithAccuracy(c1[1],       0.f, 0.0001f, @"c1=(0.25,0)");
+    STAssertEqualsWithAccuracy(c2[0],     0.75f, 0.0001f, @"c2=(0.75,-0.25)");
+    STAssertEqualsWithAccuracy(c2[1],    -0.25f, 0.0001f, @"c2=(0.75,-0.25)"); // won't it blowup when we render it?
+    
+    [tFunc1 getControlPointAtIndex:1 values:c1];
+    [tFunc1 getControlPointAtIndex:2 values:c2];
+    
+    STAssertEqualsWithAccuracy(c1[0], 0.31667f, 0.0001f, @"c1=(0,0)");
+    STAssertEqualsWithAccuracy(c1[1], 0.05107f, 0.0001f, @"c1=(0,0)");
+    STAssertEqualsWithAccuracy(c2[0], 0.68333f, 0.0001f, @"c2=(1,1)");
+    STAssertEqualsWithAccuracy(c2[1], 0.18279f, 0.0001f, @"c2=(1,1)");
+    
+    
+    STAssertEqualsWithAccuracy([[animation.values objectAtIndex:0] floatValue],      0.f, 0.0001, @"first value is 0");
+    STAssertEqualsWithAccuracy([[animation.values objectAtIndex:1] floatValue], 0.03125f, 0.0001, @"first value is 0");
+    STAssertEqualsWithAccuracy([[animation.values objectAtIndex:2] floatValue],      1.f, 0.0001, @"first value is 0");
+}
+
+
 @end

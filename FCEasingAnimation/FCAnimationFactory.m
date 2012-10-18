@@ -57,6 +57,14 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    FCAnimationFactory *factoryCopy = [[FCAnimationFactory allocWithZone:zone] init];
+    factoryCopy.normalizedTimings = _normalizedTimings;
+    factoryCopy.timingBlocks = _timingBlocks;
+    factoryCopy.totalDuration = _totalDuration;
+    return factoryCopy;
+}
 
 - (void)setSegmentedDurations:(NSArray *)segmentedDurations
 {
