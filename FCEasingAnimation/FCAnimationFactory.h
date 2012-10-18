@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 
-void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float(^block)(float x));
+#define SEGMENT_FACTOR (2.f)
 
+void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float(^block)(float x));
 
 // Base class of animation factories
 @interface FCAnimationFactory : NSObject
@@ -25,7 +26,6 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
 @property (copy) NSArray* timingBlocks;
 @property (copy) NSNumber* totalDuration;
 
-+ (FCAnimationFactory*) factory;
 - (CAKeyframeAnimation*) animation;
 
 

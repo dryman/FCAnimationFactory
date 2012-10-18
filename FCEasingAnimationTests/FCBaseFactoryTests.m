@@ -14,7 +14,7 @@
 - (void)setUp
 {
     [super setUp];
-    factory = [FCAnimationFactory factory];
+    factory = [[FCValueAnimationFactory alloc] init];
 }
 
 - (void)testDefaultFactory_timingFunctionCount
@@ -117,6 +117,11 @@
                                 return -x*x + 2*x;
                             },
                             nil];
+    factory.normalizedValues = [NSArray arrayWithObjects:
+                                [NSNumber numberWithFloat:0.f],
+                                [NSNumber numberWithFloat:0.5f],
+                                [NSNumber numberWithFloat:1.f], nil];
+    
     CAKeyframeAnimation *animation = [factory animation];
     NSArray *timingFunctions = animation.timingFunctions;
     STAssertEqualsWithAccuracy((float)animation.duration, 1.f, 0.0001f, @"duration is 1s");

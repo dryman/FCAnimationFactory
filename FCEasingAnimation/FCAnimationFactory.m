@@ -8,7 +8,6 @@
 
 #import "FCAnimationFactory.h"
 
-#define SEGMENT_FACTOR (2.f)
 
 void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float(^block)(float x))
 {
@@ -58,11 +57,6 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
     return self;
 }
 
-+ (FCAnimationFactory*)factory
-{
-    return [[FCAnimationFactory alloc] init];
-}
-
 
 - (void)setSegmentedDurations:(NSArray *)segmentedDurations
 {
@@ -99,43 +93,8 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
 
 - (CAKeyframeAnimation*) animation
 {
-    // TODO: assert if count of normalizedTimes and timingFunctions is correct
-    
-    NSMutableArray *keyTimes = [NSMutableArray array];
-    NSMutableArray *timingFunctions = [NSMutableArray array];
-    float totalDuration = self.totalDuration.floatValue;
-    __block float timeAccumulator = 0.f;
-    __weak typeof(self) weakSelf = self;
-    
-    // durations are much more convinient to do calculations!
-    [self.segmentedDurations enumerateObjectsUsingBlock:^(NSNumber* nsDuration, NSUInteger idx, BOOL *stop) {
-        float (^block)(float) = [weakSelf.timingBlocks objectAtIndex:idx];
-        float duration = nsDuration.floatValue;
-        int count = (int)ceilf(duration*SEGMENT_FACTOR);
-        
-        float step = duration/(float)count;
-        float step_n = 1.f/(float)count; // normalized
-        float iter_n = 0.f;
-        float c1[2], c2[2];
-        
-        for (int i = 0; i<count; i++) {
-            fc_bezier_interpolation(c1, c2, iter_n, iter_n+step_n, block);
-            [timingFunctions addObject:[CAMediaTimingFunction functionWithControlPoints:c1[0] :c1[1] :c2[0] :c2[1]]];
-            
-            [keyTimes addObject:[NSNumber numberWithFloat:timeAccumulator/totalDuration]];
-            
-            iter_n += step_n;
-            timeAccumulator += step;
-        }
-    }];
-    // last timestamp
-    [keyTimes addObject:[NSNumber numberWithFloat:1.f]];
-    
-    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
-    animation.keyTimes = keyTimes;
-    animation.timingFunctions = timingFunctions;
-    animation.duration = totalDuration;
-    return animation;
+    NSAssert(0, @"Overwrite this method in subclass");
+    return [CAKeyframeAnimation animation]; //cheat compiler warnings
 }
 
 @end

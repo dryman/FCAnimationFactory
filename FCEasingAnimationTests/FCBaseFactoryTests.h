@@ -7,11 +7,11 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
-#import "FCAnimationFactory.h"
+#import "FCValueAnimationFactory.h"
 
 @interface FCBaseFactoryTests : SenTestCase
 {
-    FCAnimationFactory* factory;
+    FCValueAnimationFactory* factory;
 }
 
 @end
