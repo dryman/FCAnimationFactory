@@ -9,6 +9,20 @@
 /* Begin PBXBuildFile section */
 		5D611FEC162F88E7004BB224 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D611FEB162F88E7004BB224 /* QuartzCore.framework */; };
 		5D611FEF162FA0E3004BB224 /* FCBaseFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D611FEE162FA0E3004BB224 /* FCBaseFactoryTests.m */; };
+		5D8469491630319B00E92CDA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C60162C333F00BE9BCD /* UIKit.framework */; };
+		5D84694A1630319B00E92CDA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C4F162C333F00BE9BCD /* Foundation.framework */; };
+		5D84694C1630319B00E92CDA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D84694B1630319B00E92CDA /* CoreGraphics.framework */; };
+		5D8469521630319B00E92CDA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5D8469501630319B00E92CDA /* InfoPlist.strings */; };
+		5D8469541630319B00E92CDA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D8469531630319B00E92CDA /* main.m */; };
+		5D8469581630319B00E92CDA /* FCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D8469571630319B00E92CDA /* FCAppDelegate.m */; };
+		5D84695A1630319B00E92CDA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D8469591630319B00E92CDA /* Default.png */; };
+		5D84695C1630319B00E92CDA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D84695B1630319B00E92CDA /* Default@2x.png */; };
+		5D84695E1630319B00E92CDA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D84695D1630319B00E92CDA /* Default-568h@2x.png */; };
+		5D8469611630319B00E92CDA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D84695F1630319B00E92CDA /* MainStoryboard.storyboard */; };
+		5D8469641630319B00E92CDA /* FCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D8469631630319B00E92CDA /* FCViewController.m */; };
+		5D846969163031CA00E92CDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D611FEB162F88E7004BB224 /* QuartzCore.framework */; };
+		5D84696A163031D500E92CDA /* FCAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C56162C333F00BE9BCD /* FCAnimationFactory.m */; };
+		5D84696B163031D800E92CDA /* FCValueAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCValueAnimationFactory.m */; };
 		5DD44F19162FE620008FB24A /* FCValueAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCValueAnimationFactory.m */; };
 		5DD44F1A162FE620008FB24A /* FCValueAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCValueAnimationFactory.m */; };
 		5DF94C50162C333F00BE9BCD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C4F162C333F00BE9BCD /* Foundation.framework */; };
@@ -50,6 +64,20 @@
 		5D611FEB162F88E7004BB224 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5D611FED162FA0E3004BB224 /* FCBaseFactoryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCBaseFactoryTests.h; sourceTree = "<group>"; };
 		5D611FEE162FA0E3004BB224 /* FCBaseFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCBaseFactoryTests.m; sourceTree = "<group>"; };
+		5D8469471630319B00E92CDA /* FCAnimationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FCAnimationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D84694B1630319B00E92CDA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5D84694F1630319B00E92CDA /* FCAnimationDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FCAnimationDemo-Info.plist"; sourceTree = "<group>"; };
+		5D8469511630319B00E92CDA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5D8469531630319B00E92CDA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5D8469551630319B00E92CDA /* FCAnimationDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FCAnimationDemo-Prefix.pch"; sourceTree = "<group>"; };
+		5D8469561630319B00E92CDA /* FCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCAppDelegate.h; sourceTree = "<group>"; };
+		5D8469571630319B00E92CDA /* FCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCAppDelegate.m; sourceTree = "<group>"; };
+		5D8469591630319B00E92CDA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		5D84695B1630319B00E92CDA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		5D84695D1630319B00E92CDA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		5D8469601630319B00E92CDA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		5D8469621630319B00E92CDA /* FCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCViewController.h; sourceTree = "<group>"; };
+		5D8469631630319B00E92CDA /* FCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCViewController.m; sourceTree = "<group>"; };
 		5DD44F17162FE620008FB24A /* FCValueAnimationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCValueAnimationFactory.h; sourceTree = "<group>"; };
 		5DD44F18162FE620008FB24A /* FCValueAnimationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCValueAnimationFactory.m; sourceTree = "<group>"; };
 		5DF94C4C162C333F00BE9BCD /* libFCEasingAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFCEasingAnimation.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +95,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5D8469441630319B00E92CDA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D8469491630319B00E92CDA /* UIKit.framework in Frameworks */,
+				5D84694A1630319B00E92CDA /* Foundation.framework in Frameworks */,
+				5D846969163031CA00E92CDA /* QuartzCore.framework in Frameworks */,
+				5D84694C1630319B00E92CDA /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DF94C49162C333F00BE9BCD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -90,11 +129,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D84694D1630319B00E92CDA /* FCAnimationDemo */ = {
+			isa = PBXGroup;
+			children = (
+				5D8469561630319B00E92CDA /* FCAppDelegate.h */,
+				5D8469571630319B00E92CDA /* FCAppDelegate.m */,
+				5D84695F1630319B00E92CDA /* MainStoryboard.storyboard */,
+				5D8469621630319B00E92CDA /* FCViewController.h */,
+				5D8469631630319B00E92CDA /* FCViewController.m */,
+				5D84694E1630319B00E92CDA /* Supporting Files */,
+			);
+			path = FCAnimationDemo;
+			sourceTree = "<group>";
+		};
+		5D84694E1630319B00E92CDA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5D84694F1630319B00E92CDA /* FCAnimationDemo-Info.plist */,
+				5D8469501630319B00E92CDA /* InfoPlist.strings */,
+				5D8469531630319B00E92CDA /* main.m */,
+				5D8469551630319B00E92CDA /* FCAnimationDemo-Prefix.pch */,
+				5D8469591630319B00E92CDA /* Default.png */,
+				5D84695B1630319B00E92CDA /* Default@2x.png */,
+				5D84695D1630319B00E92CDA /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		5DF94C41162C333F00BE9BCD = {
 			isa = PBXGroup;
 			children = (
 				5DF94C51162C333F00BE9BCD /* FCAnimationFactory */,
 				5DF94C66162C333F00BE9BCD /* FCEasingAnimationTests */,
+				5D84694D1630319B00E92CDA /* FCAnimationDemo */,
 				5DF94C4E162C333F00BE9BCD /* Frameworks */,
 				5DF94C4D162C333F00BE9BCD /* Products */,
 			);
@@ -105,6 +172,7 @@
 			children = (
 				5DF94C4C162C333F00BE9BCD /* libFCEasingAnimation.a */,
 				5DF94C5D162C333F00BE9BCD /* FCEasingAnimationTests.octest */,
+				5D8469471630319B00E92CDA /* FCAnimationDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,6 +184,7 @@
 				5DF94C4F162C333F00BE9BCD /* Foundation.framework */,
 				5DF94C5E162C333F00BE9BCD /* SenTestingKit.framework */,
 				5DF94C60162C333F00BE9BCD /* UIKit.framework */,
+				5D84694B1630319B00E92CDA /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -165,6 +234,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5D8469461630319B00E92CDA /* FCAnimationDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D8469671630319B00E92CDA /* Build configuration list for PBXNativeTarget "FCAnimationDemo" */;
+			buildPhases = (
+				5D8469431630319B00E92CDA /* Sources */,
+				5D8469441630319B00E92CDA /* Frameworks */,
+				5D8469451630319B00E92CDA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FCAnimationDemo;
+			productName = FCAnimationDemo;
+			productReference = 5D8469471630319B00E92CDA /* FCAnimationDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
 		5DF94C4B162C333F00BE9BCD /* FCEasingAnimation */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DF94C71162C333F00BE9BCD /* Build configuration list for PBXNativeTarget "FCEasingAnimation" */;
@@ -224,11 +310,24 @@
 			targets = (
 				5DF94C4B162C333F00BE9BCD /* FCEasingAnimation */,
 				5DF94C5C162C333F00BE9BCD /* FCEasingAnimationTests */,
+				5D8469461630319B00E92CDA /* FCAnimationDemo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5D8469451630319B00E92CDA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D8469521630319B00E92CDA /* InfoPlist.strings in Resources */,
+				5D84695A1630319B00E92CDA /* Default.png in Resources */,
+				5D84695C1630319B00E92CDA /* Default@2x.png in Resources */,
+				5D84695E1630319B00E92CDA /* Default-568h@2x.png in Resources */,
+				5D8469611630319B00E92CDA /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DF94C5A162C333F00BE9BCD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -256,6 +355,18 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5D8469431630319B00E92CDA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D84696B163031D800E92CDA /* FCValueAnimationFactory.m in Sources */,
+				5D84696A163031D500E92CDA /* FCAnimationFactory.m in Sources */,
+				5D8469541630319B00E92CDA /* main.m in Sources */,
+				5D8469581630319B00E92CDA /* FCAppDelegate.m in Sources */,
+				5D8469641630319B00E92CDA /* FCViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DF94C48162C333F00BE9BCD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -287,6 +398,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		5D8469501630319B00E92CDA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5D8469511630319B00E92CDA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5D84695F1630319B00E92CDA /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5D8469601630319B00E92CDA /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
 		5DF94C69162C333F00BE9BCD /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -298,6 +425,41 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5D8469651630319B00E92CDA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FCAnimationDemo/FCAnimationDemo-Prefix.pch";
+				INFOPLIST_FILE = "FCAnimationDemo/FCAnimationDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5D8469661630319B00E92CDA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FCAnimationDemo/FCAnimationDemo-Prefix.pch";
+				INFOPLIST_FILE = "FCAnimationDemo/FCAnimationDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		5DF94C6F162C333F00BE9BCD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -402,6 +564,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5D8469671630319B00E92CDA /* Build configuration list for PBXNativeTarget "FCAnimationDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D8469651630319B00E92CDA /* Debug */,
+				5D8469661630319B00E92CDA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		5DF94C46162C333F00BE9BCD /* Build configuration list for PBXProject "FCEasingAnimation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
