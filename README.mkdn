@@ -62,7 +62,7 @@ The project is still under heavy development. Pull requests are welcome ;)
 
 * Write complete API references, use [appledoc](http://gentlebytes.com/appledoc/).
 
-* Ease-out and ease-in-out functions are broken. Need to fix it.
+* Reuse timing blocks instead of writing anonymous block every time.
 
 * Currently only `NSNumber` value is supported. In future other value such as
   `CGColorRef` can be animated too.
