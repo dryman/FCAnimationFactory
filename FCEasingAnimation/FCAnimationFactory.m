@@ -35,7 +35,6 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
     c2[0] = 1 - (sin_1*cos_2*x_comb - cos_1*cos_2*y_comb) / (base*(x2-x1));
     
     c2[1] = 1 - (sin_1*sin_2*x_comb - cos_1*sin_2*y_comb) / (base*(y2-y1));
-
 }
 
 
@@ -47,10 +46,11 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
 - (FCAnimationFactory*)init
 {
     if (self = [super init]) {
-        _normalizedTimings = [NSArray arrayWithObject:^float(float x){return x;}]; // linear interpolation
-        _timingBlocks = [NSArray arrayWithObjects:
-                         [NSNumber numberWithFloat:0.f],
-                         [NSNumber numberWithFloat:1.f], nil];
+        _normalizedTimings = [NSArray arrayWithObjects:
+                               [NSNumber numberWithFloat:0.f],
+                               [NSNumber numberWithFloat:1.f], nil];
+        _timingBlocks = [NSArray arrayWithObject:^float(float x){return x;}]; // linear interpolation
+        
         _totalDuration = [NSNumber numberWithFloat:.25f];
     }
     return self;
@@ -61,12 +61,20 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
     return [[FCAnimationFactory alloc] init];
 }
 
+
 - (void)setSegmentedDurations:(NSArray *)segmentedDurations
 {
+    // TODO: can add negative asssertions in future
     NSNumber* sum = [segmentedDurations valueForKeyPath:@"@sum.floatValue"];
-    NSMutableArray* timings = [NSMutableArray arrayWithCapacity:segmentedDurations.count];
-    for (NSNumber* time in segmentedDurations) {
-        [timings addObject: [NSNumber numberWithFloat:time.floatValue/sum.floatValue]];
+    float totalDuration = sum.floatValue;
+    float accumulator = 0.f;
+    NSMutableArray* timings = [NSMutableArray arrayWithCapacity:segmentedDurations.count+1];
+    [timings addObject:[NSNumber numberWithFloat:0.f]];
+    
+    for (NSNumber* nsDuration in segmentedDurations) {
+        float duration = nsDuration.floatValue;
+        accumulator += duration;
+        [timings addObject: [NSNumber numberWithFloat:accumulator/totalDuration]];
     }
     self.normalizedTimings = timings;
     self.totalDuration = sum;
@@ -74,28 +82,53 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
 
 - (NSArray*)segmentedDurations
 {
-    NSMutableArray *retDurations = [NSMutableArray arrayWithCapacity:self.normalizedTimings.count];
+    NSUInteger count = self.normalizedTimings.count - 1;
     float totalDuration = self.totalDuration.floatValue;
-    for (NSNumber* time in self.normalizedTimings) {
-        [retDurations addObject:[NSNumber numberWithFloat:(time.floatValue * totalDuration)]];
+    NSMutableArray *retDurations = [NSMutableArray arrayWithCapacity:count];
+    
+    for (NSUInteger i = 0; i < count; ++i) {
+        float a = [[self.normalizedTimings objectAtIndex:i] floatValue];
+        float b = [[self.normalizedTimings objectAtIndex:i+1] floatValue];
+        [retDurations addObject:[NSNumber numberWithFloat:(b-a)*totalDuration]];
     }
+
     return [NSArray arrayWithArray: retDurations]; // Cast to NSArray
 }
 
 - (CAKeyframeAnimation*) animation
 {
+    // TODO: assert if count of normalizedTimes and timingFunctions is correct
+    
     NSMutableArray *keyTimes = [NSMutableArray array];
     NSMutableArray *timingFunctions = [NSMutableArray array];
+    float totalDuration = self.totalDuration.floatValue;
+    __block float timeAccumulator = 0.f;
+    __weak typeof(self) weakSelf = self;
     
     // durations are much more convinient to do calculations!
     [self.segmentedDurations enumerateObjectsUsingBlock:^(NSNumber* nsDuration, NSUInteger idx, BOOL *stop) {
+        float (^block)(float) = [weakSelf.timingBlocks objectAtIndex:idx];
         float duration = nsDuration.floatValue;
+        int count = (int)ceilf(duration*2.f);
         float step = duration/ceilf(duration*2.f);
+        float iter = 0.f;
+        float c1[2], c2[2];
         
+        for (int i = 0; i<count; i++) {
+            fc_bezier_interpolation(c1, c2, iter, iter+step, block);
+            [timingFunctions addObject:[CAMediaTimingFunction functionWithControlPoints:c1[0] :c1[1] :c2[0] :c2[1]]];
+            [keyTimes addObject:[NSNumber numberWithFloat:timeAccumulator/totalDuration]];
+            iter += step;
+            timeAccumulator += step;
+        }
     }];
+    // last timestamp
+    [keyTimes addObject:[NSNumber numberWithFloat:1.f]];
+    
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
     animation.keyTimes = keyTimes;
     animation.timingFunctions = timingFunctions;
+    animation.duration = totalDuration;
     return animation;
 }
 

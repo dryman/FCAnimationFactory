@@ -75,6 +75,25 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
  * acceptable.
  */
 
+- (void)testRawLinearAccuracy
+{
+    float points[4];
+    float(^f)(float) = ^float(float x) {
+        return x;
+    };
+    fc_bezier_interpolation(&points[0],&points[2], 0, 1, f);
+    
+    FCFloatBlock x_block = genBezier(points[0],points[2]);
+    FCFloatBlock y_block = genBezier(points[1],points[3]);
+    
+    float sum = 0, num = 0;
+    for (float t = 0; t < 1; t+=0.01){
+        float x = x_block(t), y = y_block(t);
+        sum += fabsf(y - f(x));
+        num++;
+    }
+    STAssertEqualsWithAccuracy(sum/num, 0.f, 0.001, @"accuracy is acceptable in 0.001");
+}
 
 - (void)testRawQuadAccuracy
 {

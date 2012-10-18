@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5D611FEC162F88E7004BB224 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D611FEB162F88E7004BB224 /* QuartzCore.framework */; };
+		5D611FEF162FA0E3004BB224 /* FCBaseFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D611FEE162FA0E3004BB224 /* FCBaseFactoryTests.m */; };
 		5DF94C50162C333F00BE9BCD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C4F162C333F00BE9BCD /* Foundation.framework */; };
 		5DF94C55162C333F00BE9BCD /* FCAnimationFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5DF94C54162C333F00BE9BCD /* FCAnimationFactory.h */; };
 		5DF94C57162C333F00BE9BCD /* FCAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C56162C333F00BE9BCD /* FCAnimationFactory.m */; };
@@ -45,6 +46,8 @@
 
 /* Begin PBXFileReference section */
 		5D611FEB162F88E7004BB224 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5D611FED162FA0E3004BB224 /* FCBaseFactoryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCBaseFactoryTests.h; sourceTree = "<group>"; };
+		5D611FEE162FA0E3004BB224 /* FCBaseFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCBaseFactoryTests.m; sourceTree = "<group>"; };
 		5DF94C4C162C333F00BE9BCD /* libFCEasingAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFCEasingAnimation.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF94C4F162C333F00BE9BCD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5DF94C53162C333F00BE9BCD /* FCEasingAnimation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FCEasingAnimation-Prefix.pch"; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 			children = (
 				5DF94C6C162C333F00BE9BCD /* FCEasingAnimationTests.h */,
 				5DF94C6D162C333F00BE9BCD /* FCEasingAnimationTests.m */,
+				5D611FED162FA0E3004BB224 /* FCBaseFactoryTests.h */,
+				5D611FEE162FA0E3004BB224 /* FCBaseFactoryTests.m */,
 				5DF94C67162C333F00BE9BCD /* Supporting Files */,
 			);
 			path = FCEasingAnimationTests;
@@ -259,6 +264,7 @@
 			files = (
 				5DF94C6E162C333F00BE9BCD /* FCEasingAnimationTests.m in Sources */,
 				5DF94C77162C51D500BE9BCD /* FCAnimationFactory.m in Sources */,
+				5D611FEF162FA0E3004BB224 /* FCBaseFactoryTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
