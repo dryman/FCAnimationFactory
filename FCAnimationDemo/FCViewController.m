@@ -79,7 +79,7 @@
         [CATransaction begin];
         [CATransaction setDisableActions:YES];
         _layer.position = CGPointMake(160.f, 50.f);
-        CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"linear" fromValue:@300.f toValue:@50.f duration:@1.f];
+        CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"quinticEaseInOut" fromValue:@300.f toValue:@50.f duration:@1.f];
         animation.keyPath = @"position.y";
         [_layer addAnimation:animation forKey:@"myUselessKey"];
         [CATransaction commit];
