@@ -70,7 +70,7 @@
     factoryCopy.normalizedTimings = _normalizedTimings;
     factoryCopy.timingBlocks = _timingBlocks;
     factoryCopy.totalDuration = _totalDuration;
-    factoryCopy.normalizedTimings = _normalizedTimings;
+    factoryCopy.normalizedValues = _normalizedValues;
     factoryCopy.fromValue = _fromValue;
     factoryCopy.toValue = _toValue;
     return factoryCopy;
@@ -107,13 +107,13 @@
         factory.timingBlocks = [NSArray arrayWithObject:^(float x){return 1-(x-1)*(x-1);}];
         [dict setObject:[factory copy] forKey:@"quadraticEaseOut"];
 
-        factory.timingBlocks = [NSArray arrayWithObject:^(float x){return 1-(x-1)*(x-1)*(x-1);}];
+        factory.timingBlocks = [NSArray arrayWithObject:^(float x){return 1+(x-1)*(x-1)*(x-1);}];
         [dict setObject:[factory copy] forKey:@"cubicEaseOut"];
         
         factory.timingBlocks = [NSArray arrayWithObject:^(float x){return 1-(x-1)*(x-1)*(x-1)*(x-1);}];
         [dict setObject:[factory copy] forKey:@"quarticEaseOut"];
         
-        factory.timingBlocks = [NSArray arrayWithObject:^(float x){return 1-(x-1)*(x-1)*(x-1)*(x-1)*(x-1);}];
+        factory.timingBlocks = [NSArray arrayWithObject:^(float x){return 1+(x-1)*(x-1)*(x-1)*(x-1)*(x-1);}];
         [dict setObject:[factory copy] forKey:@"quinticEaseOut"];
         
         factory.normalizedValues = [NSArray arrayWithObjects:
@@ -131,7 +131,7 @@
 
         factory.timingBlocks = [NSArray arrayWithObjects:
                                      ^(float x){return x*x*x;},
-                                     ^(float x){return 1-(x-1)*(x-1)*(x-1);}, nil];
+                                     ^(float x){return 1+(x-1)*(x-1)*(x-1);}, nil];
         [dict setObject:[factory copy] forKey:@"cubicEaseInOut"];
         
         factory.timingBlocks = [NSArray arrayWithObjects:
@@ -141,7 +141,7 @@
 
         factory.timingBlocks = [NSArray arrayWithObjects:
                                      ^(float x){return x*x*x*x*x;},
-                                     ^(float x){return 1-(x-1)*(x-1)*(x-1)*(x-1)*(x-1);}, nil];
+                                     ^(float x){return 1+(x-1)*(x-1)*(x-1)*(x-1)*(x-1);}, nil];
         [dict setObject:[factory copy] forKey:@"quinticEaseInOut"];
     }
     return dict;
