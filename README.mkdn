@@ -1,0 +1,107 @@
+# FCAnimationFactory (Pre-Alpha stage)
+
+`FCAnimationFactory` is an objective-c library for generating
+`CAKeyFrameAnimation` with custom timing functions including cubic, quadratic,
+or even bouncing functions. 
+
+The main difference between [AHEasing][AHEasing] and `FCAnimationFactory` is that
+[AHEasing][AHEasing] create every frames for `CAKeyFrameAnimation`, which breaks
+Core Animation model-presentation rendering pipeline. `FCAnimationFactory` use
+standard `CAMediaTimingFunction` to tell `CAKeyFrameAnimation` the timing and
+let it deals with frames itself. The challenge is not only timing needs to be
+interpolated, values (numbers, colors, path) also need to be interpolated as
+well. The goal of `FCAnimationFactory` is to provide a daily use API like
+`animationWithName`, and an API of factory itself which is fully programmable
+and plugin friendly.
+
+## SYNOPSIS
+
+High level animation API:
+
+        [CATransaction begin];
+        [CATransaction setDisableActions:YES];
+        _layer.position = CGPointMake(160.f, 300.f);
+        CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"cubicEaseIn"
+                                                                          fromValue:@50.f
+                                                                            toValue:@300.f
+                                                                           duration:@1.f];
+        animation.keyPath = @"position.y";
+        [_layer addAnimation:animation forKey:@"myUselessKey"];
+        [CATransaction commit];
+
+Create your own timing function directly with `FCValueAnimationFactory`:
+
+    factory = [[FCValueAnimationFactory alloc] init];
+    factory.totalDuration = [NSNumber numberWithFloat:1.f];
+    factory.timingBlocks = [NSArray arrayWithObject:^float(float x){
+        return x*x*x*x*x;
+    }];
+    factory.normalizedValues = [NSArray arrayWithObjects:
+                               [NSNumber numberWithFloat:0.f],
+                               [NSNumber numberWithFloat:1.f], nil];
+    factory.normalizedTimings = [NSArray arrayWithObjects:
+                                [NSNumber numberWithFloat:0.f],
+                                [NSNumber numberWithFloat:1.f], nil];
+    CAKeyframeAnimation *animation = [factory animation];
+    // setup animation to layer...
+
+Clone the project and see example usage in `FCAnimationDemo` target.
+
+## INSTALL
+
+Clone the project and drag these files into your own project:
+
+    FCAnimationFactory.h
+    FCAnimationFactory.m
+    FCValueAnimationFactory.h
+    FCValueAnimationFactory.m
+
+The project is still under heavy development. Pull requests are welcome ;)
+
+## TODOS
+
+* Write complete API references, use [appledoc](http://gentlebytes.com/appledoc/).
+
+* Ease-out and ease-in-out functions are broken. Need to fix it.
+
+* Currently only `NSNumber` value is supported. In future other value such as
+  `CGColorRef` can be animated too.
+
+* `FCPathAnimationFactory` can create cubic path on `position` or other 2D
+  movement animation.
+
+## LICENSE
+
+ Created by Felix Chern on 12/10/15.
+ Copyright (c) 2012 Felix R. Chern. All rights reserved. (BSD LICENSE)
+ 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+
+ * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright
+ notice, this list of conditions and the following disclaimer in the
+ documentation and/or other materials provided with the distribution.
+ * Neither the name of the FCAnimationFactory nor the
+ names of its contributors may be used to endorse or promote products
+ derived from this software without specific prior written permission.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL FELIX R. CHERN BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ 
+## SEE ALSO
+
+* [AHEasing][AHEasing]
+* [IRAnimationQueue](https://github.com/evadne/IRAnimationQueue-Experimental)
+
+
+[AHEasing]: https://github.com/warrenm/AHEasing
