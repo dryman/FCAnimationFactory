@@ -8,6 +8,8 @@
 
 #import "FCAnimationFactory.h"
 
+#define SEGMENT_FACTOR (2.f)
+
 void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float(^block)(float x))
 {
     const float h = sqrtf(FLT_EPSILON);
@@ -109,16 +111,20 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
     [self.segmentedDurations enumerateObjectsUsingBlock:^(NSNumber* nsDuration, NSUInteger idx, BOOL *stop) {
         float (^block)(float) = [weakSelf.timingBlocks objectAtIndex:idx];
         float duration = nsDuration.floatValue;
-        int count = (int)ceilf(duration*2.f);
-        float step = duration/ceilf(duration*2.f);
-        float iter = 0.f;
+        int count = (int)ceilf(duration*SEGMENT_FACTOR);
+        
+        float step = duration/(float)count;
+        float step_n = 1.f/(float)count; // normalized
+        float iter_n = 0.f;
         float c1[2], c2[2];
         
         for (int i = 0; i<count; i++) {
-            fc_bezier_interpolation(c1, c2, iter, iter+step, block);
+            fc_bezier_interpolation(c1, c2, iter_n, iter_n+step_n, block);
             [timingFunctions addObject:[CAMediaTimingFunction functionWithControlPoints:c1[0] :c1[1] :c2[0] :c2[1]]];
+            
             [keyTimes addObject:[NSNumber numberWithFloat:timeAccumulator/totalDuration]];
-            iter += step;
+            
+            iter_n += step_n;
             timeAccumulator += step;
         }
     }];
