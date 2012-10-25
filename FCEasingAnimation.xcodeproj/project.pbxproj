@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D3DEFFB1638D19000DF8A4D /* FCValueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3DEFFA1638D19000DF8A4D /* FCValueTest.m */; };
+		5D3DF0011638EF2E00DF8A4D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D84694B1630319B00E92CDA /* CoreGraphics.framework */; };
+		5D3DF0031639286200DF8A4D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D3DF0021639286200DF8A4D /* Icon.png */; };
 		5D611FEC162F88E7004BB224 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D611FEB162F88E7004BB224 /* QuartzCore.framework */; };
 		5D611FEF162FA0E3004BB224 /* FCBaseFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D611FEE162FA0E3004BB224 /* FCBaseFactoryTests.m */; };
 		5D8469491630319B00E92CDA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C60162C333F00BE9BCD /* UIKit.framework */; };
@@ -61,6 +64,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5D3DEFFA1638D19000DF8A4D /* FCValueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCValueTest.m; sourceTree = "<group>"; };
+		5D3DF0021639286200DF8A4D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		5D611FEB162F88E7004BB224 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5D611FED162FA0E3004BB224 /* FCBaseFactoryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCBaseFactoryTests.h; sourceTree = "<group>"; };
 		5D611FEE162FA0E3004BB224 /* FCBaseFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCBaseFactoryTests.m; sourceTree = "<group>"; };
@@ -118,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D3DF0011638EF2E00DF8A4D /* CoreGraphics.framework in Frameworks */,
 				5D611FEC162F88E7004BB224 /* QuartzCore.framework in Frameworks */,
 				5DF94C5F162C333F00BE9BCD /* SenTestingKit.framework in Frameworks */,
 				5DF94C61162C333F00BE9BCD /* UIKit.framework in Frameworks */,
@@ -145,6 +151,7 @@
 		5D84694E1630319B00E92CDA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5D3DF0021639286200DF8A4D /* Icon.png */,
 				5D84694F1630319B00E92CDA /* FCAnimationDemo-Info.plist */,
 				5D8469501630319B00E92CDA /* InfoPlist.strings */,
 				5D8469531630319B00E92CDA /* main.m */,
@@ -215,6 +222,7 @@
 			children = (
 				5DF94C6C162C333F00BE9BCD /* FCEasingAnimationTests.h */,
 				5DF94C6D162C333F00BE9BCD /* FCEasingAnimationTests.m */,
+				5D3DEFFA1638D19000DF8A4D /* FCValueTest.m */,
 				5D611FED162FA0E3004BB224 /* FCBaseFactoryTests.h */,
 				5D611FEE162FA0E3004BB224 /* FCBaseFactoryTests.m */,
 				5DF94C67162C333F00BE9BCD /* Supporting Files */,
@@ -333,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DF94C6B162C333F00BE9BCD /* InfoPlist.strings in Resources */,
+				5D3DF0031639286200DF8A4D /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +393,7 @@
 				5DF94C77162C51D500BE9BCD /* FCAnimationFactory.m in Sources */,
 				5D611FEF162FA0E3004BB224 /* FCBaseFactoryTests.m in Sources */,
 				5DD44F1A162FE620008FB24A /* FCValueAnimationFactory.m in Sources */,
+				5D3DEFFB1638D19000DF8A4D /* FCValueTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
