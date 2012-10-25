@@ -285,7 +285,7 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
 - (void)testSegmentedQuintAccuracy
 {
     float points[4];
-    float sum = 0, num = 0, seg = 0.5;
+    float sum = 0, num = 0, seg = 0.25;
     
     float(^f)(float) = ^float(float x) {
         return x*x*x*x*x;
