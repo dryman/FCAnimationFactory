@@ -34,6 +34,7 @@
 
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
 
 #define SEGMENT_FACTOR (4.f)
 

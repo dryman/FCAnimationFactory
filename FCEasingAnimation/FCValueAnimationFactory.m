@@ -147,6 +147,77 @@
     return dict;
 }
 
+- (id(^)(float))makeValueScalingBlock
+{
+    if (self.fromValue==nil || self.toValue==nil) NSAssert(0, @"fromValue and toValue must not be nil");
+    
+    id value = self.fromValue;
+    
+    /*
+     * single float is handled in NSNumber
+     */
+    if ([value isKindOfClass:[NSNumber class]]) {
+        float fromValue = self.fromValue.floatValue;
+        float toValue = self.toValue.floatValue;
+        float diffValue = toValue - fromValue;
+        return ^id(float factor){
+            float result = factor*diffValue + fromValue;
+            return [NSNumber numberWithFloat:result];
+        };
+    }
+    
+    /*
+     * NSValue handles CGPoint, CGSize, CGRect, and CATransform3D
+     */
+    if ([value isKindOfClass:[NSValue class]]) {
+        const char* objCType = [value objCType];
+        if (strcmp(objCType, @encode(CGPoint))) {
+            CGPoint pt0, pt1;
+            [self.fromValue getValue:&pt0];
+            [self.toValue getValue:&pt1];
+            return ^id(float factor){
+                float x = (pt1.x - pt0.x)*factor + pt0.x;
+                float y = (pt1.y - pt0.y)*factor + pt0.y;
+                return [NSValue valueWithCGPoint:CGPointMake(x, y)];
+            };
+        } else if (strcmp(objCType, @encode(CGSize))) {
+            CGSize size0, size1;
+            [self.fromValue getValue:&size0];
+            [self.toValue getValue:&size1];
+            return ^id(float factor){
+                float w = (size1.width - size0.width)*factor + size0.width;
+                float h = (size1.height - size0.height)*factor + size0.height;
+                return [NSValue valueWithCGSize:CGSizeMake(w, h)];
+            };
+        } else if (strcmp(objCType, @encode(CGRect))) {
+            CGRect rect0, rect1;
+            [self.fromValue getValue:&rect0];
+            [self.toValue getValue:&rect1];
+            return ^id(float factor){
+                float x = (rect1.origin.x - rect0.origin.x)*factor + rect0.origin.x;
+                float y = (rect1.origin.y - rect0.origin.y)*factor + rect0.origin.y;
+                float w = (rect1.size.width - rect0.size.width)*factor + rect0.size.width;
+                float h = (rect1.size.height - rect0.size.height)*factor + rect0.size.height;
+                return [NSValue valueWithCGRect:CGRectMake(x, y, w, h)];
+            };
+        } else if (strcmp(objCType, @encode(CATransform3D))) {
+            NSAssert(0, @"CATransform3D type currently not supported");
+        } else {
+            NSAssert(0, @"Unknown NSValue type %s",objCType);
+        }
+    }
+    
+    if (CFGetTypeID((__bridge CFTypeRef)value) == CGColorGetTypeID()) {
+        NSAssert(0, @"CGColorRef type currently not supported");
+    }
+    if (CFGetTypeID((__bridge CFTypeRef)value) == CGImageGetTypeID()) {
+        NSAssert(0, @"CGImageRef should be handled in another class");
+    }
+    
+    NSAssert(0, @"value type unknown");
+    return ^id(float factor){ return nil;};    // turn off compiler warnings
+}
+
 - (CAKeyframeAnimation*) animation
 {
     // TODO: assert if count of normalizedTimes, normalizedValues and timingFunctions is correct
@@ -157,8 +228,7 @@
     NSMutableArray *timingFunctions = [NSMutableArray array];
     NSMutableArray *values = [NSMutableArray array];
     float total_duration = self.totalDuration.floatValue;
-    float to_value = self.toValue.floatValue, from_value = self.fromValue.floatValue;
-    float value_diff = to_value - from_value;
+    id (^scalingBlock)(float) = [self makeValueScalingBlock];
     __block float time_accumulator = 0.f;
     __weak typeof(self) weakSelf = self;
     
@@ -183,9 +253,9 @@
             
             [keyTimes addObject:[NSNumber numberWithFloat:time_accumulator/total_duration]];
             
-            float normalized_value = block(n_iter)*n_value_diff + n_value0;
-            float value = normalized_value * value_diff + from_value;
-            [values addObject:[NSNumber numberWithFloat:value]];
+            float factor = block(n_iter)*n_value_diff + n_value0; // factor range is 0-1
+            
+            [values addObject:scalingBlock(factor)];
             
             n_iter += n_step;
             time_accumulator += time_step;
