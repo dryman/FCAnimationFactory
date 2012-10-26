@@ -39,12 +39,12 @@
 @interface FCValueAnimationFactory : FCAnimationFactory <NSCopying>
 {
     NSArray* _normalizedValues;
-    NSNumber* _fromValue;
-    NSNumber* _toValue;
+    id _fromValue;
+    id _toValue;
 }
 @property (copy) NSArray* normalizedValues;
-@property (copy) NSNumber* fromValue;
-@property (copy) NSNumber* toValue;
+@property (copy) id fromValue;
+@property (copy) id toValue;
 
 + (CAKeyframeAnimation*) animationWithName:(NSString*)name fromValue:(NSNumber*)fv toValue: (NSNumber*)tv duration:(NSNumber*)duration;
 

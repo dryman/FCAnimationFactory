@@ -157,8 +157,8 @@
      * single float is handled in NSNumber
      */
     if ([value isKindOfClass:[NSNumber class]]) {
-        float fromValue = self.fromValue.floatValue;
-        float toValue = self.toValue.floatValue;
+        float fromValue = [(NSNumber*)self.fromValue floatValue];
+        float toValue = [(NSNumber*)self.toValue floatValue];
         float diffValue = toValue - fromValue;
         return ^id(float factor){
             float result = factor*diffValue + fromValue;
@@ -173,8 +173,8 @@
         const char* objCType = [value objCType];
         if (strcmp(objCType, @encode(CGPoint))) {
             CGPoint pt0, pt1;
-            [self.fromValue getValue:&pt0];
-            [self.toValue getValue:&pt1];
+            [(NSValue*)self.fromValue getValue:&pt0];
+            [(NSValue*)self.toValue getValue:&pt1];
             return ^id(float factor){
                 float x = (pt1.x - pt0.x)*factor + pt0.x;
                 float y = (pt1.y - pt0.y)*factor + pt0.y;
@@ -182,8 +182,8 @@
             };
         } else if (strcmp(objCType, @encode(CGSize))) {
             CGSize size0, size1;
-            [self.fromValue getValue:&size0];
-            [self.toValue getValue:&size1];
+            [(NSValue*)self.fromValue getValue:&size0];
+            [(NSValue*)self.toValue getValue:&size1];
             return ^id(float factor){
                 float w = (size1.width - size0.width)*factor + size0.width;
                 float h = (size1.height - size0.height)*factor + size0.height;
@@ -191,8 +191,8 @@
             };
         } else if (strcmp(objCType, @encode(CGRect))) {
             CGRect rect0, rect1;
-            [self.fromValue getValue:&rect0];
-            [self.toValue getValue:&rect1];
+            [(NSValue*)self.fromValue getValue:&rect0];
+            [(NSValue*)self.toValue getValue:&rect1];
             return ^id(float factor){
                 float x = (rect1.origin.x - rect0.origin.x)*factor + rect0.origin.x;
                 float y = (rect1.origin.y - rect0.origin.y)*factor + rect0.origin.y;
