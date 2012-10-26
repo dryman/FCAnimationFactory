@@ -16,16 +16,16 @@ well.
 
 High level animation API:
 
-        [CATransaction begin];
-        [CATransaction setDisableActions:YES];
-        _layer.position = CGPointMake(160.f, 300.f);
-        CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"elasticEaseOut"
-                                                                          fromValue:[NSValue valueWithCGPoint:CGPointMake(320,50)]
-                                                                            toValue:[NSValue valueWithCGPoint:CGPointMake(160,300)]
-                                                                           duration:@2.5f];
-        animation.keyPath = @"position";
-        [_layer addAnimation:animation forKey:@"positionKey"];
-        [CATransaction commit];
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    _layer.position = CGPointMake(160.f, 300.f);
+    CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"elasticEaseOut"
+                                                                      fromValue:[NSValue valueWithCGPoint:CGPointMake(320,50)]
+                                                                        toValue:[NSValue valueWithCGPoint:CGPointMake(160,300)]
+                                                                       duration:@2.5f];
+    animation.keyPath = @"position";
+    [_layer addAnimation:animation forKey:@"positionKey"];
+    [CATransaction commit];
 
 Create your own timing function directly with `FCValueAnimationFactory`:
 
@@ -80,16 +80,20 @@ Use `[NSValue valueWithCGSize: myOffset]`.
 
 ### Frames and bounds
 
+* `frame`
+* `bounds`
+* `contentsRect`
+
 Use `[NSValue valueWithCGRect: bounds]`.
 
-## Properties under cunstruction
+## Animatable properties under cunstruction
 
 * `backgroundColor`, `borderColor`, and `shadowColor`.
 * `transform` and `sublayerTransform`
 * `countents` I'll use CATransition to made another class to animate contents.
 * `path` property in `CAKeyFrameAnimation`.
 
-## Property won't be supported
+## Animatable property won't be supported
 
 * doubleSided
 * hidden
@@ -98,9 +102,9 @@ Use `[NSValue valueWithCGRect: bounds]`.
 * filters
 * subLayers
 
-These properties will present the final value at the begining of animation.
-You don't need `FCAnimationFactory` to interpolate these boolean or filter
-values. You only need `CABasicAnimation` or `CAKeyFrameAnimation` to setup
+These properties will present the final value at the begining of an animation.
+You don't need `FCAnimationFactory` to interpolate these boolean or layer
+contents. You only need `CABasicAnimation` or `CAKeyFrameAnimation` to setup
 timestamp when it need changes.
 
 ## Timing block/function names
@@ -155,6 +159,8 @@ The project is still under heavy development. Pull requests are welcome ;)
   `FCValueAnimationFactory` is more transparent and customizable.
 
 * Draw timing block diagrams
+
+* Write example of how `doubleSided` property works with other animations.
 
 # LICENSE
 
