@@ -93,6 +93,8 @@
             float(^quinticEaseOut)(float)   = ^(float x){return 1.f +(x-1.f)*(x-1.f)*(x-1.f)*(x-1.f)*(x-1.f);};
             float(^sineEaseIn)(float)       = ^(float x){return sinf((x-1.f) * M_PI_2) + 1;};
             float(^sineEaseOut)(float)      = ^(float x){return sinf(x*M_PI_2);};
+            
+            
             float(^circularEaseIn)(float)   = ^(float x){return 1.f - sqrtf(1.f - x*x);};
             float(^circularEaseOut)(float)  = ^(float x){return sqrtf((2.f - x)*x);};
             float(^expEaseIn)(float)        = ^(float x){return powf(2.f, 10.f * (x-1));};
@@ -141,6 +143,7 @@
             [dict setObject:[factory copy] forKey:@"sineEaseIn"];
             factory.timingBlocks = [NSArray arrayWithObject:sineEaseOut];
             [dict setObject:[factory copy] forKey:@"sineEaseOut"];
+            
             
             factory.timingBlocks = [NSArray arrayWithObject:circularEaseIn];
             [dict setObject:[factory copy] forKey:@"circularEaseIn"];
