@@ -78,40 +78,9 @@
     factory.totalDuration = [NSNumber numberWithFloat:1.f];
     CAKeyframeAnimation *animation = [factory animation];
     NSArray *timingFunctions = animation.timingFunctions;
-    STAssertEquals(timingFunctions.count, 2U, @"two functions");
+    STAssertEquals(timingFunctions.count, 4U, @"two functions");
 }
 
-- (void)testTwoSegment_timingFunction
-{
-    factory.totalDuration = [NSNumber numberWithFloat:1.f];
-    CAKeyframeAnimation *animation = [factory animation];
-    NSArray *timingFunctions = animation.timingFunctions;
-    for (CAMediaTimingFunction *tFunc in timingFunctions) {
-        float c0[2];
-        [tFunc getControlPointAtIndex:0 values:c0];
-        STAssertEqualsWithAccuracy(c0[0], 0.f, 0.00001f, @"c0[0] should be 0");
-        STAssertEqualsWithAccuracy(c0[1], 0.f, 0.00001f, @"c0[1] should be 0");
-        
-        float c1[2], c2[2];
-        [tFunc getControlPointAtIndex:1 values:c1];
-        [tFunc getControlPointAtIndex:2 values:c2];
-        
-        STAssertEqualsWithAccuracy(c1[0], 0.f, 0.000001f, @"c1=(0,0)");
-        STAssertEqualsWithAccuracy(c1[1], 0.f, 0.000001f, @"c1=(0,0)");
-        STAssertEqualsWithAccuracy(c2[0], 1.f, 0.000001f, @"c2=(1,1)");
-        STAssertEqualsWithAccuracy(c2[1], 1.f, 0.000001f, @"c2=(1,1)");
-    }
-}
-
-- (void)testTwoSegment_values
-{
-    factory.totalDuration = [NSNumber numberWithFloat:1.f];
-    CAKeyframeAnimation *animation = [factory animation];
-    STAssertEquals(animation.values.count, 3U, @"three values");
-    STAssertEqualsWithAccuracy([[animation.values objectAtIndex:0] floatValue], 0.f, 0.0001, @"first value is 0");
-    STAssertEqualsWithAccuracy([[animation.values objectAtIndex:1] floatValue], 0.5f, 0.0001, @"first value is 0");
-    STAssertEqualsWithAccuracy([[animation.values objectAtIndex:2] floatValue], 1.f, 0.0001, @"first value is 0");
-}
 
 - (void)testQuintFunction
 {
@@ -143,7 +112,7 @@
 
 - (void)testQuintFunctionValues
 {
-    factory.totalDuration = [NSNumber numberWithFloat:1.f];
+    factory.totalDuration = [NSNumber numberWithFloat:.5f];
     factory.timingBlocks = [NSArray arrayWithObject:^float(float x){
         return x*x*x*x*x;
     }];
@@ -157,7 +126,7 @@
 
 - (void)testTwoTimingFunctions
 {
-    factory.totalDuration = [NSNumber numberWithFloat:1.f];
+    factory.totalDuration = [NSNumber numberWithFloat:.5f];
     factory.normalizedTimings = [NSArray arrayWithObjects:@0.f, @.5f, @1.f, nil];
     factory.timingBlocks = [NSArray arrayWithObjects:
                             ^float(float x){
@@ -174,7 +143,7 @@
     
     CAKeyframeAnimation *animation = [factory animation];
     NSArray *timingFunctions = animation.timingFunctions;
-    STAssertEqualsWithAccuracy((float)animation.duration, 1.f, 0.0001f, @"duration is 1s");
+    STAssertEqualsWithAccuracy((float)animation.duration, .5f, 0.0001f, @"duration is 1s");
     STAssertEquals(timingFunctions.count, 2U, @"two functions");
 
     CAMediaTimingFunction *tFunc0 = [timingFunctions objectAtIndex:0];
@@ -202,14 +171,10 @@
 
 - (void)testQuintAnimation
 {
-    factory.totalDuration = [NSNumber numberWithFloat:1.f];
-    factory.timingBlocks = [NSArray arrayWithObject:^float(float x){
-        return x*x*x*x*x;
-    }];
     CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"quinticEaseIn"
                                                                       fromValue:@0.f
                                                                         toValue:@1.f
-                                                                       duration:@1.f];
+                                                                       duration:@.5f];
     CAMediaTimingFunction *tFunc0 = [animation.timingFunctions objectAtIndex:0];
     CAMediaTimingFunction *tFunc1 = [animation.timingFunctions objectAtIndex:1];
     
@@ -236,5 +201,35 @@
     STAssertEqualsWithAccuracy([[animation.values objectAtIndex:2] floatValue],      1.f, 0.0001, @"first value is 0");
 }
 
+- (void)testNSValue
+{
+    factory.fromValue = [NSValue valueWithCGPoint:CGPointMake(0, 0)];
+    factory.toValue = [NSValue valueWithCGPoint:CGPointMake(1, 1)];
+    factory.totalDuration = @0.5f;
+    factory.timingBlocks = @[^(float x){return x;}];
+    
+    CAKeyframeAnimation *animation = [factory animation];
+    NSArray* values = animation.values;
+    STAssertEquals(values.count, 3U, @"three values");
+    
+    /*
+    Though we give it CGPoint, CAAnimation translate it to CGSize...
+     
+    [values enumerateObjectsUsingBlock:^(NSValue* v, NSUInteger idx, BOOL *stop) {
+        STAssertTrue(strcmp([v objCType],@encode(CGPoint))==0, @"value type is %s", [v objCType]);
+    }];
+    */
+    
+    CGPoint pt;
+    [[values objectAtIndex:0] getValue:&pt];
+    STAssertEqualsWithAccuracy(pt.x, 0.f, 0.001, @"(0,0)");
+    STAssertEqualsWithAccuracy(pt.y, 0.f, 0.001, @"(0,0)");
+    [[values objectAtIndex:1] getValue:&pt];
+    STAssertEqualsWithAccuracy(pt.x, 0.5f, 0.001, @"(0.5,0.5)");
+    STAssertEqualsWithAccuracy(pt.y, 0.5f, 0.001, @"(0.5,0.5)");
+    [[values objectAtIndex:2] getValue:&pt];
+    STAssertEqualsWithAccuracy(pt.x, 1.f, 0.001, @"(1,1)");
+    STAssertEqualsWithAccuracy(pt.y, 1.f, 0.001, @"(1,1)");
+}
 
 @end

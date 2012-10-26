@@ -34,8 +34,9 @@
 
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
 
-#define SEGMENT_FACTOR (2.f)
+#define SEGMENT_FACTOR (4.f)
 
 void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float(^block)(float x));
 
