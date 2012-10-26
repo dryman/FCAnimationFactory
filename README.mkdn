@@ -1,8 +1,8 @@
-# FCAnimationFactory (Pre-Alpha stage)
+# FCAnimationFactory (Alpha stage)
 
 `FCAnimationFactory` is an objective-c library for generating
 `CAKeyFrameAnimation` with custom timing functions including cubic, quadratic,
-or even bouncing functions. 
+or even elastic functions. 
 
 The main difference between [AHEasing][AHEasing] and `FCAnimationFactory` is that
 [AHEasing][AHEasing] create every frames for `CAKeyFrameAnimation`, which breaks
@@ -10,9 +10,7 @@ Core Animation model-presentation rendering pipeline. `FCAnimationFactory` use
 standard `CAMediaTimingFunction` to tell `CAKeyFrameAnimation` the timing and
 let it deals with frames itself. The challenge is not only timing needs to be
 interpolated, values (numbers, colors, path) also need to be interpolated as
-well. The goal of `FCAnimationFactory` is to provide a daily use API like
-`animationWithName`, and an API of factory itself which is fully programmable
-and plugin friendly.
+well. 
 
 ## SYNOPSIS
 
@@ -21,31 +19,118 @@ High level animation API:
         [CATransaction begin];
         [CATransaction setDisableActions:YES];
         _layer.position = CGPointMake(160.f, 300.f);
-        CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"cubicEaseIn"
-                                                                          fromValue:@50.f
-                                                                            toValue:@300.f
-                                                                           duration:@1.f];
-        animation.keyPath = @"position.y";
-        [_layer addAnimation:animation forKey:@"myUselessKey"];
+        CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"elasticEaseOut"
+                                                                          fromValue:[NSValue valueWithCGPoint:CGPointMake(320,50)]
+                                                                            toValue:[NSValue valueWithCGPoint:CGPointMake(160,300)]
+                                                                           duration:@2.5f];
+        animation.keyPath = @"position";
+        [_layer addAnimation:animation forKey:@"positionKey"];
         [CATransaction commit];
 
 Create your own timing function directly with `FCValueAnimationFactory`:
 
     factory = [[FCValueAnimationFactory alloc] init];
-    factory.totalDuration = [NSNumber numberWithFloat:1.f];
     factory.timingBlocks = [NSArray arrayWithObject:^float(float x){
         return x*x*x*x*x;
     }];
-    factory.normalizedValues = [NSArray arrayWithObjects:
-                               [NSNumber numberWithFloat:0.f],
-                               [NSNumber numberWithFloat:1.f], nil];
-    factory.normalizedTimings = [NSArray arrayWithObjects:
-                                [NSNumber numberWithFloat:0.f],
-                                [NSNumber numberWithFloat:1.f], nil];
+    factory.normalizedValues = @[ @0.f, @1.f];
+    factory.normalizedTimings = @[ @0.f, @1.f];
+    factory.totalDuration = [NSNumber numberWithFloat:2.5f];
+    factory.fromValue = @1.0f;
+    factory.toValue = @0.5f;
     CAKeyframeAnimation *animation = [factory animation];
-    // setup animation to layer...
+    animation.keyPath = @"opacity";
+
+    [_layer addAnimation: animation forKey:@"opacityKey"]
 
 Clone the project and see example usage in `FCAnimationDemo` target.
+
+### Animatable properties
+
+#### Single float number
+
+* `borderWidth`
+* `cornerRadius`
+* `opacity`
+* `shadowOpacity`
+* `shadowRadius`
+* `zPosition`
+
+Use `[NSNumber numberWithFloat: myFloat]` or objective-c literal `@3.5f` for
+`fromValue` and `toValue`.
+
+    CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"elasticEaseOut"
+                                                                      fromValue:@1.f
+                                                                        toValue:@0.f
+                                                                       duration:@2.5f];
+    animation.keyPath = @"shadowOpacity";
+    
+#### CGPoint
+
+* `anchorPoint`
+* `position`
+
+Use `[NSValue valueWithCGPoint: point]`.
+
+#### CGSize
+
+* `shadowOffset`
+
+Use `[NSValue valueWithCGSize: myOffset]`.
+
+#### Frames and bounds
+
+Use `[NSValue valueWithCGRect: bounds]`.
+
+### Properties under cunstruction
+
+* `backgroundColor`, `borderColor`, and `shadowColor`.
+* `transform` and `sublayerTransform`
+* `countents` I'll use CATransition to made another class to animate contents.
+* `path` property in `CAKeyFrameAnimation`.
+
+### Property won't be supported
+
+* doubleSided
+* hidden
+* maskToBounds
+* mask
+* filters
+* subLayers
+
+These properties will present the final value at the begining of animation.
+You don't need `FCAnimationFactory` to interpolate these boolean or filter
+values. You only need `CABasicAnimation` or `CAKeyFrameAnimation` to setup
+timestamp when it need changes.
+
+### Timing block/function names
+
+* linear
+* quadraticEaseIn
+* quadraticEaseOut
+* quadraticEaseInOut
+* cubicEaseIn
+* cubicEaseOut
+* cubicEaseInOut
+* quarticEaseIn
+* quarticEaseOut
+* quarticEaseInOut
+* quinticEaseIn
+* quinticEaseOut
+* quinticEaseInOut
+* sineEaseIn
+* sineEaseOut
+* sineEaseInOut
+* circularEaseIn
+* circularEaseOut
+* circularEaseInOut
+* expEaseIn
+* expEaseOut
+* expEaseInOut
+* elasticEaseIn
+* elasticEaseOut
+* backEaseIn
+* backEaseOut
 
 ## INSTALL
 
@@ -62,13 +147,14 @@ The project is still under heavy development. Pull requests are welcome ;)
 
 * Write complete API references, use [appledoc](http://gentlebytes.com/appledoc/).
 
-* Reuse timing blocks instead of writing anonymous block every time.
-
-* Currently only `NSNumber` value is supported. In future other value such as
-  `CGColorRef` can be animated too.
-
 * `FCPathAnimationFactory` can create cubic path on `position` or other 2D
   movement animation.
+
+* Rename `FCValueAnimationFactory` to `FCBasicAnimationFactory`.
+ `FCBasicAnimationFactory` is opaque class with built-in timing functions,
+  `FCValueAnimationFactory` is more transparent and customizable.
+
+* Draw timing block diagrams
 
 ## LICENSE
 

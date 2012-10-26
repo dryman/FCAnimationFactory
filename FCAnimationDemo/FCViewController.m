@@ -68,7 +68,7 @@
         [CATransaction begin];
         [CATransaction setDisableActions:YES];
         _layer.position = CGPointMake(160.f, 300.f);
-        CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"sineEaseIn"
+        CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"elasticEaseOut"
                                                                           fromValue:@50.f
                                                                             toValue:@300.f
                                                                            duration:@1.5f];
