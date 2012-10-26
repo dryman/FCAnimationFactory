@@ -33,7 +33,7 @@
  */
 
 #import "FCViewController.h"
-#import "FCValueAnimationFactory.h"
+#import "FCBasicAnimationFactory.h"
 
 @interface FCViewController ()
 
@@ -68,7 +68,7 @@
         [CATransaction begin];
         [CATransaction setDisableActions:YES];
         _layer.position = CGPointMake(160.f, 300.f);
-        CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"elasticEaseOut"
+        CAKeyframeAnimation *animation = [FCBasicAnimationFactory animationWithName:@"elasticEaseOut"
                                                                           fromValue:@50.f
                                                                             toValue:@300.f
                                                                            duration:@1.5f];
@@ -79,7 +79,7 @@
         [CATransaction begin];
         [CATransaction setDisableActions:YES];
         _layer.position = CGPointMake(160.f, 50.f);
-        CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"circularEaseOut" fromValue:@300.f toValue:@50.f duration:@1.f];
+        CAKeyframeAnimation *animation = [FCBasicAnimationFactory animationWithName:@"circularEaseOut" fromValue:@300.f toValue:@50.f duration:@1.f];
         animation.keyPath = @"position.y";
         [_layer addAnimation:animation forKey:@"myUselessKey"];
         [CATransaction commit];

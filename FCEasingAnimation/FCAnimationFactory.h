@@ -53,7 +53,10 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
 @property (copy) NSArray* timingBlocks;
 @property (copy) NSNumber* totalDuration;
 
+// abstracted method, need to be implemented in subclass
 - (CAKeyframeAnimation*) animation;
 
+// internal use
+- (id(^)(float))makeValueScalingBlockFromValue:(id)fromValue ToValue:(id)toValue;
 
 @end

@@ -40,7 +40,7 @@
 - (void)setUp
 {
     [super setUp];
-    factory = [[FCValueAnimationFactory alloc] init];
+    factory = [[FCBasicAnimationFactory alloc] init];
 }
 
 - (void)testDefaultFactory_timingFunctionCount
@@ -171,7 +171,7 @@
 
 - (void)testQuintAnimation
 {
-    CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"quinticEaseIn"
+    CAKeyframeAnimation *animation = [FCBasicAnimationFactory animationWithName:@"quinticEaseIn"
                                                                       fromValue:@0.f
                                                                         toValue:@1.f
                                                                        duration:@.5f];

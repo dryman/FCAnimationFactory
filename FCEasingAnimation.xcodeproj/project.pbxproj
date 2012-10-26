@@ -25,9 +25,9 @@
 		5D8469641630319B00E92CDA /* FCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D8469631630319B00E92CDA /* FCViewController.m */; };
 		5D846969163031CA00E92CDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D611FEB162F88E7004BB224 /* QuartzCore.framework */; };
 		5D84696A163031D500E92CDA /* FCAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C56162C333F00BE9BCD /* FCAnimationFactory.m */; };
-		5D84696B163031D800E92CDA /* FCValueAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCValueAnimationFactory.m */; };
-		5DD44F19162FE620008FB24A /* FCValueAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCValueAnimationFactory.m */; };
-		5DD44F1A162FE620008FB24A /* FCValueAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCValueAnimationFactory.m */; };
+		5D84696B163031D800E92CDA /* FCBasicAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCBasicAnimationFactory.m */; };
+		5DD44F19162FE620008FB24A /* FCBasicAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCBasicAnimationFactory.m */; };
+		5DD44F1A162FE620008FB24A /* FCBasicAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCBasicAnimationFactory.m */; };
 		5DF94C50162C333F00BE9BCD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C4F162C333F00BE9BCD /* Foundation.framework */; };
 		5DF94C55162C333F00BE9BCD /* FCAnimationFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5DF94C54162C333F00BE9BCD /* FCAnimationFactory.h */; };
 		5DF94C57162C333F00BE9BCD /* FCAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C56162C333F00BE9BCD /* FCAnimationFactory.m */; };
@@ -83,8 +83,8 @@
 		5D8469601630319B00E92CDA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		5D8469621630319B00E92CDA /* FCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCViewController.h; sourceTree = "<group>"; };
 		5D8469631630319B00E92CDA /* FCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCViewController.m; sourceTree = "<group>"; };
-		5DD44F17162FE620008FB24A /* FCValueAnimationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCValueAnimationFactory.h; sourceTree = "<group>"; };
-		5DD44F18162FE620008FB24A /* FCValueAnimationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCValueAnimationFactory.m; sourceTree = "<group>"; };
+		5DD44F17162FE620008FB24A /* FCBasicAnimationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCBasicAnimationFactory.h; sourceTree = "<group>"; };
+		5DD44F18162FE620008FB24A /* FCBasicAnimationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCBasicAnimationFactory.m; sourceTree = "<group>"; };
 		5DF94C4C162C333F00BE9BCD /* libFCEasingAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFCEasingAnimation.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF94C4F162C333F00BE9BCD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5DF94C53162C333F00BE9BCD /* FCEasingAnimation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FCEasingAnimation-Prefix.pch"; sourceTree = "<group>"; };
@@ -201,8 +201,8 @@
 			children = (
 				5DF94C54162C333F00BE9BCD /* FCAnimationFactory.h */,
 				5DF94C56162C333F00BE9BCD /* FCAnimationFactory.m */,
-				5DD44F17162FE620008FB24A /* FCValueAnimationFactory.h */,
-				5DD44F18162FE620008FB24A /* FCValueAnimationFactory.m */,
+				5DD44F17162FE620008FB24A /* FCBasicAnimationFactory.h */,
+				5DD44F18162FE620008FB24A /* FCBasicAnimationFactory.m */,
 				5DF94C52162C333F00BE9BCD /* Supporting Files */,
 			);
 			name = FCAnimationFactory;
@@ -368,7 +368,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D84696B163031D800E92CDA /* FCValueAnimationFactory.m in Sources */,
+				5D84696B163031D800E92CDA /* FCBasicAnimationFactory.m in Sources */,
 				5D84696A163031D500E92CDA /* FCAnimationFactory.m in Sources */,
 				5D8469541630319B00E92CDA /* main.m in Sources */,
 				5D8469581630319B00E92CDA /* FCAppDelegate.m in Sources */,
@@ -381,7 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DF94C57162C333F00BE9BCD /* FCAnimationFactory.m in Sources */,
-				5DD44F19162FE620008FB24A /* FCValueAnimationFactory.m in Sources */,
+				5DD44F19162FE620008FB24A /* FCBasicAnimationFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,7 +392,7 @@
 				5DF94C6E162C333F00BE9BCD /* FCEasingAnimationTests.m in Sources */,
 				5DF94C77162C51D500BE9BCD /* FCAnimationFactory.m in Sources */,
 				5D611FEF162FA0E3004BB224 /* FCBaseFactoryTests.m in Sources */,
-				5DD44F1A162FE620008FB24A /* FCValueAnimationFactory.m in Sources */,
+				5DD44F1A162FE620008FB24A /* FCBasicAnimationFactory.m in Sources */,
 				5D3DEFFB1638D19000DF8A4D /* FCValueTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

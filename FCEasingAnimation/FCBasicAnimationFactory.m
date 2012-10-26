@@ -32,15 +32,15 @@
  
  */
 
-#import "FCValueAnimationFactory.h"
+#import "FCBasicAnimationFactory.h"
 
-@implementation FCValueAnimationFactory
+@implementation FCBasicAnimationFactory
 @synthesize normalizedValues = _normalizedValues;
 @synthesize fromValue = _fromValue;
 @synthesize toValue = _toValue;
 
 
--(FCValueAnimationFactory*)init
+-(FCBasicAnimationFactory*)init
 {
     if (self=[super init]) {
         _normalizedValues = [NSArray arrayWithObjects:
@@ -57,7 +57,7 @@
                                    toValue: (NSNumber*)tv
                                   duration:(NSNumber*)duration
 {
-    FCValueAnimationFactory *factory = [[FCValueAnimationFactory animationDictionary] valueForKey:name];
+    FCBasicAnimationFactory *factory = [[FCBasicAnimationFactory animationDictionary] valueForKey:name];
     factory.fromValue = fv;
     factory.toValue = tv;
     factory.totalDuration = duration;
@@ -66,7 +66,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    FCValueAnimationFactory *factoryCopy = [[FCValueAnimationFactory allocWithZone:zone] init];
+    FCBasicAnimationFactory *factoryCopy = [[FCBasicAnimationFactory allocWithZone:zone] init];
     factoryCopy.normalizedTimings = _normalizedTimings;
     factoryCopy.timingBlocks = _timingBlocks;
     factoryCopy.totalDuration = _totalDuration;
@@ -108,7 +108,7 @@
 
             
             /* one step animations */
-            FCValueAnimationFactory* factory = [[FCValueAnimationFactory alloc] init];
+            FCBasicAnimationFactory* factory = [[FCBasicAnimationFactory alloc] init];
             factory.normalizedValues = [NSArray arrayWithObjects:
                                         [NSNumber numberWithFloat:0.f],
                                         [NSNumber numberWithFloat:1.f], nil];
@@ -201,76 +201,6 @@
     return dict;
 }
 
-- (id(^)(float))makeValueScalingBlock
-{
-    if (self.fromValue==nil || self.toValue==nil) NSAssert(0, @"fromValue and toValue must not be nil");
-    
-    id value = self.fromValue;
-    
-    /*
-     * single float is handled in NSNumber
-     */
-    if ([value isKindOfClass:[NSNumber class]]) {
-        float fromValue = [(NSNumber*)self.fromValue floatValue];
-        float toValue = [(NSNumber*)self.toValue floatValue];
-        float diffValue = toValue - fromValue;
-        return ^id(float factor){
-            float result = factor*diffValue + fromValue;
-            return [NSNumber numberWithFloat:result];
-        };
-    }
-    
-    /*
-     * NSValue handles CGPoint, CGSize, CGRect, and CATransform3D
-     */
-    if ([value isKindOfClass:[NSValue class]]) {
-        const char* objCType = [value objCType];
-        if (strcmp(objCType, @encode(CGPoint))) {
-            CGPoint pt0, pt1;
-            [(NSValue*)self.fromValue getValue:&pt0];
-            [(NSValue*)self.toValue getValue:&pt1];
-            return ^id(float factor){
-                float x = (pt1.x - pt0.x)*factor + pt0.x;
-                float y = (pt1.y - pt0.y)*factor + pt0.y;
-                return [NSValue valueWithCGPoint:CGPointMake(x, y)];
-            };
-        } else if (strcmp(objCType, @encode(CGSize))) {
-            CGSize size0, size1;
-            [(NSValue*)self.fromValue getValue:&size0];
-            [(NSValue*)self.toValue getValue:&size1];
-            return ^id(float factor){
-                float w = (size1.width - size0.width)*factor + size0.width;
-                float h = (size1.height - size0.height)*factor + size0.height;
-                return [NSValue valueWithCGSize:CGSizeMake(w, h)];
-            };
-        } else if (strcmp(objCType, @encode(CGRect))) {
-            CGRect rect0, rect1;
-            [(NSValue*)self.fromValue getValue:&rect0];
-            [(NSValue*)self.toValue getValue:&rect1];
-            return ^id(float factor){
-                float x = (rect1.origin.x - rect0.origin.x)*factor + rect0.origin.x;
-                float y = (rect1.origin.y - rect0.origin.y)*factor + rect0.origin.y;
-                float w = (rect1.size.width - rect0.size.width)*factor + rect0.size.width;
-                float h = (rect1.size.height - rect0.size.height)*factor + rect0.size.height;
-                return [NSValue valueWithCGRect:CGRectMake(x, y, w, h)];
-            };
-        } else if (strcmp(objCType, @encode(CATransform3D))) {
-            NSAssert(0, @"CATransform3D type currently not supported");
-        } else {
-            NSAssert(0, @"Unknown NSValue type %s",objCType);
-        }
-    }
-    
-    if (CFGetTypeID((__bridge CFTypeRef)value) == CGColorGetTypeID()) {
-        NSAssert(0, @"CGColorRef type currently not supported");
-    }
-    if (CFGetTypeID((__bridge CFTypeRef)value) == CGImageGetTypeID()) {
-        NSAssert(0, @"CGImageRef should be handled in another class");
-    }
-    
-    NSAssert(0, @"value type unknown");
-    return ^id(float factor){ return nil;};    // turn off compiler warnings
-}
 
 - (CAKeyframeAnimation*) animation
 {
@@ -282,7 +212,7 @@
     NSMutableArray *timingFunctions = [NSMutableArray array];
     NSMutableArray *values = [NSMutableArray array];
     float total_duration = self.totalDuration.floatValue;
-    id (^scalingBlock)(float) = [self makeValueScalingBlock];
+    id (^scalingBlock)(float) = [self makeValueScalingBlockFromValue:self.fromValue ToValue:self.toValue];
     __block float time_accumulator = 0.f;
     __weak typeof(self) weakSelf = self;
     
