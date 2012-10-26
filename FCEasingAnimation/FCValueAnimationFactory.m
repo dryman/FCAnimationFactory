@@ -79,71 +79,122 @@
 + (NSDictionary *)animationDictionary
 {
     static NSMutableDictionary* dict;
-    if (dict==nil) {
-        dict = [[NSMutableDictionary alloc] init];
-        
-        FCValueAnimationFactory* factory = [[FCValueAnimationFactory alloc] init];
-        factory.timingBlocks = [NSArray arrayWithObject:^(float x){return x;}];
-        factory.normalizedValues = [NSArray arrayWithObjects:
-                                   [NSNumber numberWithFloat:0.f],
-                                   [NSNumber numberWithFloat:1.f], nil];
-        factory.normalizedTimings = [NSArray arrayWithObjects:
-                                    [NSNumber numberWithFloat:0.f],
-                                    [NSNumber numberWithFloat:1.f], nil];
-        [dict setObject:[factory copy] forKey:@"linear"];
-        
-        factory.timingBlocks = [NSArray arrayWithObject:^(float x){return x*x;}];
-        [dict setObject:[factory copy] forKey:@"quadraticEaseIn"];
-        
-        factory.timingBlocks = [NSArray arrayWithObject:^(float x){return x*x*x;}];
-        [dict setObject:[factory copy] forKey:@"cubicEaseIn"];
-        
-        factory.timingBlocks = [NSArray arrayWithObject:^(float x){return x*x*x*x;}];
-        [dict setObject:[factory copy] forKey:@"quarticEaseIn"];
-        
-        factory.timingBlocks = [NSArray arrayWithObject:^(float x){return x*x*x*x*x;}];
-        [dict setObject:[factory copy] forKey:@"quinticEaseIn"];
-        
-        factory.timingBlocks = [NSArray arrayWithObject:^(float x){return 1-(x-1)*(x-1);}];
-        [dict setObject:[factory copy] forKey:@"quadraticEaseOut"];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (dict==nil) {
+            dict = [[NSMutableDictionary alloc] init];
+            float(^quadraticEaseIn)(float)  = ^(float x){return x*x;};
+            float(^cubicEaseIn)(float)      = ^(float x){return x*x*x;};
+            float(^quarticEaseIn)(float)    = ^(float x){return x*x*x*x;};
+            float(^quinticEaseIn)(float)    = ^(float x){return x*x*x*x*x;};
+            float(^quadraticEaseOut)(float) = ^(float x){return 1.f -(x-1.f)*(x-1.f);};
+            float(^cubicEaseOut)(float)     = ^(float x){return 1.f +(x-1.f)*(x-1.f)*(x-1.f);};
+            float(^quarticEaseOut)(float)   = ^(float x){return 1.f -(x-1.f)*(x-1.f)*(x-1.f)*(x-1.f);};
+            float(^quinticEaseOut)(float)   = ^(float x){return 1.f +(x-1.f)*(x-1.f)*(x-1.f)*(x-1.f)*(x-1.f);};
+            float(^sineEaseIn)(float)       = ^(float x){return sinf((x-1.f) * M_PI_2) + 1;};
+            float(^sineEaseOut)(float)      = ^(float x){return sinf(x*M_PI_2);};
+            float(^circularEaseIn)(float)   = ^(float x){return 1.f - sqrtf(1.f - x*x);};
+            float(^circularEaseOut)(float)  = ^(float x){return sqrtf((2.f - x)*x);};
+            float(^expEaseIn)(float)        = ^(float x){return powf(2.f, 10.f * (x-1));};
+            float(^expEaseOut)(float)       = ^(float x){return 1.f - powf(2.f, -10.f * x);};
+            float(^elasticEaseIn)(float)    = ^(float x){return sinf(13.f * M_PI_2 * x) * powf(2.f, 10.f * (x-1.f));};
+            float(^elasticEaseOut)(float)   = ^(float x){return sinf(-13.f * M_PI_2 * (x+1.f)) * powf(2.f, -10.f *x) + 1;};
+            float(^backEaseIn)(float)       = ^(float x){return x*x*x - x * sinf(x * M_PI);};
+            float(^backEaseOut)(float)      = ^(float x){float f = (1.f-x); return 1.f - (f*f*f - f * sinf(f * M_PI));};
 
-        factory.timingBlocks = [NSArray arrayWithObject:^(float x){return 1+(x-1)*(x-1)*(x-1);}];
-        [dict setObject:[factory copy] forKey:@"cubicEaseOut"];
-        
-        factory.timingBlocks = [NSArray arrayWithObject:^(float x){return 1-(x-1)*(x-1)*(x-1)*(x-1);}];
-        [dict setObject:[factory copy] forKey:@"quarticEaseOut"];
-        
-        factory.timingBlocks = [NSArray arrayWithObject:^(float x){return 1+(x-1)*(x-1)*(x-1)*(x-1)*(x-1);}];
-        [dict setObject:[factory copy] forKey:@"quinticEaseOut"];
-        
-        factory.normalizedValues = [NSArray arrayWithObjects:
-                                    [NSNumber numberWithFloat:0.f],
-                                    [NSNumber numberWithFloat:0.5f],
-                                    [NSNumber numberWithFloat:1.f], nil];
-        factory.normalizedTimings = [NSArray arrayWithObjects:
-                                    [NSNumber numberWithFloat:0.f],
-                                    [NSNumber numberWithFloat:0.5f],
-                                    [NSNumber numberWithFloat:1.f], nil];
-        factory.timingBlocks = [NSArray arrayWithObjects:
-                                     ^(float x){return x*x;},
-                                     ^(float x){return 1-(x-1)*(x-1);}, nil];
-        [dict setObject:[factory copy] forKey:@"quadraticEaseInOut"];
+            
 
-        factory.timingBlocks = [NSArray arrayWithObjects:
-                                     ^(float x){return x*x*x;},
-                                     ^(float x){return 1+(x-1)*(x-1)*(x-1);}, nil];
-        [dict setObject:[factory copy] forKey:@"cubicEaseInOut"];
-        
-        factory.timingBlocks = [NSArray arrayWithObjects:
-                                     ^(float x){return x*x*x*x;},
-                                     ^(float x){return 1-(x-1)*(x-1)*(x-1)*(x-1);}, nil];
-        [dict setObject:[factory copy] forKey:@"quarticEaseInOut"];
+            
+            /* one step animations */
+            FCValueAnimationFactory* factory = [[FCValueAnimationFactory alloc] init];
+            factory.normalizedValues = [NSArray arrayWithObjects:
+                                        [NSNumber numberWithFloat:0.f],
+                                        [NSNumber numberWithFloat:1.f], nil];
+            factory.normalizedTimings = [NSArray arrayWithObjects:
+                                         [NSNumber numberWithFloat:0.f],
+                                         [NSNumber numberWithFloat:1.f], nil];
+            
+            factory.timingBlocks = [NSArray arrayWithObject:^(float x){return x;}];
+            [dict setObject:[factory copy] forKey:@"linear"];
+            
+            factory.timingBlocks = [NSArray arrayWithObject:quadraticEaseIn];
+            [dict setObject:[factory copy] forKey:@"quadraticEaseIn"];
+            factory.timingBlocks = [NSArray arrayWithObject:quadraticEaseOut];
+            [dict setObject:[factory copy] forKey:@"quadraticEaseOut"];
+            
+            factory.timingBlocks = [NSArray arrayWithObject:cubicEaseIn];
+            [dict setObject:[factory copy] forKey:@"cubicEaseIn"];
+            factory.timingBlocks = [NSArray arrayWithObject:cubicEaseOut];
+            [dict setObject:[factory copy] forKey:@"cubicEaseOut"];
+            
+            factory.timingBlocks = [NSArray arrayWithObject:quarticEaseIn];
+            [dict setObject:[factory copy] forKey:@"quarticEaseIn"];
+            factory.timingBlocks = [NSArray arrayWithObject:quarticEaseOut];
+            [dict setObject:[factory copy] forKey:@"quarticEaseOut"];
+            
+            factory.timingBlocks = [NSArray arrayWithObject:quinticEaseIn];
+            [dict setObject:[factory copy] forKey:@"quinticEaseIn"];
+            factory.timingBlocks = [NSArray arrayWithObject:quinticEaseOut];
+            [dict setObject:[factory copy] forKey:@"quinticEaseOut"];
+            
+            factory.timingBlocks = [NSArray arrayWithObject:sineEaseIn];
+            [dict setObject:[factory copy] forKey:@"sineEaseIn"];
+            factory.timingBlocks = [NSArray arrayWithObject:sineEaseOut];
+            [dict setObject:[factory copy] forKey:@"sineEaseOut"];
+            
+            factory.timingBlocks = [NSArray arrayWithObject:circularEaseIn];
+            [dict setObject:[factory copy] forKey:@"circularEaseIn"];
+            factory.timingBlocks = [NSArray arrayWithObject:circularEaseOut];
+            [dict setObject:[factory copy] forKey:@"circularEaseOut"];
+            
+            factory.timingBlocks = [NSArray arrayWithObject:expEaseIn];
+            [dict setObject:[factory copy] forKey:@"expEaseIn"];
+            factory.timingBlocks = [NSArray arrayWithObject:expEaseOut];
+            [dict setObject:[factory copy] forKey:@"expEaseOut"];
+            
+            factory.timingBlocks = [NSArray arrayWithObject:elasticEaseIn];
+            [dict setObject:[factory copy] forKey:@"elasticEaseIn"];
+            factory.timingBlocks = [NSArray arrayWithObject:elasticEaseOut];
+            [dict setObject:[factory copy] forKey:@"elasticEaseOut"];
+            
+            factory.timingBlocks = [NSArray arrayWithObject:backEaseIn];
+            [dict setObject:[factory copy] forKey:@"backEaseIn"];
+            factory.timingBlocks = [NSArray arrayWithObject:backEaseOut];
+            [dict setObject:[factory copy] forKey:@"backEaseOut"];
+            
+            /* two steps animations */
+            factory.normalizedValues = [NSArray arrayWithObjects:
+                                        [NSNumber numberWithFloat:0.f],
+                                        [NSNumber numberWithFloat:0.5f],
+                                        [NSNumber numberWithFloat:1.f], nil];
+            factory.normalizedTimings = [NSArray arrayWithObjects:
+                                         [NSNumber numberWithFloat:0.f],
+                                         [NSNumber numberWithFloat:0.5f],
+                                         [NSNumber numberWithFloat:1.f], nil];
+            
+            factory.timingBlocks = [NSArray arrayWithObjects: quadraticEaseIn, quadraticEaseOut, nil];
+            [dict setObject:[factory copy] forKey:@"quadraticEaseInOut"];
+            
+            factory.timingBlocks = [NSArray arrayWithObjects: cubicEaseIn, cubicEaseOut, nil];
+            [dict setObject:[factory copy] forKey:@"cubicEaseInOut"];
+            
+            factory.timingBlocks = [NSArray arrayWithObjects: quarticEaseIn, quarticEaseOut, nil];
+            [dict setObject:[factory copy] forKey:@"quarticEaseInOut"];
+            
+            factory.timingBlocks = [NSArray arrayWithObjects: quinticEaseIn, quinticEaseOut, nil];
+            [dict setObject:[factory copy] forKey:@"quinticEaseInOut"];
+            
+            factory.timingBlocks = [NSArray arrayWithObjects: sineEaseIn, sineEaseOut, nil];
+            [dict setObject:[factory copy] forKey:@"sineEaseInOut"];
+            
+            factory.timingBlocks = [NSArray arrayWithObjects: circularEaseIn, circularEaseOut, nil];
+            [dict setObject:[factory copy] forKey:@"circularEaseInOut"];
+            
+            factory.timingBlocks = [NSArray arrayWithObjects: expEaseIn, expEaseOut, nil];
+            [dict setObject:[factory copy] forKey:@"expEaseInOut"];
+        }
 
-        factory.timingBlocks = [NSArray arrayWithObjects:
-                                     ^(float x){return x*x*x*x*x;},
-                                     ^(float x){return 1+(x-1)*(x-1)*(x-1)*(x-1)*(x-1);}, nil];
-        [dict setObject:[factory copy] forKey:@"quinticEaseInOut"];
-    }
+    });
     return dict;
 }
 
