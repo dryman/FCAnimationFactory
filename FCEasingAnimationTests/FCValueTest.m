@@ -130,6 +130,8 @@
     STAssertTrue(![value isKindOfClass:[NSNumber class]], @"is not a NSNumber");
     STAssertTrue(![value isKindOfClass:[NSValue class]], @"is not a NSValue");
     STAssertEquals(CFGetTypeID((__bridge CFTypeRef)value), CGColorGetTypeID(), @"is a CGColor");
+    
+    object_getClass(value);
 }
 
 - (void)testCGImageRef
@@ -152,5 +154,9 @@
     STAssertEquals(CFGetTypeID((__bridge CFTypeRef)value), CGImageGetTypeID(), @"is CGImage");
 }
 
+- (void)testObjCType
+{
+    
+}
 
 @end

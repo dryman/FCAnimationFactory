@@ -84,7 +84,7 @@
 
 - (void)testQuintFunction
 {
-    factory.totalDuration = [NSNumber numberWithFloat:1.f];
+    factory.totalDuration = [NSNumber numberWithFloat:.5f];
     factory.timingBlocks = [NSArray arrayWithObject:^float(float x){
         return x*x*x*x*x;
     }];

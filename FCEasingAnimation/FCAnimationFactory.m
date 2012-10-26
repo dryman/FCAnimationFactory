@@ -46,8 +46,8 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
     x_mid = (x1 + x2) / 2.f;
     y_mid = block(x_mid);
     
-    float theta_1 = atan2f(block(x1+h)-block(x1), h);
-    float theta_2 = atan2f(block(x2)-block(x2-h), h);
+    float theta_1 = atan2f(-1.5f*block(x1) + 2.f*block(x1+h) - .5f*block(x1+2.f*h), h);
+    float theta_2 = atan2f( 1.5f*block(x2) - 2.f*block(x2-h) + .5f*block(x2-2.f*h), h);
     float sin_1 = sinf(theta_1), cos_1 = cosf(theta_1);
     float sin_2 = sinf(theta_2), cos_2 = cosf(theta_2);
     
