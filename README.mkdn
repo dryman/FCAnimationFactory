@@ -149,7 +149,7 @@ You don't need `FCAnimationFactory` to interpolate these boolean or layer
 contents. You only need `CABasicAnimation` or `CAKeyFrameAnimation` to setup
 timestamp when it need changes.
 
-## Timing block/function names {#timing-names}
+## Timing block/function names ## {#timing-names}
 
 * linear
 * quadraticEaseIn
