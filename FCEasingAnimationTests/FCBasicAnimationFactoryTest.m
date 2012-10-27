@@ -32,10 +32,10 @@
  
  */
 
-#import "FCBaseFactoryTests.h"
+#import "FCBasicAnimationFactoryTest.h"
 
 
-@implementation FCBaseFactoryTests
+@implementation FCBasicAnimationFactoryTest
 
 - (void)setUp
 {

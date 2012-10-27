@@ -1,5 +1,5 @@
 //
-//  FCEasingAnimation.m
+//  FCAnimationFactory.m
 //  FCEasingAnimation
 //
 
@@ -92,7 +92,7 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
     return factoryCopy;
 }
 
-- (void)setSegmentedDurations:(NSArray *)segmentedDurations
+- (void)setDurations:(NSArray *)segmentedDurations
 {
     // TODO: can add negative asssertions in future
     NSNumber* sum = [segmentedDurations valueForKeyPath:@"@sum.floatValue"];
@@ -110,7 +110,7 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
     self.totalDuration = sum;
 }
 
-- (NSArray*)segmentedDurations
+- (NSArray*)durations
 {
     NSUInteger count = self.normalizedTimings.count - 1;
     float totalDuration = self.totalDuration.floatValue;

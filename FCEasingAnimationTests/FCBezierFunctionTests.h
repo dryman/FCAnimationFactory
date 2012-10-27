@@ -1,11 +1,11 @@
 //
-//  FCBaseFactoryTests.h
-//  FCEasingAnimation
+//  FCEasingAnimationTests.h
+//  FCEasingAnimationTests
 //
 
 /*
  
- Created by Felix Chern on 12/10/18.
+ Created by Felix Chern on 12/10/15.
  Copyright (c) 2012 Felix R. Chern. All rights reserved. (BSD LICENSE)
  
  Redistribution and use in source and binary forms, with or without
@@ -33,11 +33,7 @@
  */
 
 #import <SenTestingKit/SenTestingKit.h>
-#import "FCBasicAnimationFactory.h"
 
-@interface FCBaseFactoryTests : SenTestCase
-{
-    FCBasicAnimationFactory* factory;
-}
+@interface FCBezierFunctionTests : SenTestCase
 
 @end

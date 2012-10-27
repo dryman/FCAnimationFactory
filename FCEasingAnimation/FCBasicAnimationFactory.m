@@ -1,5 +1,5 @@
 //
-//  FCValueAnimationFactory.m
+//  FCBasicAnimationFactory.m
 //  FCEasingAnimation
 //
 
@@ -214,15 +214,14 @@
     float total_duration = self.totalDuration.floatValue;
     id (^scalingBlock)(float) = [self makeValueScalingBlockFromValue:self.fromValue ToValue:self.toValue];
     __block float time_accumulator = 0.f;
-    __weak typeof(self) weakSelf = self;
     
     // durations are much more convinient to do calculations!
-    [self.segmentedDurations enumerateObjectsUsingBlock:^(NSNumber* nsDuration, NSUInteger idx, BOOL *stop) {
-        float (^block)(float) = [weakSelf.timingBlocks objectAtIndex:idx];
+    [self.durations enumerateObjectsUsingBlock:^(NSNumber* nsDuration, NSUInteger idx, BOOL *stop) {
+        float (^block)(float) = [self.timingBlocks objectAtIndex:idx];
         float duration = nsDuration.floatValue;
         int count = (int)ceilf(duration*SEGMENT_FACTOR);
-        float n_value0 = [[weakSelf.normalizedValues objectAtIndex:idx] floatValue];
-        float n_value1 = [[weakSelf.normalizedValues objectAtIndex:idx+1] floatValue];
+        float n_value0 = [[self.normalizedValues objectAtIndex:idx] floatValue];
+        float n_value1 = [[self.normalizedValues objectAtIndex:idx+1] floatValue];
         float n_value_diff = n_value1 - n_value0;
         
         float time_step = duration/(float)count;

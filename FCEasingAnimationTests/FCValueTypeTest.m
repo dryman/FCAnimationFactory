@@ -82,13 +82,13 @@
 #import <objc/runtime.h>
 #import <UIKit/UIKit.h>
 
-@interface FCValueTest : SenTestCase
+@interface FCValueTypeTest : SenTestCase
 {
     CALayer* layer;
 }
 @end
 
-@implementation FCValueTest
+@implementation FCValueTypeTest
 
 - (void)setUp
 {

@@ -1,11 +1,11 @@
 //
-//  FCBasicAnimationFactory.h
+//  FCValueAnimationFactory.h
 //  FCEasingAnimation
 //
 
 /*
  
- Created by Felix Chern on 12/10/18.
+ Created by Felix Chern on 12/10/26.
  Copyright (c) 2012 Felix R. Chern. All rights reserved. (BSD LICENSE)
  
  Redistribution and use in source and binary forms, with or without
@@ -32,21 +32,14 @@
  
  */
 
-
-#import <Foundation/Foundation.h>
 #import "FCAnimationFactory.h"
 
-@interface FCBasicAnimationFactory : FCAnimationFactory <NSCopying>
+@interface FCValueAnimationFactory : FCAnimationFactory <NSCopying>
 {
-    NSArray* _normalizedValues;
-    id _fromValue;
-    id _toValue;
+    NSArray* _values;
 }
-@property (copy) NSArray* normalizedValues;
-@property (copy) id fromValue;
-@property (copy) id toValue;
 
-+ (CAKeyframeAnimation*) animationWithName:(NSString*)name fromValue:(NSNumber*)fv toValue: (NSNumber*)tv duration:(NSNumber*)duration;
+@property (copy) NSArray* values;
 
 
 @end

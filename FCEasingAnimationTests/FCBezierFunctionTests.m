@@ -32,7 +32,7 @@
  
  */
 
-#import "FCEasingAnimationTests.h"
+#import "FCBezierFunctionTests.h"
 #import "FCAnimationFactory.h"
 #import <math.h>
 
@@ -52,7 +52,7 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
     };
 }
 
-@implementation FCEasingAnimationTests
+@implementation FCBezierFunctionTests
 
 - (void)setUp
 {

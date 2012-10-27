@@ -1,5 +1,5 @@
 //
-//  FCEasingAnimation.h
+//  FCAnimationFactory.h
 //  FCEasingAnimation
 //
 
@@ -49,11 +49,12 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
 }
 
 @property (copy) NSArray* normalizedTimings;
-@property (copy) NSArray* segmentedDurations;
+@property (copy) NSArray* durations;
 @property (copy) NSArray* timingBlocks;
 @property (copy) NSNumber* totalDuration;
 
 // abstracted method, need to be implemented in subclass
+// may change to protocol in future
 - (CAKeyframeAnimation*) animation;
 
 // internal use
