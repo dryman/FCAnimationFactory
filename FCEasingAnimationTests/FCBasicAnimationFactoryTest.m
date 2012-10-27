@@ -234,6 +234,40 @@
 
 - (void)testCGColorOwnerShip
 {
+    /* 
+     note on UIColor
+     
+     If we used 
+     
+         UIColor red = [UIColor redColor];
+         CGColorRef redColor = red.CGColor;
+     
+     the retain count of `redColor` would be 1 owned by `redColor`
+     until `redColor` and `red` is out of scope
+     
+     This remains true even when we wrote
+     
+         CGColorRef redColor = [[UIColor redColor] CGColor];
+     
+     `redColor` still *owns* the CGColor.
+     This behavior is differnt from
+     http://weblog.bignerdranch.com/296-arc-gotcha-unexpectedly-short-lifetimes/
+     I don't know why...
+     
+     To test the actual behavior of how blocks capture and retains
+     CGColor, I use manual CGColor creation here.
+     
+     It turns out that block don't retain CGColorRef captured in block.
+     The solution is capture the object with type (id) and block retains it
+     automatically.
+     
+     By adding `CFRelease(redColor);` at the end of this test, we can know
+     that block does release object captured in it.
+     
+     By adding `CFRelease(ref);` at the end of this test, we can know
+     that block does release CGColorRef created in it.
+     */
+
     CGColorRef redColor, greenColor;
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGFloat redComp[4] = {1.f, 0.f, 0.f, 1.f};
@@ -255,6 +289,16 @@
     STAssertEquals(CFGetRetainCount(ref), 2L, @"retain count owned by arr and block");
     STAssertEquals(CFGetRetainCount(redColor), 1L, @"retain count owned by block");
     STAssertEquals(CFGetRetainCount(greenColor), 1L, @"retain count owned block");
+    
+    /*
+     Should crash if we uncomment this
+     CFRelease(redColor); // Will over released because block released it
+     */
+    
+    /*
+     Should crash if we un comment this
+     CFRelease(ref);     // Will over released because block released it
+     */
 }
 
 @end
