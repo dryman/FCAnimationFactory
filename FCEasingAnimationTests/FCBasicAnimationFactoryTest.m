@@ -232,4 +232,21 @@
     STAssertEqualsWithAccuracy(pt.y, 1.f, 0.001, @"(1,1)");
 }
 
+- (void)testCGColorOwnerShip
+{
+    CGColorRef redColor = [[UIColor redColor] CGColor];
+    CGColorRef greenColor = [[UIColor greenColor] CGColor];
+    STAssertEquals(CFGetRetainCount(redColor), 1L, @"retain count owned by UIColor");
+    STAssertEquals(CFGetRetainCount(greenColor), 1L, @"retain count owned by UIColor");
+    id(^scalingBlock)(float) = [factory makeValueScalingBlockFromValue:(__bridge id)redColor ToValue:(__bridge id)greenColor];
+
+    NSArray *arr = [NSArray arrayWithObject:scalingBlock(0.5f)];
+    CFTypeRef ref = (__bridge CFTypeRef)[arr objectAtIndex:0];
+    STAssertEquals(CFGetRetainCount(redColor), 1L, @"retain count owned by block");
+    STAssertEquals(CFGetRetainCount(greenColor), 1L, @"retain count owned block");
+    STAssertEquals(CFGetRetainCount(ref), 2L, @"retain count owned by arr and block");
+    
+    // when out of scope, block will release the returned color too...
+}
+
 @end

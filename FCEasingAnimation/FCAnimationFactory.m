@@ -192,10 +192,10 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
     }
     
     if (CFGetTypeID((__bridge CFTypeRef)value) == CGColorGetTypeID()) {
-        CGColorRef fromColor = (__bridge CGColorRef)fromValue;
-        CGColorRef toColor = (__bridge CGColorRef)toValue;
+        CGColorRef fromColor = (__bridge_retained CGColorRef)fromValue;
+        CGColorRef toColor = (__bridge_retained CGColorRef)toValue;
         
-        return ^id(float factor){
+        id(^retBlock)(float) = ^id(float factor){
             size_t num = CGColorGetNumberOfComponents(fromColor);      // fromColor & toColor retained
             const CGFloat *fromComp = CGColorGetComponents(fromColor);
             const CGFloat *toComp = CGColorGetComponents(toColor);
@@ -207,6 +207,9 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
             CGColorRef retColor = CGColorCreate(CGColorGetColorSpace(fromColor), newComp);
             return (__bridge_transfer id)retColor;
         };
+        CFRelease(fromColor);
+        CFRelease(toColor);
+        return retBlock;
     }
     if (CFGetTypeID((__bridge CFTypeRef)value) == CGImageGetTypeID()) {
         NSAssert(0, @"CGImageRef should be handled in another class");
