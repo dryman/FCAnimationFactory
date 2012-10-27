@@ -154,9 +154,56 @@
     STAssertEquals(CFGetTypeID((__bridge CFTypeRef)value), CGImageGetTypeID(), @"is CGImage");
 }
 
-- (void)testObjCType
+- (void)testCGColorRetainCount
 {
+    CGColorRef color;
+    color= [[UIColor redColor] CGColor];
+    STAssertEquals(CFGetRetainCount(color), 1L, @"retain count owned by UIColor");
+    @autoreleasepool {
+        NSArray* arr1 = [NSArray arrayWithObject:(__bridge id)color];
+        STAssertEquals(CFGetRetainCount(color), 2L, @"retain count owned by UIColor and arr1");
+        NSLog(@"%@", arr1);
+    }
+    STAssertEquals(CFGetRetainCount(color), 1L, @"retain count owned by UIColor");
+
+    size_t num = CGColorGetNumberOfComponents(color);
+    const CGFloat* comp = CGColorGetComponents(color);
+    CGFloat new_comp[num];
+    CGFloat factor = 0.9f;
+    for (size_t i = 0; i<num; ++i) {
+        new_comp[i] = comp[i]*factor;
+    }
+    CGColorRef newColor = CGColorCreate(CGColorGetColorSpace(color), new_comp);
     
+    STAssertEquals(CFGetRetainCount(newColor), 1L, @"retain count owned by us");
+    NSArray* arr = [NSArray arrayWithObject:(__bridge id)newColor];
+    NSLog(@"%@",arr);
+    STAssertEquals(CFGetRetainCount(newColor), 2L, @"retain count owned by us and arr");
+    CFRelease(newColor);
+    STAssertEquals(CFGetRetainCount(newColor), 1L, @"retain count owned by arr");
+    
+    id(^myBlock)(void) = ^{
+        STAssertEquals(CFGetRetainCount(color), 2L, @"retain count owned by UIColor and block");
+        size_t num = CGColorGetNumberOfComponents(color);
+        const CGFloat* comp = CGColorGetComponents(color);
+        CGFloat new_comp[num];
+        CGFloat factor = 0.9f;
+        for (size_t i = 0; i<num; ++i) {
+            new_comp[i] = comp[i]*factor;
+        }
+        CGColorRef newColor = CGColorCreate(CGColorGetColorSpace(color), new_comp);
+        STAssertEquals(CFGetRetainCount(newColor), 1L, @"retain count owned by us");
+        
+        return (__bridge_transfer id)newColor;
+    };
+    
+    dispatch_async(dispatch_get_main_queue(),  ^{
+        CFTypeRef oldObj = (__bridge CFTypeRef)myBlock();
+        NSArray* arr = [NSArray arrayWithObject: (__bridge id)oldObj];
+        CFTypeRef myObj = (__bridge CFTypeRef)[arr objectAtIndex:0];
+        STAssertEquals(CFGetRetainCount(myObj), 1L, @"retain count owned by arr, transfering ownership worked as exptected");
+        STAssertEquals(CFGetRetainCount(oldObj), 1L, @"retain count owned by arr");
+    });
 }
 
 @end
