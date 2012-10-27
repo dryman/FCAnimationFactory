@@ -65,7 +65,7 @@ Clone the project and see example usage in `FCAnimationDemo` target.
 ### Methods
 * `-(CAKeyFrameAnimation*)animation;` Create an animation from factory.
 * `+(CAKeyFrameAnimation*)animationWithName:(NSString*)name fromValue:(NSValue*)value toValue:(NSValue*) duration:(NSNumber*)duration` convinient form for creating animations.
-See [Timing block/function names](#timing-names) for available names.
+See [Timing block/function names](#timing-blockfunction-names) for available names.
 
 ## `FCValueAnimationFactory` class
 ### Properties
@@ -101,11 +101,13 @@ value-0   value-1   value-2    value-n   value-n+1
 Use `[NSNumber numberWithFloat: myFloat]` or objective-c literal `@3.5f` for
 `fromValue` and `toValue`.
 
-    CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"elasticEaseOut"
-                                                                      fromValue:@1.f
-                                                                        toValue:@0.f
-                                                                       duration:@2.5f];
-    animation.keyPath = @"shadowOpacity";
+```objc
+CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"elasticEaseOut"
+                                                                  fromValue:@1.f
+                                                                    toValue:@0.f
+                                                                   duration:@2.5f];
+animation.keyPath = @"shadowOpacity";
+```
     
 ### CGPoint
 
@@ -149,7 +151,7 @@ You don't need `FCAnimationFactory` to interpolate these boolean or layer
 contents. You only need `CABasicAnimation` or `CAKeyFrameAnimation` to setup
 timestamp when it need changes.
 
-## Timing block/function names ## {#timing-names}
+## Timing block/function names
 
 * linear
 * quadraticEaseIn
