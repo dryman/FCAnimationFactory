@@ -1,11 +1,11 @@
 //
-//  FCValueAnimationFactory.h
+//  FCBaseFactoryTests.h
 //  FCEasingAnimation
 //
 
 /*
  
- Created by Felix Chern on 12/10/26.
+ Created by Felix Chern on 12/10/18.
  Copyright (c) 2012 Felix R. Chern. All rights reserved. (BSD LICENSE)
  
  Redistribution and use in source and binary forms, with or without
@@ -32,14 +32,12 @@
  
  */
 
-#import "FCAnimationFactory.h"
+#import <SenTestingKit/SenTestingKit.h>
+#import "FCBasicAnimationFactory.h"
 
-@interface FCValueAnimationFactory : FCAnimationFactory <NSCopying>
+@interface FCBasicAnimationFactoryTest : SenTestCase
 {
-    NSArray* _values;
+    FCBasicAnimationFactory* factory;
 }
-
-@property (copy) NSArray* values;
-
 
 @end

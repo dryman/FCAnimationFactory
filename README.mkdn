@@ -16,34 +16,74 @@ well.
 
 High level animation API:
 
-    [CATransaction begin];
-    [CATransaction setDisableActions:YES];
-    _layer.position = CGPointMake(160.f, 300.f);
-    CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"elasticEaseOut"
-                                                                      fromValue:[NSValue valueWithCGPoint:CGPointMake(320,50)]
-                                                                        toValue:[NSValue valueWithCGPoint:CGPointMake(160,300)]
-                                                                       duration:@2.5f];
-    animation.keyPath = @"position";
-    [_layer addAnimation:animation forKey:@"positionKey"];
-    [CATransaction commit];
+```objc
+[CATransaction begin];
+[CATransaction setDisableActions:YES];
+_layer.position = CGPointMake(160.f, 300.f);
+CAKeyframeAnimation *animation = [FCBasicAnimationFactory animationWithName:@"elasticEaseOut"
+                                                                  fromValue:[NSValue valueWithCGPoint:CGPointMake(320,50)]
+                                                                    toValue:[NSValue valueWithCGPoint:CGPointMake(160,300)]
+                                                                   duration:@2.5f];
+animation.keyPath = @"position";
+[_layer addAnimation:animation forKey:@"positionKey"];
+[CATransaction commit];
+```
 
 Create your own timing function directly with `FCValueAnimationFactory`:
 
-    factory = [[FCValueAnimationFactory alloc] init];
-    factory.timingBlocks = [NSArray arrayWithObject:^float(float x){
-        return x*x*x*x*x;
-    }];
-    factory.normalizedValues = @[ @0.f, @1.f];
-    factory.normalizedTimings = @[ @0.f, @1.f];
-    factory.totalDuration = [NSNumber numberWithFloat:2.5f];
-    factory.fromValue = @1.0f;
-    factory.toValue = @0.5f;
-    CAKeyframeAnimation *animation = [factory animation];
-    animation.keyPath = @"opacity";
+```objc
+factory = [[FCValueAnimationFactory alloc] init];
+factory.timingBlocks = @[
+    ^float(float x){return x*x*x*x*x;} // fast shooting with x^5
+    ^(float x){return sinf(x*M_PI_2);} // slow down in sine function
+];
+factory.durations = @[ @1.f, @1.5f];
+factory.values = @[
+    [NSValue valueWithCGPoint:CGPointMake(0.f, 160.f)],    // start from edge of screen
+    [NSValue valueWithCGPoint:CGPointMake(350.f, 160.f)],  // overshoot to outside of screen
+    [NSValue valueWithCGPoint:CGPointMake(160.f, 160.f)]   // end at middle of screen
+];
+CAKeyframeAnimation *animation = [factory animation];
+animation.keyPath = @"position";
 
-    [_layer addAnimation: animation forKey:@"opacityKey"]
+[_layer addAnimation: animation forKey:@"positionKey"]
+```
 
 Clone the project and see example usage in `FCAnimationDemo` target.
+
+# CLASSES AND METHODS
+
+## `FCBasicAnimationFactory` class
+
+### Properties
+* `timingBlocks` An array of objective-c blocks. The type of the blocks is `float(^)(float)`.
+* `fromValue` An `id` value, can be `NSNumbers` or `NSValues`.
+* `toValue` An `id` value, can be `NSNumbers` or `NSValues`.
+
+### Methods
+* `-(CAKeyFrameAnimation*)animation;` Create an animation from factory.
+* `+(CAKeyFrameAnimation*)animationWithName:(NSString*)name fromValue:(NSValue*)value toValue:(NSValue*) duration:(NSNumber*)duration` convinient form for creating animations.
+See [Timing block/function names](#timing-names) for available names.
+
+## `FCValueAnimationFactory` class
+### Properties
+* `timingBlocks` An array of objective-c blocks. The type of the blocks is `float(^)(float)`.
+* `values` An array of `id` values, which can be `NSNumbers` or `NSValues`.
+* `durations` An array of `NSNumber numberWithFloat` of each time segments
+  presented in seconds.
+
+If count of `timingBlocks` and `durations` is *n*, `values` count must be *n+1*.
+The time line looks like this:
+
+```
+    tBlock-0   tBlock-1     ...     tBlock-n
+   duration-0 duration-1    ...    duration-n       
+  I----------I----------I-- ... --I----------I
+value-0   value-1   value-2    value-n   value-n+1
+```
+
+### Method
+* `-(CAKeyFrameAnimation*)animation;` Create an animation from factory.
 
 ## Animatable properties
 
@@ -107,7 +147,7 @@ You don't need `FCAnimationFactory` to interpolate these boolean or layer
 contents. You only need `CABasicAnimation` or `CAKeyFrameAnimation` to setup
 timestamp when it need changes.
 
-## Timing block/function names
+## Timing block/function names {#timing-names}
 
 * linear
 * quadraticEaseIn
@@ -142,6 +182,8 @@ Clone the project and drag these files into your own project:
 
     FCAnimationFactory.h
     FCAnimationFactory.m
+    FCBasicAnimationFactory.h
+    FCBasicAnimationFactory.m
     FCValueAnimationFactory.h
     FCValueAnimationFactory.m
 
@@ -154,13 +196,11 @@ The project is still under heavy development. Pull requests are welcome ;)
 * `FCPathAnimationFactory` can create cubic path on `position` or other 2D
   movement animation.
 
-* Rename `FCValueAnimationFactory` to `FCBasicAnimationFactory`.
- `FCBasicAnimationFactory` is opaque class with built-in timing functions,
-  `FCValueAnimationFactory` is more transparent and customizable.
-
 * Draw timing block diagrams
 
 * Write example of how `doubleSided` property works with other animations.
+
+* Make beautiful demos
 
 # LICENSE
 

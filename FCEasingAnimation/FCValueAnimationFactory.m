@@ -5,7 +5,7 @@
 
 /*
  
- Created by Felix Chern on 12/10/18.
+ Created by Felix Chern on 12/10/26.
  Copyright (c) 2012 Felix R. Chern. All rights reserved. (BSD LICENSE)
  
  Redistribution and use in source and binary forms, with or without
@@ -32,37 +32,11 @@
  
  */
 
+
 #import "FCValueAnimationFactory.h"
 
 @implementation FCValueAnimationFactory
-@synthesize normalizedValues = _normalizedValues;
-@synthesize fromValue = _fromValue;
-@synthesize toValue = _toValue;
-
-
--(FCValueAnimationFactory*)init
-{
-    if (self=[super init]) {
-        _normalizedValues = [NSArray arrayWithObjects:
-                             [NSNumber numberWithFloat:0.f],
-                             [NSNumber numberWithFloat:1.f], nil];
-        _fromValue = [NSNumber numberWithFloat:0.f];
-        _toValue = [NSNumber numberWithFloat:1.f];
-    }
-    return self;
-}
-
-+ (CAKeyframeAnimation*) animationWithName:(NSString*)name
-                                 fromValue:(NSNumber*)fv
-                                   toValue: (NSNumber*)tv
-                                  duration:(NSNumber*)duration
-{
-    FCValueAnimationFactory *factory = [[FCValueAnimationFactory animationDictionary] valueForKey:name];
-    factory.fromValue = fv;
-    factory.toValue = tv;
-    factory.totalDuration = duration;
-    return [factory animation];
-}
+@synthesize values = _values;
 
 - (id)copyWithZone:(NSZone *)zone
 {
@@ -70,260 +44,49 @@
     factoryCopy.normalizedTimings = _normalizedTimings;
     factoryCopy.timingBlocks = _timingBlocks;
     factoryCopy.totalDuration = _totalDuration;
-    factoryCopy.normalizedValues = _normalizedValues;
-    factoryCopy.fromValue = _fromValue;
-    factoryCopy.toValue = _toValue;
+    factoryCopy.values = _values;
     return factoryCopy;
 }
 
-+ (NSDictionary *)animationDictionary
+
+- (CAKeyframeAnimation*)animation
 {
-    static NSMutableDictionary* dict;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        if (dict==nil) {
-            dict = [[NSMutableDictionary alloc] init];
-            float(^quadraticEaseIn)(float)  = ^(float x){return x*x;};
-            float(^cubicEaseIn)(float)      = ^(float x){return x*x*x;};
-            float(^quarticEaseIn)(float)    = ^(float x){return x*x*x*x;};
-            float(^quinticEaseIn)(float)    = ^(float x){return x*x*x*x*x;};
-            float(^quadraticEaseOut)(float) = ^(float x){return 1.f -(x-1.f)*(x-1.f);};
-            float(^cubicEaseOut)(float)     = ^(float x){return 1.f +(x-1.f)*(x-1.f)*(x-1.f);};
-            float(^quarticEaseOut)(float)   = ^(float x){return 1.f -(x-1.f)*(x-1.f)*(x-1.f)*(x-1.f);};
-            float(^quinticEaseOut)(float)   = ^(float x){return 1.f +(x-1.f)*(x-1.f)*(x-1.f)*(x-1.f)*(x-1.f);};
-            float(^sineEaseIn)(float)       = ^(float x){return sinf((x-1.f) * M_PI_2) + 1;};
-            float(^sineEaseOut)(float)      = ^(float x){return sinf(x*M_PI_2);};
-            
-            
-            float(^circularEaseIn)(float)   = ^(float x){return 1.f - sqrtf(1.f - x*x);};
-            float(^circularEaseOut)(float)  = ^(float x){return sqrtf((2.f - x)*x);};
-            float(^expEaseIn)(float)        = ^(float x){return powf(2.f, 10.f * (x-1));};
-            float(^expEaseOut)(float)       = ^(float x){return 1.f - powf(2.f, -10.f * x);};
-            float(^elasticEaseIn)(float)    = ^(float x){return sinf(13.f * M_PI_2 * x) * powf(2.f, 10.f * (x-1.f));};
-            float(^elasticEaseOut)(float)   = ^(float x){return sinf(-13.f * M_PI_2 * (x+1.f)) * powf(2.f, -10.f *x) + 1;};
-            float(^backEaseIn)(float)       = ^(float x){return x*x*x - x * sinf(x * M_PI);};
-            float(^backEaseOut)(float)      = ^(float x){float f = (1.f-x); return 1.f - (f*f*f - f * sinf(f * M_PI));};
-
-            
-
-            
-            /* one step animations */
-            FCValueAnimationFactory* factory = [[FCValueAnimationFactory alloc] init];
-            factory.normalizedValues = [NSArray arrayWithObjects:
-                                        [NSNumber numberWithFloat:0.f],
-                                        [NSNumber numberWithFloat:1.f], nil];
-            factory.normalizedTimings = [NSArray arrayWithObjects:
-                                         [NSNumber numberWithFloat:0.f],
-                                         [NSNumber numberWithFloat:1.f], nil];
-            
-            factory.timingBlocks = [NSArray arrayWithObject:^(float x){return x;}];
-            [dict setObject:[factory copy] forKey:@"linear"];
-            
-            factory.timingBlocks = [NSArray arrayWithObject:quadraticEaseIn];
-            [dict setObject:[factory copy] forKey:@"quadraticEaseIn"];
-            factory.timingBlocks = [NSArray arrayWithObject:quadraticEaseOut];
-            [dict setObject:[factory copy] forKey:@"quadraticEaseOut"];
-            
-            factory.timingBlocks = [NSArray arrayWithObject:cubicEaseIn];
-            [dict setObject:[factory copy] forKey:@"cubicEaseIn"];
-            factory.timingBlocks = [NSArray arrayWithObject:cubicEaseOut];
-            [dict setObject:[factory copy] forKey:@"cubicEaseOut"];
-            
-            factory.timingBlocks = [NSArray arrayWithObject:quarticEaseIn];
-            [dict setObject:[factory copy] forKey:@"quarticEaseIn"];
-            factory.timingBlocks = [NSArray arrayWithObject:quarticEaseOut];
-            [dict setObject:[factory copy] forKey:@"quarticEaseOut"];
-            
-            factory.timingBlocks = [NSArray arrayWithObject:quinticEaseIn];
-            [dict setObject:[factory copy] forKey:@"quinticEaseIn"];
-            factory.timingBlocks = [NSArray arrayWithObject:quinticEaseOut];
-            [dict setObject:[factory copy] forKey:@"quinticEaseOut"];
-            
-            factory.timingBlocks = [NSArray arrayWithObject:sineEaseIn];
-            [dict setObject:[factory copy] forKey:@"sineEaseIn"];
-            factory.timingBlocks = [NSArray arrayWithObject:sineEaseOut];
-            [dict setObject:[factory copy] forKey:@"sineEaseOut"];
-            
-            
-            factory.timingBlocks = [NSArray arrayWithObject:circularEaseIn];
-            [dict setObject:[factory copy] forKey:@"circularEaseIn"];
-            factory.timingBlocks = [NSArray arrayWithObject:circularEaseOut];
-            [dict setObject:[factory copy] forKey:@"circularEaseOut"];
-            
-            factory.timingBlocks = [NSArray arrayWithObject:expEaseIn];
-            [dict setObject:[factory copy] forKey:@"expEaseIn"];
-            factory.timingBlocks = [NSArray arrayWithObject:expEaseOut];
-            [dict setObject:[factory copy] forKey:@"expEaseOut"];
-            
-            factory.timingBlocks = [NSArray arrayWithObject:elasticEaseIn];
-            [dict setObject:[factory copy] forKey:@"elasticEaseIn"];
-            factory.timingBlocks = [NSArray arrayWithObject:elasticEaseOut];
-            [dict setObject:[factory copy] forKey:@"elasticEaseOut"];
-            
-            factory.timingBlocks = [NSArray arrayWithObject:backEaseIn];
-            [dict setObject:[factory copy] forKey:@"backEaseIn"];
-            factory.timingBlocks = [NSArray arrayWithObject:backEaseOut];
-            [dict setObject:[factory copy] forKey:@"backEaseOut"];
-            
-            /* two steps animations */
-            factory.normalizedValues = [NSArray arrayWithObjects:
-                                        [NSNumber numberWithFloat:0.f],
-                                        [NSNumber numberWithFloat:0.5f],
-                                        [NSNumber numberWithFloat:1.f], nil];
-            factory.normalizedTimings = [NSArray arrayWithObjects:
-                                         [NSNumber numberWithFloat:0.f],
-                                         [NSNumber numberWithFloat:0.5f],
-                                         [NSNumber numberWithFloat:1.f], nil];
-            
-            factory.timingBlocks = [NSArray arrayWithObjects: quadraticEaseIn, quadraticEaseOut, nil];
-            [dict setObject:[factory copy] forKey:@"quadraticEaseInOut"];
-            
-            factory.timingBlocks = [NSArray arrayWithObjects: cubicEaseIn, cubicEaseOut, nil];
-            [dict setObject:[factory copy] forKey:@"cubicEaseInOut"];
-            
-            factory.timingBlocks = [NSArray arrayWithObjects: quarticEaseIn, quarticEaseOut, nil];
-            [dict setObject:[factory copy] forKey:@"quarticEaseInOut"];
-            
-            factory.timingBlocks = [NSArray arrayWithObjects: quinticEaseIn, quinticEaseOut, nil];
-            [dict setObject:[factory copy] forKey:@"quinticEaseInOut"];
-            
-            factory.timingBlocks = [NSArray arrayWithObjects: sineEaseIn, sineEaseOut, nil];
-            [dict setObject:[factory copy] forKey:@"sineEaseInOut"];
-            
-            factory.timingBlocks = [NSArray arrayWithObjects: circularEaseIn, circularEaseOut, nil];
-            [dict setObject:[factory copy] forKey:@"circularEaseInOut"];
-            
-            factory.timingBlocks = [NSArray arrayWithObjects: expEaseIn, expEaseOut, nil];
-            [dict setObject:[factory copy] forKey:@"expEaseInOut"];
-        }
-
-    });
-    return dict;
-}
-
-- (id(^)(float))makeValueScalingBlock
-{
-    if (self.fromValue==nil || self.toValue==nil) NSAssert(0, @"fromValue and toValue must not be nil");
-    
-    id value = self.fromValue;
-    
-    /*
-     * single float is handled in NSNumber
-     */
-    if ([value isKindOfClass:[NSNumber class]]) {
-        float fromValue = [(NSNumber*)self.fromValue floatValue];
-        float toValue = [(NSNumber*)self.toValue floatValue];
-        float diffValue = toValue - fromValue;
-        return ^id(float factor){
-            float result = factor*diffValue + fromValue;
-            return [NSNumber numberWithFloat:result];
-        };
-    }
-    
-    /*
-     * NSValue handles CGPoint, CGSize, CGRect, and CATransform3D
-     */
-    if ([value isKindOfClass:[NSValue class]]) {
-        const char* objCType = [value objCType];
-        if (strcmp(objCType, @encode(CGPoint))) {
-            CGPoint pt0, pt1;
-            [(NSValue*)self.fromValue getValue:&pt0];
-            [(NSValue*)self.toValue getValue:&pt1];
-            return ^id(float factor){
-                float x = (pt1.x - pt0.x)*factor + pt0.x;
-                float y = (pt1.y - pt0.y)*factor + pt0.y;
-                return [NSValue valueWithCGPoint:CGPointMake(x, y)];
-            };
-        } else if (strcmp(objCType, @encode(CGSize))) {
-            CGSize size0, size1;
-            [(NSValue*)self.fromValue getValue:&size0];
-            [(NSValue*)self.toValue getValue:&size1];
-            return ^id(float factor){
-                float w = (size1.width - size0.width)*factor + size0.width;
-                float h = (size1.height - size0.height)*factor + size0.height;
-                return [NSValue valueWithCGSize:CGSizeMake(w, h)];
-            };
-        } else if (strcmp(objCType, @encode(CGRect))) {
-            CGRect rect0, rect1;
-            [(NSValue*)self.fromValue getValue:&rect0];
-            [(NSValue*)self.toValue getValue:&rect1];
-            return ^id(float factor){
-                float x = (rect1.origin.x - rect0.origin.x)*factor + rect0.origin.x;
-                float y = (rect1.origin.y - rect0.origin.y)*factor + rect0.origin.y;
-                float w = (rect1.size.width - rect0.size.width)*factor + rect0.size.width;
-                float h = (rect1.size.height - rect0.size.height)*factor + rect0.size.height;
-                return [NSValue valueWithCGRect:CGRectMake(x, y, w, h)];
-            };
-        } else if (strcmp(objCType, @encode(CATransform3D))) {
-            NSAssert(0, @"CATransform3D type currently not supported");
-        } else {
-            NSAssert(0, @"Unknown NSValue type %s",objCType);
-        }
-    }
-    
-    if (CFGetTypeID((__bridge CFTypeRef)value) == CGColorGetTypeID()) {
-        NSAssert(0, @"CGColorRef type currently not supported");
-    }
-    if (CFGetTypeID((__bridge CFTypeRef)value) == CGImageGetTypeID()) {
-        NSAssert(0, @"CGImageRef should be handled in another class");
-    }
-    
-    NSAssert(0, @"value type unknown");
-    return ^id(float factor){ return nil;};    // turn off compiler warnings
-}
-
-- (CAKeyframeAnimation*) animation
-{
-    // TODO: assert if count of normalizedTimes, normalizedValues and timingFunctions is correct
-    // TODO: need to implement different kinds of values...
-    
-        
     NSMutableArray *keyTimes = [NSMutableArray array];
     NSMutableArray *timingFunctions = [NSMutableArray array];
-    NSMutableArray *values = [NSMutableArray array];
-    float total_duration = self.totalDuration.floatValue;
-    id (^scalingBlock)(float) = [self makeValueScalingBlock];
-    __block float time_accumulator = 0.f;
-    __weak typeof(self) weakSelf = self;
+    NSMutableArray *resultValues = [NSMutableArray array];
     
-    // durations are much more convinient to do calculations!
-    [self.segmentedDurations enumerateObjectsUsingBlock:^(NSNumber* nsDuration, NSUInteger idx, BOOL *stop) {
-        float (^block)(float) = [weakSelf.timingBlocks objectAtIndex:idx];
+    float total_duration = self.totalDuration.floatValue;
+    __block float time_accumulator;
+    [self.durations enumerateObjectsUsingBlock:^(NSNumber* nsDuration, NSUInteger idx, BOOL *stop) {
+        id (^scalingBlock)(float) = [self makeValueScalingBlockFromValue:[self.values objectAtIndex:idx]
+                                                                     ToValue:[self.values objectAtIndex:idx+1]];
+        float (^timingBlock)(float) = [self.timingBlocks objectAtIndex:idx];
         float duration = nsDuration.floatValue;
         int count = (int)ceilf(duration*SEGMENT_FACTOR);
-        float n_value0 = [[weakSelf.normalizedValues objectAtIndex:idx] floatValue];
-        float n_value1 = [[weakSelf.normalizedValues objectAtIndex:idx+1] floatValue];
-        float n_value_diff = n_value1 - n_value0;
         
         float time_step = duration/(float)count;
-        float n_step = 1.f/(float)count; // normalized
+        float n_step = 1.f /(float)count;
         float n_iter = 0.f;
         
         float c1[2], c2[2];
         
-        for (int i = 0; i<count; i++) {
-            fc_bezier_interpolation(c1, c2, n_iter, n_iter+n_step, block);
+        for (int i=0; i<count; ++i) {
+            fc_bezier_interpolation(c1, c2, n_iter, n_iter+n_step,timingBlock);
             [timingFunctions addObject:[CAMediaTimingFunction functionWithControlPoints:c1[0] :c1[1] :c2[0] :c2[1]]];
-            
             [keyTimes addObject:[NSNumber numberWithFloat:time_accumulator/total_duration]];
-            
-            float factor = block(n_iter)*n_value_diff + n_value0; // factor range is 0-1
-            
-            [values addObject:scalingBlock(factor)];
-            
+            [resultValues addObject:scalingBlock(timingBlock(n_iter))];
+
             n_iter += n_step;
             time_accumulator += time_step;
         }
     }];
-    // last timestamp and value
     [keyTimes addObject:[NSNumber numberWithFloat:1.f]];
-    [values addObject:self.toValue];
-    
+    [resultValues addObject:[self.values lastObject]];
+
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
     animation.keyTimes = keyTimes;
     animation.timingFunctions = timingFunctions;
-    animation.duration = total_duration;
-    animation.values = values;
+    animation.values = resultValues;
     return animation;
 }
 

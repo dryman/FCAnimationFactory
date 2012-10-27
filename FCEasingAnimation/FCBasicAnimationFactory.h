@@ -1,5 +1,5 @@
 //
-//  FCBaseFactoryTests.h
+//  FCBasicAnimationFactory.h
 //  FCEasingAnimation
 //
 
@@ -32,12 +32,21 @@
  
  */
 
-#import <SenTestingKit/SenTestingKit.h>
-#import "FCValueAnimationFactory.h"
 
-@interface FCBaseFactoryTests : SenTestCase
+#import <Foundation/Foundation.h>
+#import "FCAnimationFactory.h"
+
+@interface FCBasicAnimationFactory : FCAnimationFactory <NSCopying>
 {
-    FCValueAnimationFactory* factory;
+    NSArray* _normalizedValues;
+    id _fromValue;
+    id _toValue;
 }
+@property (copy) NSArray* normalizedValues;
+@property (copy) id fromValue;
+@property (copy) id toValue;
+
++ (CAKeyframeAnimation*) animationWithName:(NSString*)name fromValue:(NSNumber*)fv toValue: (NSNumber*)tv duration:(NSNumber*)duration;
+
 
 @end

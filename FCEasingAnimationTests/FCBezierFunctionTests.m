@@ -32,7 +32,7 @@
  
  */
 
-#import "FCEasingAnimationTests.h"
+#import "FCBezierFunctionTests.h"
 #import "FCAnimationFactory.h"
 #import <math.h>
 
@@ -52,7 +52,7 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
     };
 }
 
-@implementation FCEasingAnimationTests
+@implementation FCBezierFunctionTests
 
 - (void)setUp
 {
@@ -90,7 +90,7 @@ FCFloatBlock genScaledBezier (float p1, float p2, float s1, float s2)
     float points[4];
     fc_bezier_interpolation(&points[0],&points[2], 0, 1, ^float(float x) { return x*x; });
     STAssertEqualsWithAccuracy(points[1], 0.f, 0.0001f, @"control point p1 sholdn't have y component");
-    STAssertEqualsWithAccuracy((1.f-points[3])/(1.f-points[2]), 2.f, 0.0001, @"derivative on 1 should be 2.f");
+    STAssertEqualsWithAccuracy((1.f-points[3])/(1.f-points[2]), 2.f, 0.001, @"derivative on 1 should be 2.f");
 }
 
 

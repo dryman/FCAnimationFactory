@@ -32,15 +32,15 @@
  
  */
 
-#import "FCBaseFactoryTests.h"
+#import "FCBasicAnimationFactoryTest.h"
 
 
-@implementation FCBaseFactoryTests
+@implementation FCBasicAnimationFactoryTest
 
 - (void)setUp
 {
     [super setUp];
-    factory = [[FCValueAnimationFactory alloc] init];
+    factory = [[FCBasicAnimationFactory alloc] init];
 }
 
 - (void)testDefaultFactory_timingFunctionCount
@@ -84,7 +84,7 @@
 
 - (void)testQuintFunction
 {
-    factory.totalDuration = [NSNumber numberWithFloat:1.f];
+    factory.totalDuration = [NSNumber numberWithFloat:.5f];
     factory.timingBlocks = [NSArray arrayWithObject:^float(float x){
         return x*x*x*x*x;
     }];
@@ -171,7 +171,7 @@
 
 - (void)testQuintAnimation
 {
-    CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"quinticEaseIn"
+    CAKeyframeAnimation *animation = [FCBasicAnimationFactory animationWithName:@"quinticEaseIn"
                                                                       fromValue:@0.f
                                                                         toValue:@1.f
                                                                        duration:@.5f];

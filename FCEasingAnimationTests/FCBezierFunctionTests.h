@@ -34,6 +34,6 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface FCEasingAnimationTests : SenTestCase
+@interface FCBezierFunctionTests : SenTestCase
 
 @end

@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5D3DEFFB1638D19000DF8A4D /* FCValueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3DEFFA1638D19000DF8A4D /* FCValueTest.m */; };
+		5D05605C163AC88E000EC538 /* FCValueAnimationFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D05605B163AC88E000EC538 /* FCValueAnimationFactoryTest.m */; };
+		5D3DEFFB1638D19000DF8A4D /* FCValueTypeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3DEFFA1638D19000DF8A4D /* FCValueTypeTest.m */; };
 		5D3DF0011638EF2E00DF8A4D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D84694B1630319B00E92CDA /* CoreGraphics.framework */; };
 		5D3DF0031639286200DF8A4D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D3DF0021639286200DF8A4D /* Icon.png */; };
+		5D5B4F14163ABE19006CC735 /* FCValueAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5B4F13163ABE19006CC735 /* FCValueAnimationFactory.m */; };
+		5D5B4F15163ABE19006CC735 /* FCValueAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5B4F13163ABE19006CC735 /* FCValueAnimationFactory.m */; };
+		5D5B4F16163ABE19006CC735 /* FCValueAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5B4F13163ABE19006CC735 /* FCValueAnimationFactory.m */; };
 		5D611FEC162F88E7004BB224 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D611FEB162F88E7004BB224 /* QuartzCore.framework */; };
-		5D611FEF162FA0E3004BB224 /* FCBaseFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D611FEE162FA0E3004BB224 /* FCBaseFactoryTests.m */; };
+		5D611FEF162FA0E3004BB224 /* FCBasicAnimationFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D611FEE162FA0E3004BB224 /* FCBasicAnimationFactoryTest.m */; };
 		5D8469491630319B00E92CDA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C60162C333F00BE9BCD /* UIKit.framework */; };
 		5D84694A1630319B00E92CDA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C4F162C333F00BE9BCD /* Foundation.framework */; };
 		5D84694C1630319B00E92CDA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D84694B1630319B00E92CDA /* CoreGraphics.framework */; };
@@ -25,9 +29,9 @@
 		5D8469641630319B00E92CDA /* FCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D8469631630319B00E92CDA /* FCViewController.m */; };
 		5D846969163031CA00E92CDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D611FEB162F88E7004BB224 /* QuartzCore.framework */; };
 		5D84696A163031D500E92CDA /* FCAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C56162C333F00BE9BCD /* FCAnimationFactory.m */; };
-		5D84696B163031D800E92CDA /* FCValueAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCValueAnimationFactory.m */; };
-		5DD44F19162FE620008FB24A /* FCValueAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCValueAnimationFactory.m */; };
-		5DD44F1A162FE620008FB24A /* FCValueAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCValueAnimationFactory.m */; };
+		5D84696B163031D800E92CDA /* FCBasicAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCBasicAnimationFactory.m */; };
+		5DD44F19162FE620008FB24A /* FCBasicAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCBasicAnimationFactory.m */; };
+		5DD44F1A162FE620008FB24A /* FCBasicAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCBasicAnimationFactory.m */; };
 		5DF94C50162C333F00BE9BCD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C4F162C333F00BE9BCD /* Foundation.framework */; };
 		5DF94C55162C333F00BE9BCD /* FCAnimationFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5DF94C54162C333F00BE9BCD /* FCAnimationFactory.h */; };
 		5DF94C57162C333F00BE9BCD /* FCAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C56162C333F00BE9BCD /* FCAnimationFactory.m */; };
@@ -36,7 +40,7 @@
 		5DF94C62162C333F00BE9BCD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C4F162C333F00BE9BCD /* Foundation.framework */; };
 		5DF94C65162C333F00BE9BCD /* libFCEasingAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF94C4C162C333F00BE9BCD /* libFCEasingAnimation.a */; };
 		5DF94C6B162C333F00BE9BCD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5DF94C69162C333F00BE9BCD /* InfoPlist.strings */; };
-		5DF94C6E162C333F00BE9BCD /* FCEasingAnimationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C6D162C333F00BE9BCD /* FCEasingAnimationTests.m */; };
+		5DF94C6E162C333F00BE9BCD /* FCBezierFunctionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C6D162C333F00BE9BCD /* FCBezierFunctionTests.m */; };
 		5DF94C77162C51D500BE9BCD /* FCAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C56162C333F00BE9BCD /* FCAnimationFactory.m */; };
 /* End PBXBuildFile section */
 
@@ -64,11 +68,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5D3DEFFA1638D19000DF8A4D /* FCValueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCValueTest.m; sourceTree = "<group>"; };
+		5D05605A163AC88E000EC538 /* FCValueAnimationFactoryTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCValueAnimationFactoryTest.h; sourceTree = "<group>"; };
+		5D05605B163AC88E000EC538 /* FCValueAnimationFactoryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCValueAnimationFactoryTest.m; sourceTree = "<group>"; };
+		5D3DEFFA1638D19000DF8A4D /* FCValueTypeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCValueTypeTest.m; sourceTree = "<group>"; };
 		5D3DF0021639286200DF8A4D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		5D5B4F12163ABE19006CC735 /* FCValueAnimationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCValueAnimationFactory.h; sourceTree = "<group>"; };
+		5D5B4F13163ABE19006CC735 /* FCValueAnimationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCValueAnimationFactory.m; sourceTree = "<group>"; };
 		5D611FEB162F88E7004BB224 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		5D611FED162FA0E3004BB224 /* FCBaseFactoryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCBaseFactoryTests.h; sourceTree = "<group>"; };
-		5D611FEE162FA0E3004BB224 /* FCBaseFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCBaseFactoryTests.m; sourceTree = "<group>"; };
+		5D611FED162FA0E3004BB224 /* FCBasicAnimationFactoryTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCBasicAnimationFactoryTest.h; sourceTree = "<group>"; };
+		5D611FEE162FA0E3004BB224 /* FCBasicAnimationFactoryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCBasicAnimationFactoryTest.m; sourceTree = "<group>"; };
 		5D8469471630319B00E92CDA /* FCAnimationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FCAnimationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D84694B1630319B00E92CDA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5D84694F1630319B00E92CDA /* FCAnimationDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FCAnimationDemo-Info.plist"; sourceTree = "<group>"; };
@@ -83,8 +91,8 @@
 		5D8469601630319B00E92CDA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		5D8469621630319B00E92CDA /* FCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCViewController.h; sourceTree = "<group>"; };
 		5D8469631630319B00E92CDA /* FCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCViewController.m; sourceTree = "<group>"; };
-		5DD44F17162FE620008FB24A /* FCValueAnimationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCValueAnimationFactory.h; sourceTree = "<group>"; };
-		5DD44F18162FE620008FB24A /* FCValueAnimationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCValueAnimationFactory.m; sourceTree = "<group>"; };
+		5DD44F17162FE620008FB24A /* FCBasicAnimationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCBasicAnimationFactory.h; sourceTree = "<group>"; };
+		5DD44F18162FE620008FB24A /* FCBasicAnimationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCBasicAnimationFactory.m; sourceTree = "<group>"; };
 		5DF94C4C162C333F00BE9BCD /* libFCEasingAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFCEasingAnimation.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF94C4F162C333F00BE9BCD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5DF94C53162C333F00BE9BCD /* FCEasingAnimation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FCEasingAnimation-Prefix.pch"; sourceTree = "<group>"; };
@@ -95,8 +103,8 @@
 		5DF94C60162C333F00BE9BCD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		5DF94C68162C333F00BE9BCD /* FCEasingAnimationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FCEasingAnimationTests-Info.plist"; sourceTree = "<group>"; };
 		5DF94C6A162C333F00BE9BCD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		5DF94C6C162C333F00BE9BCD /* FCEasingAnimationTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCEasingAnimationTests.h; sourceTree = "<group>"; };
-		5DF94C6D162C333F00BE9BCD /* FCEasingAnimationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCEasingAnimationTests.m; sourceTree = "<group>"; };
+		5DF94C6C162C333F00BE9BCD /* FCBezierFunctionTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCBezierFunctionTests.h; sourceTree = "<group>"; };
+		5DF94C6D162C333F00BE9BCD /* FCBezierFunctionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCBezierFunctionTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,8 +209,10 @@
 			children = (
 				5DF94C54162C333F00BE9BCD /* FCAnimationFactory.h */,
 				5DF94C56162C333F00BE9BCD /* FCAnimationFactory.m */,
-				5DD44F17162FE620008FB24A /* FCValueAnimationFactory.h */,
-				5DD44F18162FE620008FB24A /* FCValueAnimationFactory.m */,
+				5DD44F17162FE620008FB24A /* FCBasicAnimationFactory.h */,
+				5DD44F18162FE620008FB24A /* FCBasicAnimationFactory.m */,
+				5D5B4F12163ABE19006CC735 /* FCValueAnimationFactory.h */,
+				5D5B4F13163ABE19006CC735 /* FCValueAnimationFactory.m */,
 				5DF94C52162C333F00BE9BCD /* Supporting Files */,
 			);
 			name = FCAnimationFactory;
@@ -220,11 +230,13 @@
 		5DF94C66162C333F00BE9BCD /* FCEasingAnimationTests */ = {
 			isa = PBXGroup;
 			children = (
-				5DF94C6C162C333F00BE9BCD /* FCEasingAnimationTests.h */,
-				5DF94C6D162C333F00BE9BCD /* FCEasingAnimationTests.m */,
-				5D3DEFFA1638D19000DF8A4D /* FCValueTest.m */,
-				5D611FED162FA0E3004BB224 /* FCBaseFactoryTests.h */,
-				5D611FEE162FA0E3004BB224 /* FCBaseFactoryTests.m */,
+				5DF94C6C162C333F00BE9BCD /* FCBezierFunctionTests.h */,
+				5DF94C6D162C333F00BE9BCD /* FCBezierFunctionTests.m */,
+				5D3DEFFA1638D19000DF8A4D /* FCValueTypeTest.m */,
+				5D611FED162FA0E3004BB224 /* FCBasicAnimationFactoryTest.h */,
+				5D611FEE162FA0E3004BB224 /* FCBasicAnimationFactoryTest.m */,
+				5D05605A163AC88E000EC538 /* FCValueAnimationFactoryTest.h */,
+				5D05605B163AC88E000EC538 /* FCValueAnimationFactoryTest.m */,
 				5DF94C67162C333F00BE9BCD /* Supporting Files */,
 			);
 			path = FCEasingAnimationTests;
@@ -368,11 +380,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D84696B163031D800E92CDA /* FCValueAnimationFactory.m in Sources */,
+				5D84696B163031D800E92CDA /* FCBasicAnimationFactory.m in Sources */,
 				5D84696A163031D500E92CDA /* FCAnimationFactory.m in Sources */,
 				5D8469541630319B00E92CDA /* main.m in Sources */,
 				5D8469581630319B00E92CDA /* FCAppDelegate.m in Sources */,
 				5D8469641630319B00E92CDA /* FCViewController.m in Sources */,
+				5D5B4F16163ABE19006CC735 /* FCValueAnimationFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,7 +394,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DF94C57162C333F00BE9BCD /* FCAnimationFactory.m in Sources */,
-				5DD44F19162FE620008FB24A /* FCValueAnimationFactory.m in Sources */,
+				5DD44F19162FE620008FB24A /* FCBasicAnimationFactory.m in Sources */,
+				5D5B4F14163ABE19006CC735 /* FCValueAnimationFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,11 +403,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DF94C6E162C333F00BE9BCD /* FCEasingAnimationTests.m in Sources */,
+				5DF94C6E162C333F00BE9BCD /* FCBezierFunctionTests.m in Sources */,
 				5DF94C77162C51D500BE9BCD /* FCAnimationFactory.m in Sources */,
-				5D611FEF162FA0E3004BB224 /* FCBaseFactoryTests.m in Sources */,
-				5DD44F1A162FE620008FB24A /* FCValueAnimationFactory.m in Sources */,
-				5D3DEFFB1638D19000DF8A4D /* FCValueTest.m in Sources */,
+				5D611FEF162FA0E3004BB224 /* FCBasicAnimationFactoryTest.m in Sources */,
+				5DD44F1A162FE620008FB24A /* FCBasicAnimationFactory.m in Sources */,
+				5D3DEFFB1638D19000DF8A4D /* FCValueTypeTest.m in Sources */,
+				5D5B4F15163ABE19006CC735 /* FCValueAnimationFactory.m in Sources */,
+				5D05605C163AC88E000EC538 /* FCValueAnimationFactoryTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,7 +462,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FCAnimationDemo/FCAnimationDemo-Prefix.pch";
 				INFOPLIST_FILE = "FCAnimationDemo/FCAnimationDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -463,7 +479,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FCAnimationDemo/FCAnimationDemo-Prefix.pch";
 				INFOPLIST_FILE = "FCAnimationDemo/FCAnimationDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

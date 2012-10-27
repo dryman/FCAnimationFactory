@@ -1,5 +1,5 @@
 //
-//  FCEasingAnimation.m
+//  FCAnimationFactory.m
 //  FCEasingAnimation
 //
 
@@ -46,8 +46,8 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
     x_mid = (x1 + x2) / 2.f;
     y_mid = block(x_mid);
     
-    float theta_1 = atan2f(block(x1+h)-block(x1), h);
-    float theta_2 = atan2f(block(x2)-block(x2-h), h);
+    float theta_1 = atan2f(-1.5f*block(x1) + 2.f*block(x1+h) - .5f*block(x1+2.f*h), h);
+    float theta_2 = atan2f( 1.5f*block(x2) - 2.f*block(x2-h) + .5f*block(x2-2.f*h), h);
     float sin_1 = sinf(theta_1), cos_1 = cosf(theta_1);
     float sin_2 = sinf(theta_2), cos_2 = cosf(theta_2);
     
@@ -92,7 +92,7 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
     return factoryCopy;
 }
 
-- (void)setSegmentedDurations:(NSArray *)segmentedDurations
+- (void)setDurations:(NSArray *)segmentedDurations
 {
     // TODO: can add negative asssertions in future
     NSNumber* sum = [segmentedDurations valueForKeyPath:@"@sum.floatValue"];
@@ -110,7 +110,7 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
     self.totalDuration = sum;
 }
 
-- (NSArray*)segmentedDurations
+- (NSArray*)durations
 {
     NSUInteger count = self.normalizedTimings.count - 1;
     float totalDuration = self.totalDuration.floatValue;
@@ -129,6 +129,77 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
 {
     NSAssert(0, @"Overwrite this method in subclass");
     return [CAKeyframeAnimation animation]; //cheat compiler warnings
+}
+
+- (id(^)(float))makeValueScalingBlockFromValue:(id)fromValue ToValue:(id)toValue
+{
+    if (fromValue==nil || toValue==nil) NSAssert(0, @"fromValue and toValue must not be nil");
+    
+    id value = fromValue;
+    
+    /*
+     * single float is handled in NSNumber
+     */
+    if ([value isKindOfClass:[NSNumber class]]) {
+        float v1 = [(NSNumber*)fromValue floatValue];
+        float v2 = [(NSNumber*)toValue floatValue];
+        float diffValue = v2 - v1;
+        return ^id(float factor){
+            float result = factor*diffValue + v1;
+            return [NSNumber numberWithFloat:result];
+        };
+    }
+    
+    /*
+     * NSValue handles CGPoint, CGSize, CGRect, and CATransform3D
+     */
+    if ([value isKindOfClass:[NSValue class]]) {
+        const char* objCType = [value objCType];
+        if (strcmp(objCType, @encode(CGPoint))) {
+            CGPoint pt0, pt1;
+            [(NSValue*)fromValue getValue:&pt0];
+            [(NSValue*)toValue getValue:&pt1];
+            return ^id(float factor){
+                float x = (pt1.x - pt0.x)*factor + pt0.x;
+                float y = (pt1.y - pt0.y)*factor + pt0.y;
+                return [NSValue valueWithCGPoint:CGPointMake(x, y)];
+            };
+        } else if (strcmp(objCType, @encode(CGSize))) {
+            CGSize size0, size1;
+            [(NSValue*)fromValue getValue:&size0];
+            [(NSValue*)toValue getValue:&size1];
+            return ^id(float factor){
+                float w = (size1.width - size0.width)*factor + size0.width;
+                float h = (size1.height - size0.height)*factor + size0.height;
+                return [NSValue valueWithCGSize:CGSizeMake(w, h)];
+            };
+        } else if (strcmp(objCType, @encode(CGRect))) {
+            CGRect rect0, rect1;
+            [(NSValue*)fromValue getValue:&rect0];
+            [(NSValue*)toValue getValue:&rect1];
+            return ^id(float factor){
+                float x = (rect1.origin.x - rect0.origin.x)*factor + rect0.origin.x;
+                float y = (rect1.origin.y - rect0.origin.y)*factor + rect0.origin.y;
+                float w = (rect1.size.width - rect0.size.width)*factor + rect0.size.width;
+                float h = (rect1.size.height - rect0.size.height)*factor + rect0.size.height;
+                return [NSValue valueWithCGRect:CGRectMake(x, y, w, h)];
+            };
+        } else if (strcmp(objCType, @encode(CATransform3D))) {
+            NSAssert(0, @"CATransform3D type currently not supported");
+        } else {
+            NSAssert(0, @"Unknown NSValue type %s",objCType);
+        }
+    }
+    
+    if (CFGetTypeID((__bridge CFTypeRef)value) == CGColorGetTypeID()) {
+        NSAssert(0, @"CGColorRef type currently not supported");
+    }
+    if (CFGetTypeID((__bridge CFTypeRef)value) == CGImageGetTypeID()) {
+        NSAssert(0, @"CGImageRef should be handled in another class");
+    }
+    
+    NSAssert(0, @"value type unknown");
+    return ^id(float factor){ return nil;};    // turn off compiler warnings
 }
 
 @end

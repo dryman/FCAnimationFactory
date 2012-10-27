@@ -1,5 +1,5 @@
 //
-//  FCValueAnimationFactory.h
+//  FCValueAnimationFactoryTest.h
 //  FCEasingAnimation
 //
 
@@ -32,14 +32,8 @@
  
  */
 
-#import "FCAnimationFactory.h"
+#import <SenTestingKit/SenTestingKit.h>
 
-@interface FCValueAnimationFactory : FCAnimationFactory <NSCopying>
-{
-    NSArray* _values;
-}
-
-@property (copy) NSArray* values;
-
+@interface FCValueAnimationFactoryTest : SenTestCase
 
 @end
