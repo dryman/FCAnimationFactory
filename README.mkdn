@@ -59,6 +59,8 @@ Clone the project and see example usage in `FCAnimationDemo` target.
 * `timingBlocks` An array of objective-c blocks. The type of the blocks is `float(^)(float)`.
 * `fromValue` An `id` value, can be `NSNumbers` or `NSValues`.
 * `toValue` An `id` value, can be `NSNumbers` or `NSValues`.
+* `totalDurations` An `NSNumber numberWithfloat` which present the total
+  duration presented in seconds.
 
 ### Methods
 * `-(CAKeyFrameAnimation*)animation;` Create an animation from factory.
