@@ -235,28 +235,26 @@
 - (void)testCGColorOwnerShip
 {
     CGColorRef redColor, greenColor;
-    @autoreleasepool {
-        __autoreleasing UIColor * redUIColor = [UIColor redColor];
-        __autoreleasing UIColor * greenUIColor = [UIColor greenColor];
-        redColor = CGColorRetain(redUIColor.CGColor);
-        greenColor = CGColorRetain(greenUIColor.CGColor);
-    }
-    // by sementic, it should be 1, but clang is too smart to retain CGColor in UIColor...
-    STAssertEquals(CFGetRetainCount(redColor), 2L, @"retain count owned by us and UIColor?");
-    STAssertEquals(CFGetRetainCount(greenColor), 2L, @"retain count owned by us and UIColor?");
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGFloat redComp[4] = {1.f, 0.f, 0.f, 1.f};
+    CGFloat greenComp[4] = {0.f, 1.f, 0.f, 1.f};
+    redColor = CGColorCreate(colorSpace, redComp);
+    greenColor = CGColorCreate(colorSpace, greenComp);
+    CGColorSpaceRelease(colorSpace);
+
+    
+    STAssertEquals(CFGetRetainCount(redColor), 1L, @"retain count owned by us");
+    STAssertEquals(CFGetRetainCount(greenColor), 1L, @"retain count owned by us");
     
     id(^scalingBlock)(float) = [factory makeValueScalingBlockFromValue:(__bridge id)redColor ToValue:(__bridge id)greenColor];
-    STAssertEquals(CFGetRetainCount(redColor), 2L, @"retain count owned by block and us");
-    STAssertEquals(CFGetRetainCount(greenColor), 2L, @"retain count owned block and us");
+    CGColorRelease(redColor);
+    CGColorRelease(greenColor);
     
     NSArray *arr = [NSArray arrayWithObject:scalingBlock(0.5f)];
     CFTypeRef ref = (__bridge CFTypeRef)[arr objectAtIndex:0];
     STAssertEquals(CFGetRetainCount(ref), 2L, @"retain count owned by arr and block");
-    
-    CGColorRelease(redColor);
-    CGColorRelease(greenColor);
-    
-    // when out of scope, block will release the returned color too...
+    STAssertEquals(CFGetRetainCount(redColor), 1L, @"retain count owned by block");
+    STAssertEquals(CFGetRetainCount(greenColor), 1L, @"retain count owned block");
 }
 
 @end
