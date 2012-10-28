@@ -41,9 +41,9 @@ factory.timingBlocks = @[
 ];
 factory.durations = @[ @1.f, @1.5f];
 factory.values = @[
-    [NSValue valueWithCGPoint:CGPointMake(0.f, 160.f)],    // start from edge of screen
-    [NSValue valueWithCGPoint:CGPointMake(350.f, 160.f)],  // overshoot to outside of screen
-    [NSValue valueWithCGPoint:CGPointMake(160.f, 160.f)]   // end at middle of screen
+    [NSValue valueWithCGPoint:CGPointMake(0.f, 160.f)],    // start from edge of the screen
+    [NSValue valueWithCGPoint:CGPointMake(350.f, 160.f)],  // overshoot to outside of the screen
+    [NSValue valueWithCGPoint:CGPointMake(160.f, 160.f)]   // end at middle of the screen
 ];
 CAKeyframeAnimation *animation = [factory animation];
 animation.keyPath = @"position";
@@ -105,7 +105,7 @@ Use `[NSNumber numberWithFloat: myFloat]` or objective-c literal `@3.5f` for
 `fromValue` and `toValue`.
 
 ```objc
-CAKeyframeAnimation *animation = [FCValueAnimationFactory animationWithName:@"elasticEaseOut"
+CAKeyframeAnimation *animation = [FCBasicAnimationFactory animationWithName:@"elasticEaseOut"
                                                                   fromValue:@1.f
                                                                     toValue:@0.f
                                                                    duration:@2.5f];
