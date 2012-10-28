@@ -192,11 +192,10 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
     }
     
     if (CFGetTypeID((__bridge CFTypeRef)value) == CGColorGetTypeID()) {
-        CGColorRef fromColor = (__bridge CGColorRef)fromValue;
-        CGColorRef toColor = (__bridge CGColorRef)toValue;
-        
         return ^id(float factor){
-            size_t num = CGColorGetNumberOfComponents(fromColor);      // fromColor & toColor retained
+            CGColorRef fromColor = (__bridge CGColorRef)fromValue; 
+            CGColorRef toColor = (__bridge CGColorRef)toValue;
+            size_t num = CGColorGetNumberOfComponents(fromColor);
             const CGFloat *fromComp = CGColorGetComponents(fromColor);
             const CGFloat *toComp = CGColorGetComponents(toColor);
             
@@ -205,6 +204,7 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
                 newComp[i] = (toComp[i] - fromComp[i]) * factor + fromComp[i];
             }
             CGColorRef retColor = CGColorCreate(CGColorGetColorSpace(fromColor), newComp);
+            
             return (__bridge_transfer id)retColor;
         };
     }

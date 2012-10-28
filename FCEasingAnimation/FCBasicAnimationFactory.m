@@ -53,8 +53,8 @@
 }
 
 + (CAKeyframeAnimation*) animationWithName:(NSString*)name
-                                 fromValue:(NSNumber*)fv
-                                   toValue: (NSNumber*)tv
+                                 fromValue:(id)fv
+                                   toValue: (id)tv
                                   duration:(NSNumber*)duration
 {
     FCBasicAnimationFactory *factory = [[FCBasicAnimationFactory animationDictionary] valueForKey:name];

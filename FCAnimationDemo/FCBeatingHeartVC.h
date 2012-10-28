@@ -1,11 +1,11 @@
 //
-//  FCViewController.h
-//  FCAnimationDemo
+//  FCBeatingHeartVC.h
+//  FCEasingAnimation
 //
 
 /*
  
- Created by Felix Chern on 12/10/18.
+ Created by Felix Chern on 12/10/28.
  Copyright (c) 2012 Felix R. Chern. All rights reserved. (BSD LICENSE)
  
  Redistribution and use in source and binary forms, with or without
@@ -32,13 +32,9 @@
  
  */
 
+
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
 
-@interface FCViewController : UIViewController
-
-@property (nonatomic, strong) CALayer* layer;
-@property (nonatomic, assign) BOOL atTop;
-- (IBAction)buttonPressed:(id)sender;
+@interface FCBeatingHeartVC : UIViewController
 
 @end
