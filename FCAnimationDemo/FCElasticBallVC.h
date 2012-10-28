@@ -1,11 +1,11 @@
 //
-//  FCValueAnimationFactory.h
-//  FCEasingAnimation
+//  FCViewController.h
+//  FCAnimationDemo
 //
 
 /*
  
- Created by Felix Chern on 12/10/26.
+ Created by Felix Chern on 12/10/18.
  Copyright (c) 2012 Felix R. Chern. All rights reserved. (BSD LICENSE)
  
  Redistribution and use in source and binary forms, with or without
@@ -32,14 +32,13 @@
  
  */
 
-#import "FCAnimationFactory.h"
+#import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
-@interface FCValueAnimationFactory : FCAnimationFactory <NSCopying>
-{
-    NSArray* _values;
-}
+@interface FCElasticBallVC : UIViewController
 
-@property (nonatomic, copy) NSArray* values;
-
+@property (nonatomic, strong) CALayer* layer;
+@property (nonatomic, assign) BOOL atTop;
+- (IBAction)buttonPressed:(id)sender;
 
 @end

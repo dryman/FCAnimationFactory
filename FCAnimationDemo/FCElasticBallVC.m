@@ -32,14 +32,14 @@
  
  */
 
-#import "FCViewController.h"
+#import "FCElasticBallVC.h"
 #import "FCBasicAnimationFactory.h"
 
-@interface FCViewController ()
+@interface FCElasticBallVC ()
 
 @end
 
-@implementation FCViewController
+@implementation FCElasticBallVC
 
 - (void)viewDidLoad
 {
@@ -49,8 +49,8 @@
     _layer.bounds = CGRectMake(0, 0, 30, 30);
     _layer.position = CGPointMake(160.f, 50.f);
     _layer.cornerRadius = 15.f;
-    _layer.borderWidth = 3.f;
-    _layer.borderColor = [[[UIColor redColor] colorWithAlphaComponent:.5f] CGColor];
+//    _layer.borderWidth = 3.f;
+//    _layer.borderColor = [[[UIColor redColor] colorWithAlphaComponent:.5f] CGColor];
     self.atTop = YES;
     
     [self.view.layer addSublayer:_layer];
@@ -64,10 +64,22 @@
 
 - (IBAction)buttonPressed:(id)sender
 {
+    UIColor * __autoreleasing redColor = [[UIColor redColor] colorWithAlphaComponent:.2f];
+    UIColor * __autoreleasing greenColor = [[UIColor greenColor] colorWithAlphaComponent:.2f];
+    CGColorRef redRef = CGColorRetain(redColor.CGColor);
+    CGColorRef greenRef = CGColorRetain(greenColor.CGColor);
+    
     if (self.atTop) {
         [CATransaction begin];
         [CATransaction setDisableActions:YES];
+        _layer.backgroundColor = greenRef;
         _layer.position = CGPointMake(160.f, 300.f);
+        CAKeyframeAnimation *colorAni = [FCBasicAnimationFactory animationWithName:@"circularEaseOut"
+                                                                         fromValue:(__bridge id)redRef
+                                                                           toValue:(__bridge id)greenRef
+                                                                          duration:@1.5f];
+        colorAni.keyPath = @"backgroundColor";
+        [_layer addAnimation:colorAni forKey:@"mycolorKey"];
         CAKeyframeAnimation *animation = [FCBasicAnimationFactory animationWithName:@"elasticEaseOut"
                                                                           fromValue:@50.f
                                                                             toValue:@300.f
@@ -78,15 +90,24 @@
     } else {
         [CATransaction begin];
         [CATransaction setDisableActions:YES];
+        _layer.backgroundColor = redRef;
         _layer.position = CGPointMake(160.f, 50.f);
-        CAKeyframeAnimation *animation = [FCBasicAnimationFactory animationWithName:@"circularEaseOut"
+        CAKeyframeAnimation *colorAni = [FCBasicAnimationFactory animationWithName:@"circularEaseOut"
+                                                                         fromValue:(__bridge id)greenRef
+                                                                           toValue:(__bridge id)redRef
+                                                                          duration:@1.5f];
+        colorAni.keyPath = @"backgroundColor";
+        [_layer addAnimation:colorAni forKey:@"mycolorKey"];
+        CAKeyframeAnimation *animation = [FCBasicAnimationFactory animationWithName:@"elasticEaseOut"
                                                                           fromValue:@300.f
                                                                             toValue:@50.f
-                                                                           duration:@1.f];
+                                                                           duration:@1.5f];
         animation.keyPath = @"position.y";
         [_layer addAnimation:animation forKey:@"myUselessKey"];
         [CATransaction commit];
     }
     self.atTop = !self.atTop;
+    CGColorRelease(redRef);
+    CGColorRelease(greenRef);
 }
 @end

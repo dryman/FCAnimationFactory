@@ -48,10 +48,10 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
     NSNumber* _totalDuration;
 }
 
-@property (copy) NSArray* normalizedTimings;
-@property (copy) NSArray* durations;
-@property (copy) NSArray* timingBlocks;
-@property (copy) NSNumber* totalDuration;
+@property (nonatomic, copy) NSArray* normalizedTimings;
+@property (nonatomic, copy) NSArray* durations;
+@property (nonatomic, copy) NSArray* timingBlocks;
+@property (nonatomic, retain) NSNumber* totalDuration;
 
 // abstracted method, need to be implemented in subclass
 // may change to protocol in future

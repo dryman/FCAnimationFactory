@@ -42,11 +42,11 @@
     id _fromValue;
     id _toValue;
 }
-@property (copy) NSArray* normalizedValues;
-@property (copy) id fromValue;
-@property (copy) id toValue;
+@property (nonatomic, copy) NSArray* normalizedValues;
+@property (nonatomic, retain) id fromValue;
+@property (nonatomic, retain) id toValue;
 
-+ (CAKeyframeAnimation*) animationWithName:(NSString*)name fromValue:(NSNumber*)fv toValue: (NSNumber*)tv duration:(NSNumber*)duration;
++ (CAKeyframeAnimation*) animationWithName:(NSString*)name fromValue:(id)fv toValue: (id)tv duration:(NSNumber*)duration;
 
 
 @end

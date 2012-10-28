@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5D05605C163AC88E000EC538 /* FCValueAnimationFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D05605B163AC88E000EC538 /* FCValueAnimationFactoryTest.m */; };
+		5D0C4A26163D188300D3D749 /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D0C4A24163D188300D3D749 /* heart.png */; };
+		5D0C4A27163D188300D3D749 /* heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D0C4A25163D188300D3D749 /* heart@2x.png */; };
+		5D0C4A2A163D18E900D3D749 /* FCBeatingHeartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D0C4A29163D18E900D3D749 /* FCBeatingHeartVC.m */; };
 		5D3DEFFB1638D19000DF8A4D /* FCValueTypeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3DEFFA1638D19000DF8A4D /* FCValueTypeTest.m */; };
 		5D3DF0011638EF2E00DF8A4D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D84694B1630319B00E92CDA /* CoreGraphics.framework */; };
 		5D3DF0031639286200DF8A4D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D3DF0021639286200DF8A4D /* Icon.png */; };
@@ -26,7 +29,7 @@
 		5D84695C1630319B00E92CDA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D84695B1630319B00E92CDA /* Default@2x.png */; };
 		5D84695E1630319B00E92CDA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D84695D1630319B00E92CDA /* Default-568h@2x.png */; };
 		5D8469611630319B00E92CDA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D84695F1630319B00E92CDA /* MainStoryboard.storyboard */; };
-		5D8469641630319B00E92CDA /* FCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D8469631630319B00E92CDA /* FCViewController.m */; };
+		5D8469641630319B00E92CDA /* FCElasticBallVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D8469631630319B00E92CDA /* FCElasticBallVC.m */; };
 		5D846969163031CA00E92CDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D611FEB162F88E7004BB224 /* QuartzCore.framework */; };
 		5D84696A163031D500E92CDA /* FCAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF94C56162C333F00BE9BCD /* FCAnimationFactory.m */; };
 		5D84696B163031D800E92CDA /* FCBasicAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD44F18162FE620008FB24A /* FCBasicAnimationFactory.m */; };
@@ -70,6 +73,10 @@
 /* Begin PBXFileReference section */
 		5D05605A163AC88E000EC538 /* FCValueAnimationFactoryTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCValueAnimationFactoryTest.h; sourceTree = "<group>"; };
 		5D05605B163AC88E000EC538 /* FCValueAnimationFactoryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCValueAnimationFactoryTest.m; sourceTree = "<group>"; };
+		5D0C4A24163D188300D3D749 /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = heart.png; path = images/heart.png; sourceTree = SOURCE_ROOT; };
+		5D0C4A25163D188300D3D749 /* heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "heart@2x.png"; path = "images/heart@2x.png"; sourceTree = SOURCE_ROOT; };
+		5D0C4A28163D18E900D3D749 /* FCBeatingHeartVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCBeatingHeartVC.h; sourceTree = "<group>"; };
+		5D0C4A29163D18E900D3D749 /* FCBeatingHeartVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCBeatingHeartVC.m; sourceTree = "<group>"; };
 		5D3DEFFA1638D19000DF8A4D /* FCValueTypeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCValueTypeTest.m; sourceTree = "<group>"; };
 		5D3DF0021639286200DF8A4D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		5D5B4F12163ABE19006CC735 /* FCValueAnimationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCValueAnimationFactory.h; sourceTree = "<group>"; };
@@ -89,8 +96,8 @@
 		5D84695B1630319B00E92CDA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		5D84695D1630319B00E92CDA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5D8469601630319B00E92CDA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		5D8469621630319B00E92CDA /* FCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCViewController.h; sourceTree = "<group>"; };
-		5D8469631630319B00E92CDA /* FCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCViewController.m; sourceTree = "<group>"; };
+		5D8469621630319B00E92CDA /* FCElasticBallVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCElasticBallVC.h; sourceTree = "<group>"; };
+		5D8469631630319B00E92CDA /* FCElasticBallVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCElasticBallVC.m; sourceTree = "<group>"; };
 		5DD44F17162FE620008FB24A /* FCBasicAnimationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCBasicAnimationFactory.h; sourceTree = "<group>"; };
 		5DD44F18162FE620008FB24A /* FCBasicAnimationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCBasicAnimationFactory.m; sourceTree = "<group>"; };
 		5DF94C4C162C333F00BE9BCD /* libFCEasingAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFCEasingAnimation.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,8 +156,10 @@
 				5D8469561630319B00E92CDA /* FCAppDelegate.h */,
 				5D8469571630319B00E92CDA /* FCAppDelegate.m */,
 				5D84695F1630319B00E92CDA /* MainStoryboard.storyboard */,
-				5D8469621630319B00E92CDA /* FCViewController.h */,
-				5D8469631630319B00E92CDA /* FCViewController.m */,
+				5D8469621630319B00E92CDA /* FCElasticBallVC.h */,
+				5D8469631630319B00E92CDA /* FCElasticBallVC.m */,
+				5D0C4A28163D18E900D3D749 /* FCBeatingHeartVC.h */,
+				5D0C4A29163D18E900D3D749 /* FCBeatingHeartVC.m */,
 				5D84694E1630319B00E92CDA /* Supporting Files */,
 			);
 			path = FCAnimationDemo;
@@ -159,6 +168,8 @@
 		5D84694E1630319B00E92CDA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5D0C4A24163D188300D3D749 /* heart.png */,
+				5D0C4A25163D188300D3D749 /* heart@2x.png */,
 				5D3DF0021639286200DF8A4D /* Icon.png */,
 				5D84694F1630319B00E92CDA /* FCAnimationDemo-Info.plist */,
 				5D8469501630319B00E92CDA /* InfoPlist.strings */,
@@ -345,6 +356,8 @@
 				5D84695C1630319B00E92CDA /* Default@2x.png in Resources */,
 				5D84695E1630319B00E92CDA /* Default-568h@2x.png in Resources */,
 				5D8469611630319B00E92CDA /* MainStoryboard.storyboard in Resources */,
+				5D0C4A26163D188300D3D749 /* heart.png in Resources */,
+				5D0C4A27163D188300D3D749 /* heart@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,8 +397,9 @@
 				5D84696A163031D500E92CDA /* FCAnimationFactory.m in Sources */,
 				5D8469541630319B00E92CDA /* main.m in Sources */,
 				5D8469581630319B00E92CDA /* FCAppDelegate.m in Sources */,
-				5D8469641630319B00E92CDA /* FCViewController.m in Sources */,
+				5D8469641630319B00E92CDA /* FCElasticBallVC.m in Sources */,
 				5D5B4F16163ABE19006CC735 /* FCValueAnimationFactory.m in Sources */,
+				5D0C4A2A163D18E900D3D749 /* FCBeatingHeartVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
