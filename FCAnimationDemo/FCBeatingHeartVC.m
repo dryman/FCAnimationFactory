@@ -35,6 +35,7 @@
 
 #import "FCBeatingHeartVC.h"
 #import <QuartzCore/QuartzCore.h>
+#import "FCValueAnimationFactory.h"
 
 @interface FCBeatingHeartVC ()
 
@@ -54,32 +55,76 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	UIImage *heartImg = [UIImage imageNamed:@"heart.png"];
-    CALayer *heartLayer = [CALayer layer];
-    CALayer *maskLayer = [CALayer layer];
-    maskLayer.frame = CGRectMake(0, 0, 70, 70);
-    maskLayer.bounds = CGRectMake(10,10,50,50);
-    maskLayer.anchorPoint = CGPointMake(.5f, .5f);
-    maskLayer.contents = (__bridge id)([heartImg CGImage]);
-    heartLayer.backgroundColor = [[[UIColor redColor] colorWithAlphaComponent:.5f] CGColor];
-    heartLayer.mask = maskLayer;
-
     
-    CGRect bounds = self.view.bounds;
+    CGFloat size = 130.f;
+	UIImage *heartImg = [UIImage imageNamed:@"heart.png"];
+    
+    CALayer *heartLayer = [CALayer layer];
+    heartLayer.backgroundColor = [[[UIColor redColor] colorWithAlphaComponent:.5f] CGColor];
+    heartLayer.frame = CGRectMake(0, 0, size, size);
+    
+    CALayer *maskLayer = [CALayer layer];
+    maskLayer.contentsScale = [[UIScreen mainScreen] scale];
+    maskLayer.frame = CGRectMake(0, 0, size, size);
+    maskLayer.bounds = CGRectMake(40, 40, 50, 50);
+    maskLayer.contents = (__bridge id)([heartImg CGImage]);
+    
+    heartLayer.mask = maskLayer;
+    
+    CAReplicatorLayer *repLayer = [CAReplicatorLayer layer];
+    [repLayer setContentsScale:[[UIScreen mainScreen] scale]];
+    repLayer.bounds = CGRectMake(0, 0, size, size);
+    repLayer.anchorPoint = CGPointMake(.5f, 0.f);
+    CGFloat y = self.view.bounds.size.height;
     CGFloat dy = self.navigationController.navigationBar.bounds.size.height;
-    heartLayer.frame = CGRectMake((bounds.size.width-70.f)/2.f, (bounds.size.height-dy-70.f)/2.f, 70, 70);
-    [self.view.layer addSublayer:heartLayer];
+    repLayer.position = CGPointMake(160, (y-dy)/2.f-size);
+    repLayer.instanceCount = 2;
+    
+    CATransform3D transform = CATransform3DScale(CATransform3DIdentity, 1, -1, 1);
+    transform = CATransform3DTranslate(transform, 0, -size*2.f, 1.0);
+    repLayer.instanceTransform = transform;
+    
+    CAGradientLayer *gradLayer = [CAGradientLayer layer];
+    gradLayer.contentsScale = [[UIScreen mainScreen] scale];
+    gradLayer.anchorPoint = CGPointMake(.5, 0);
+    gradLayer.colors = @[
+        (__bridge id)[[[UIColor whiteColor] colorWithAlphaComponent:.25f] CGColor],
+        (__bridge id)[[UIColor whiteColor] CGColor]
+    ];
+    gradLayer.bounds = CGRectMake(0, 0, repLayer.frame.size.width, size);
+    gradLayer.position = CGPointMake(self.view.frame.size.width/2.f, (y-dy)/2.f);
+    gradLayer.zPosition = 1;
+    
+    [repLayer addSublayer:heartLayer];
+    [self.view.layer addSublayer:repLayer];
+    [self.view.layer addSublayer:gradLayer];
     
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
-    CABasicAnimation* ani = [CABasicAnimation animationWithKeyPath:@"bounds.size"];
-    ani.fromValue = [NSValue valueWithCGSize:CGSizeMake(50, 50)];
-    ani.toValue = [NSValue valueWithCGSize:CGSizeMake(70, 70)];
-    ani.duration = 1.f;
+    FCValueAnimationFactory *aniFac = [[FCValueAnimationFactory alloc] init];
+    aniFac.values = @[
+        [NSValue valueWithCGSize:CGSizeMake(50, 50)],
+        [NSValue valueWithCGSize:CGSizeMake(80, 80)],
+        [NSValue valueWithCGSize:CGSizeMake(60, 60)],
+        [NSValue valueWithCGSize:CGSizeMake(90, 90)],
+        [NSValue valueWithCGSize:CGSizeMake(50, 50)]
+    ];
+    aniFac.timingBlocks = @[
+        ^(float x){return x*x*x;},
+        ^(float x){return 1.f +(x-1.f)*(x-1.f)*(x-1.f);},
+        ^(float x){return x*x*x;},
+        ^(float x){return sqrtf((2.f - x)*x);}
+    ];
+    aniFac.durations = @[
+        @.5f,
+        @.15f,
+        @.15f,
+        @.75f
+    ];
+    CAKeyframeAnimation *ani = [aniFac animation];
+    ani.keyPath = @"bounds.size";
     ani.repeatCount = HUGE_VALF;
-    ani.autoreverses = YES;
-    
-    //[heartLayer addAnimation:ani forKey:@"beating"];
+
     [maskLayer addAnimation:ani forKey:@"beating"];
     [CATransaction commit];
 }

@@ -87,6 +87,7 @@
     animation.keyTimes = keyTimes;
     animation.timingFunctions = timingFunctions;
     animation.values = resultValues;
+    animation.duration = total_duration;
     return animation;
 }
 
