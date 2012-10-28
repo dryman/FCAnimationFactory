@@ -39,6 +39,6 @@
 
 @property (nonatomic, strong) CALayer* layer;
 @property (nonatomic, assign) BOOL atTop;
-- (IBAction)buttonPressed:(id)sender;
+
 
 @end

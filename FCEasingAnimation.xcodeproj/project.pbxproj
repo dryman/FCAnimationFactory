@@ -11,6 +11,8 @@
 		5D0C4A26163D188300D3D749 /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D0C4A24163D188300D3D749 /* heart.png */; };
 		5D0C4A27163D188300D3D749 /* heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D0C4A25163D188300D3D749 /* heart@2x.png */; };
 		5D0C4A2A163D18E900D3D749 /* FCBeatingHeartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D0C4A29163D18E900D3D749 /* FCBeatingHeartVC.m */; };
+		5D0C4A2D163D672000D3D749 /* touch.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D0C4A2B163D672000D3D749 /* touch.png */; };
+		5D0C4A2E163D672000D3D749 /* touch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D0C4A2C163D672000D3D749 /* touch@2x.png */; };
 		5D3DEFFB1638D19000DF8A4D /* FCValueTypeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3DEFFA1638D19000DF8A4D /* FCValueTypeTest.m */; };
 		5D3DF0011638EF2E00DF8A4D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D84694B1630319B00E92CDA /* CoreGraphics.framework */; };
 		5D3DF0031639286200DF8A4D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D3DF0021639286200DF8A4D /* Icon.png */; };
@@ -77,6 +79,8 @@
 		5D0C4A25163D188300D3D749 /* heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "heart@2x.png"; path = "images/heart@2x.png"; sourceTree = SOURCE_ROOT; };
 		5D0C4A28163D18E900D3D749 /* FCBeatingHeartVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCBeatingHeartVC.h; sourceTree = "<group>"; };
 		5D0C4A29163D18E900D3D749 /* FCBeatingHeartVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCBeatingHeartVC.m; sourceTree = "<group>"; };
+		5D0C4A2B163D672000D3D749 /* touch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = touch.png; path = images/touch.png; sourceTree = SOURCE_ROOT; };
+		5D0C4A2C163D672000D3D749 /* touch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "touch@2x.png"; path = "images/touch@2x.png"; sourceTree = SOURCE_ROOT; };
 		5D3DEFFA1638D19000DF8A4D /* FCValueTypeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCValueTypeTest.m; sourceTree = "<group>"; };
 		5D3DF0021639286200DF8A4D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		5D5B4F12163ABE19006CC735 /* FCValueAnimationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCValueAnimationFactory.h; sourceTree = "<group>"; };
@@ -168,6 +172,8 @@
 		5D84694E1630319B00E92CDA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5D0C4A2B163D672000D3D749 /* touch.png */,
+				5D0C4A2C163D672000D3D749 /* touch@2x.png */,
 				5D0C4A24163D188300D3D749 /* heart.png */,
 				5D0C4A25163D188300D3D749 /* heart@2x.png */,
 				5D3DF0021639286200DF8A4D /* Icon.png */,
@@ -358,6 +364,8 @@
 				5D8469611630319B00E92CDA /* MainStoryboard.storyboard in Resources */,
 				5D0C4A26163D188300D3D749 /* heart.png in Resources */,
 				5D0C4A27163D188300D3D749 /* heart@2x.png in Resources */,
+				5D0C4A2D163D672000D3D749 /* touch.png in Resources */,
+				5D0C4A2E163D672000D3D749 /* touch@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
