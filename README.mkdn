@@ -1,4 +1,4 @@
-# FCAnimationFactory (Alpha stage)
+# FCAnimationFactory 0.3 (beta)
 
 `FCAnimationFactory` is an objective-c library for generating
 `CAKeyFrameAnimation` with custom timing functions including cubic, quadratic,
@@ -19,13 +19,15 @@ High level animation API:
 ```objc
 [CATransaction begin];
 [CATransaction setDisableActions:YES];
-_layer.position = CGPointMake(160.f, 300.f);
-CAKeyframeAnimation *animation = [FCBasicAnimationFactory animationWithName:@"elasticEaseOut"
-                                                                  fromValue:[NSValue valueWithCGPoint:CGPointMake(320,50)]
-                                                                    toValue:[NSValue valueWithCGPoint:CGPointMake(160,300)]
-                                                                   duration:@2.5f];
-animation.keyPath = @"position";
-[_layer addAnimation:animation forKey:@"positionKey"];
+CAKeyframeAnimation *animation = 
+    [FCBasicAnimationFactory animationWithName:@"cubicEaseOut"
+                                     fromValue:(__bridge id)[[UIColor redColor] CGColor]
+                                       toValue:(__bridge id)[[UIColor greenColor] CGColor]
+                                      duration:@2.5f];
+animation.keyPath = @"backgroundColor";
+animation.repeatCount = HUGE_VALF;      // repeat forever
+animation.autoreverses = YES;
+[_layer addAnimation:animation forKey:@"animateColor"];
 [CATransaction commit];
 ```
 
@@ -70,6 +72,7 @@ See [Timing block/function names](#timing-blockfunction-names) for available nam
 ## `FCValueAnimationFactory` class
 ### Properties
 * `timingBlocks` An array of objective-c blocks. The type of the blocks is `float(^)(float)`.
+ A `timingBlock` must start with 0 and end with 1.
 * `values` An array of `id` values, which can be `NSNumbers` or `NSValues`.
 * `durations` An array of `NSNumber numberWithFloat` of each time segments
   presented in seconds.
@@ -130,9 +133,23 @@ Use `[NSValue valueWithCGSize: myOffset]`.
 
 Use `[NSValue valueWithCGRect: bounds]`.
 
+### Colors
+
+* `backgroundColor`
+* `borderColor`
+* `shadowColor`
+
+Remember to cast `CGColorRef` into `id` with toll-free bridging.
+
+```objc
+UIColor * __autoreleasing redColor = [[UIColor redColor] colorWithAlphaComponent:.5f];
+CGColorRef redRef = CFRetain([redColor CGColor]);
+facotory.fromValue = (__bridge id)redRef;
+CFRelease(redRef);
+```
+
 ## Animatable properties under cunstruction
 
-* `backgroundColor`, `borderColor`, and `shadowColor`.
 * `transform` and `sublayerTransform`
 * `countents` I'll use CATransition to made another class to animate contents.
 * `path` property in `CAKeyFrameAnimation`.
@@ -200,7 +217,7 @@ The project is still under heavy development. Pull requests are welcome ;)
 * `FCPathAnimationFactory` can create cubic path on `position` or other 2D
   movement animation.
 
-* Draw timing block diagrams
+* Draw timing block diagrams. Write some timingBlocks examples.
 
 * Write example of how `doubleSided` property works with other animations.
 
@@ -208,6 +225,7 @@ The project is still under heavy development. Pull requests are welcome ;)
 
 # LICENSE
 
+<pre>
 Created by Felix Chern on 12/10/15.
 Copyright (c) 2012 Felix R. Chern. All rights reserved. (BSD LICENSE)
 
@@ -234,6 +252,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</pre>
  
 # SEE ALSO
 
