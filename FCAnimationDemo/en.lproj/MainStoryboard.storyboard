@@ -5,26 +5,26 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller - Root View Controller-->
+        <!--Table View Controller - Animation Demo-->
         <scene sceneID="zEM-Qp-cfT">
             <objects>
                 <tableViewController id="7FW-Rc-iSO" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="FS3-mr-zSE">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="FS3-mr-zSE">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection id="a5n-xG-VJU">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="DIE-SS-JVE" style="IBUITableViewCellStyleDefault" id="JwV-xv-CkR">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="10" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                            <rect key="frame" x="10" y="1" width="280" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Ball with elastic easing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DIE-SS-JVE">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                                    <rect key="frame" x="10" y="0.0" width="260" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -38,14 +38,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="dA9-Xg-Iky" style="IBUITableViewCellStyleDefault" id="l2Y-VZ-JSF">
-                                        <rect key="frame" x="0.0" y="44" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="55" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                            <rect key="frame" x="10" y="0.0" width="280" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Beating Heart" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dA9-Xg-Iky">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                                    <rect key="frame" x="10" y="0.0" width="260" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -58,20 +58,11 @@
                                             <segue destination="V2Q-cO-xBB" kind="push" id="kXT-w3-O8f"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="NWE-hW-xaX">
-                                        <rect key="frame" x="0.0" y="88" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="yLd-uo-XpC"/>
+                    <navigationItem key="navigationItem" title="Animation Demo" id="yLd-uo-XpC"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9gj-XK-9iu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -130,9 +121,6 @@
         </class>
         <class className="FCElasticBallVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FCElasticBallVC.h"/>
-            <relationships>
-                <relationship kind="action" name="buttonPressed:"/>
-            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

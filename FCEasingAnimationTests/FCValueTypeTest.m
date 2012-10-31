@@ -152,6 +152,7 @@
     
     STAssertTrue(![value isKindOfClass:[NSNumber class]], @"is not NSNumber");
     STAssertEquals(CFGetTypeID((__bridge CFTypeRef)value), CGImageGetTypeID(), @"is CGImage");
+    
 }
 
 - (void)testCGColorRetainCount1

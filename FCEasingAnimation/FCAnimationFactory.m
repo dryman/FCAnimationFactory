@@ -155,7 +155,7 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
      */
     if ([value isKindOfClass:[NSValue class]]) {
         const char* objCType = [value objCType];
-        if (strcmp(objCType, @encode(CGPoint))) {
+        if (strcmp(objCType, @encode(CGPoint))==0) {
             CGPoint pt0, pt1;
             [(NSValue*)fromValue getValue:&pt0];
             [(NSValue*)toValue getValue:&pt1];
@@ -164,7 +164,7 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
                 float y = (pt1.y - pt0.y)*factor + pt0.y;
                 return [NSValue valueWithCGPoint:CGPointMake(x, y)];
             };
-        } else if (strcmp(objCType, @encode(CGSize))) {
+        } else if (strcmp(objCType, @encode(CGSize))==0) {
             CGSize size0, size1;
             [(NSValue*)fromValue getValue:&size0];
             [(NSValue*)toValue getValue:&size1];
@@ -173,7 +173,7 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
                 float h = (size1.height - size0.height)*factor + size0.height;
                 return [NSValue valueWithCGSize:CGSizeMake(w, h)];
             };
-        } else if (strcmp(objCType, @encode(CGRect))) {
+        } else if (strcmp(objCType, @encode(CGRect))==0) {
             CGRect rect0, rect1;
             [(NSValue*)fromValue getValue:&rect0];
             [(NSValue*)toValue getValue:&rect1];
@@ -184,7 +184,7 @@ void fc_bezier_interpolation(float c1[2], float c2[2], float x1, float x2, float
                 float h = (rect1.size.height - rect0.size.height)*factor + rect0.size.height;
                 return [NSValue valueWithCGRect:CGRectMake(x, y, w, h)];
             };
-        } else if (strcmp(objCType, @encode(CATransform3D))) {
+        } else if (strcmp(objCType, @encode(CATransform3D))==0) {
             NSAssert(0, @"CATransform3D type currently not supported");
         } else {
             NSAssert(0, @"Unknown NSValue type %s",objCType);
