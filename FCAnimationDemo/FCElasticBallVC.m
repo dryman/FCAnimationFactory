@@ -114,46 +114,6 @@
     [_layer addAnimation:animation forKey:@"myUselessKey"];
     [CATransaction commit];
     
-    /*
-    if (self.atTop) {
-        [CATransaction begin];
-        [CATransaction setDisableActions:YES];
-        _layer.backgroundColor = blueRef;
-        _layer.position = CGPointMake(160.f, 300.f);
-        CAKeyframeAnimation *colorAni = [FCBasicAnimationFactory animationWithName:@"circularEaseOut"
-                                                                         fromValue:(__bridge id)redRef
-                                                                           toValue:(__bridge id)blueRef
-                                                                          duration:@1.5f];
-        colorAni.keyPath = @"backgroundColor";
-        [_layer addAnimation:colorAni forKey:@"mycolorKey"];
-        CAKeyframeAnimation *animation = [FCBasicAnimationFactory animationWithName:@"elasticEaseOut"
-                                                                          fromValue:@100.f
-                                                                            toValue:@300.f
-                                                                           duration:@1.5f];
-        animation.keyPath = @"position.y";
-        [_layer addAnimation:animation forKey:@"myUselessKey"];
-        [CATransaction commit];
-    } else {
-        [CATransaction begin];
-        [CATransaction setDisableActions:YES];
-        _layer.backgroundColor = redRef;
-        _layer.position = CGPointMake(160.f, 100.f);
-        CAKeyframeAnimation *colorAni = [FCBasicAnimationFactory animationWithName:@"circularEaseOut"
-                                                                         fromValue:(__bridge id)blueRef
-                                                                           toValue:(__bridge id)redRef
-                                                                          duration:@1.5f];
-        colorAni.keyPath = @"backgroundColor";
-        [_layer addAnimation:colorAni forKey:@"mycolorKey"];
-        CAKeyframeAnimation *animation = [FCBasicAnimationFactory animationWithName:@"elasticEaseOut"
-                                                                          fromValue:@300.f
-                                                                            toValue:@100.f
-                                                                           duration:@1.5f];
-        animation.keyPath = @"position.y";
-        [_layer addAnimation:animation forKey:@"myUselessKey"];
-        [CATransaction commit];
-    }
-    self.atTop = !self.atTop;
-     */
     CGColorRelease(redRef);
     CGColorRelease(blueRef);
 }
