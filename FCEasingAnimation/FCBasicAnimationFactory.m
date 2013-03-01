@@ -34,6 +34,44 @@
 
 #import "FCBasicAnimationFactory.h"
 
+
+NSString * const kFCEasingAnimationNameLinear =             @"linear";
+
+NSString * const kFCEasingAnimationNameQuadraticEaseIn =    @"quadraticEaseIn";
+NSString * const kFCEasingAnimationNameQuadraticEaseOut =   @"quadraticEaseOut";
+NSString * const kFCEasingAnimationNameQuadraticEaseInOut = @"quadraticEaseInOut";
+
+NSString * const kFCEasingAnimationNameCubicEaseIn =        @"cubicEaseIn";
+NSString * const kFCEasingAnimationNameCubicEaseOut =       @"cubicEaseOut";
+NSString * const kFCEasingAnimationNameCubicEaseInOut =     @"cubicEaseInOut";
+
+NSString * const kFCEasingAnimationNameQuarticEaseIn =      @"quarticEaseIn";
+NSString * const kFCEasingAnimationNameQuarticEaseOut =     @"quarticEaseOut";
+NSString * const kFCEasingAnimationNameQuarticEaseInOut =   @"quarticEaseInOut";
+
+NSString * const kFCEasingAnimationNameQuinticEaseIn =      @"quinticEaseIn";
+NSString * const kFCEasingAnimationNameQuinticEaseOut =     @"quinticEaseOut";
+NSString * const kFCEasingAnimationNameQuinticEaseInOut =   @"quinticEaseInOut";
+
+NSString * const kFCEasingAnimationNameSineEaseIn =         @"sineEaseIn";
+NSString * const kFCEasingAnimationNameSineEaseOut =        @"sineEaseOut";
+NSString * const kFCEasingAnimationNameSineEaseInOut =      @"sineEaseInOut";
+
+NSString * const kFCEasingAnimationNameCircularEaseIn =     @"circularEaseIn";
+NSString * const kFCEasingAnimationNameCircularEaseOut =    @"circularEaseOut";
+NSString * const kFCEasingAnimationNameCircularEaseInOut =  @"circularEaseInOut";
+
+NSString * const kFCEasingAnimationNameExpEaseIn =          @"expEaseIn";
+NSString * const kFCEasingAnimationNameExpEaseOut =         @"expEaseOut";
+NSString * const kFCEasingAnimationNameExpEaseInOut =       @"expEaseInOut";
+
+NSString * const kFCEasingAnimationNameElasticEaseIn =      @"elasticEaseIn";
+NSString * const kFCEasingAnimationNameElasticEaseOut =     @"elasticEaseOut";
+
+NSString * const kFCEasingAnimationNameBackEaseIn =         @"backEaseIn";
+NSString * const kFCEasingAnimationNameBackEaseOut =        @"backEaseOut";
+
+
 @implementation FCBasicAnimationFactory
 @synthesize normalizedValues = _normalizedValues;
 @synthesize fromValue = _fromValue;
@@ -105,8 +143,6 @@
             float(^backEaseOut)(float)      = ^(float x){float f = (1.f-x); return 1.f - (f*f*f - f * sinf(f * M_PI));};
 
             
-
-            
             /* one step animations */
             FCBasicAnimationFactory* factory = [[FCBasicAnimationFactory alloc] init];
             factory.normalizedValues = [NSArray arrayWithObjects:
@@ -117,53 +153,52 @@
                                          [NSNumber numberWithFloat:1.f], nil];
             
             factory.timingBlocks = [NSArray arrayWithObject:^(float x){return x;}];
-            [dict setObject:[factory copy] forKey:@"linear"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameLinear];
             
             factory.timingBlocks = [NSArray arrayWithObject:quadraticEaseIn];
-            [dict setObject:[factory copy] forKey:@"quadraticEaseIn"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameQuadraticEaseIn];
             factory.timingBlocks = [NSArray arrayWithObject:quadraticEaseOut];
-            [dict setObject:[factory copy] forKey:@"quadraticEaseOut"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameQuadraticEaseOut];
             
             factory.timingBlocks = [NSArray arrayWithObject:cubicEaseIn];
-            [dict setObject:[factory copy] forKey:@"cubicEaseIn"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameCubicEaseIn];
             factory.timingBlocks = [NSArray arrayWithObject:cubicEaseOut];
-            [dict setObject:[factory copy] forKey:@"cubicEaseOut"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameCubicEaseOut];
             
             factory.timingBlocks = [NSArray arrayWithObject:quarticEaseIn];
-            [dict setObject:[factory copy] forKey:@"quarticEaseIn"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameQuarticEaseIn];
             factory.timingBlocks = [NSArray arrayWithObject:quarticEaseOut];
-            [dict setObject:[factory copy] forKey:@"quarticEaseOut"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameQuarticEaseOut];
             
             factory.timingBlocks = [NSArray arrayWithObject:quinticEaseIn];
-            [dict setObject:[factory copy] forKey:@"quinticEaseIn"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameQuinticEaseIn];
             factory.timingBlocks = [NSArray arrayWithObject:quinticEaseOut];
-            [dict setObject:[factory copy] forKey:@"quinticEaseOut"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameQuinticEaseOut];
             
             factory.timingBlocks = [NSArray arrayWithObject:sineEaseIn];
-            [dict setObject:[factory copy] forKey:@"sineEaseIn"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameSineEaseIn];
             factory.timingBlocks = [NSArray arrayWithObject:sineEaseOut];
-            [dict setObject:[factory copy] forKey:@"sineEaseOut"];
-            
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameSineEaseOut];
             
             factory.timingBlocks = [NSArray arrayWithObject:circularEaseIn];
-            [dict setObject:[factory copy] forKey:@"circularEaseIn"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameCircularEaseIn];
             factory.timingBlocks = [NSArray arrayWithObject:circularEaseOut];
-            [dict setObject:[factory copy] forKey:@"circularEaseOut"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameCircularEaseOut];
             
             factory.timingBlocks = [NSArray arrayWithObject:expEaseIn];
-            [dict setObject:[factory copy] forKey:@"expEaseIn"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameExpEaseIn];
             factory.timingBlocks = [NSArray arrayWithObject:expEaseOut];
-            [dict setObject:[factory copy] forKey:@"expEaseOut"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameExpEaseOut];
             
             factory.timingBlocks = [NSArray arrayWithObject:elasticEaseIn];
-            [dict setObject:[factory copy] forKey:@"elasticEaseIn"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameElasticEaseIn];
             factory.timingBlocks = [NSArray arrayWithObject:elasticEaseOut];
-            [dict setObject:[factory copy] forKey:@"elasticEaseOut"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameElasticEaseOut];
             
             factory.timingBlocks = [NSArray arrayWithObject:backEaseIn];
-            [dict setObject:[factory copy] forKey:@"backEaseIn"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameBackEaseIn];
             factory.timingBlocks = [NSArray arrayWithObject:backEaseOut];
-            [dict setObject:[factory copy] forKey:@"backEaseOut"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameBackEaseOut];
             
             /* two steps animations */
             factory.normalizedValues = [NSArray arrayWithObjects:
@@ -176,25 +211,25 @@
                                          [NSNumber numberWithFloat:1.f], nil];
             
             factory.timingBlocks = [NSArray arrayWithObjects: quadraticEaseIn, quadraticEaseOut, nil];
-            [dict setObject:[factory copy] forKey:@"quadraticEaseInOut"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameQuadraticEaseInOut];
             
             factory.timingBlocks = [NSArray arrayWithObjects: cubicEaseIn, cubicEaseOut, nil];
-            [dict setObject:[factory copy] forKey:@"cubicEaseInOut"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameCubicEaseInOut];
             
             factory.timingBlocks = [NSArray arrayWithObjects: quarticEaseIn, quarticEaseOut, nil];
-            [dict setObject:[factory copy] forKey:@"quarticEaseInOut"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameQuarticEaseInOut];
             
             factory.timingBlocks = [NSArray arrayWithObjects: quinticEaseIn, quinticEaseOut, nil];
-            [dict setObject:[factory copy] forKey:@"quinticEaseInOut"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameQuinticEaseInOut];
             
             factory.timingBlocks = [NSArray arrayWithObjects: sineEaseIn, sineEaseOut, nil];
-            [dict setObject:[factory copy] forKey:@"sineEaseInOut"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameSineEaseInOut];
             
             factory.timingBlocks = [NSArray arrayWithObjects: circularEaseIn, circularEaseOut, nil];
-            [dict setObject:[factory copy] forKey:@"circularEaseInOut"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameCircularEaseInOut];
             
             factory.timingBlocks = [NSArray arrayWithObjects: expEaseIn, expEaseOut, nil];
-            [dict setObject:[factory copy] forKey:@"expEaseInOut"];
+            [dict setObject:[factory copy] forKey:kFCEasingAnimationNameExpEaseInOut];
         }
 
     });

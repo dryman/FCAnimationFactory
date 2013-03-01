@@ -48,5 +48,40 @@
 
 + (CAKeyframeAnimation*) animationWithName:(NSString*)name fromValue:(id)fv toValue: (id)tv duration:(NSNumber*)duration;
 
+extern NSString * const kFCEasingAnimationNameLinear;
+
+extern NSString * const kFCEasingAnimationNameQuadraticEaseIn;
+extern NSString * const kFCEasingAnimationNameQuadraticEaseOut;
+extern NSString * const kFCEasingAnimationNameQuadraticEaseInOut;
+
+extern NSString * const kFCEasingAnimationNameCubicEaseIn;
+extern NSString * const kFCEasingAnimationNameCubicEaseOut;
+extern NSString * const kFCEasingAnimationNameCubicEaseInOut;
+
+extern NSString * const kFCEasingAnimationNameQuarticEaseIn;
+extern NSString * const kFCEasingAnimationNameQuarticEaseOut;
+extern NSString * const kFCEasingAnimationNameQuarticEaseInOut;
+
+extern NSString * const kFCEasingAnimationNameQuinticEaseIn;
+extern NSString * const kFCEasingAnimationNameQuinticEaseOut;
+extern NSString * const kFCEasingAnimationNameQuinticEaseInOut;
+
+extern NSString * const kFCEasingAnimationNameSineEaseIn;
+extern NSString * const kFCEasingAnimationNameSineEaseOut;
+extern NSString * const kFCEasingAnimationNameSineEaseInOut;
+
+extern NSString * const kFCEasingAnimationNameCircularEaseIn;
+extern NSString * const kFCEasingAnimationNameCircularEaseOut;
+extern NSString * const kFCEasingAnimationNameCircularEaseInOut;
+
+extern NSString * const kFCEasingAnimationNameExpEaseIn;
+extern NSString * const kFCEasingAnimationNameExpEaseOut;
+extern NSString * const kFCEasingAnimationNameExpEaseInOut;
+
+extern NSString * const kFCEasingAnimationNameElasticEaseIn;
+extern NSString * const kFCEasingAnimationNameElasticEaseOut;
+
+extern NSString * const kFCEasingAnimationNameBackEaseIn;
+extern NSString * const kFCEasingAnimationNameBackEaseOut;
 
 @end
